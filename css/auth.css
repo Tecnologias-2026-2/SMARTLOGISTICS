@@ -1,0 +1,598 @@
+/* =========================================================
+   Smart Logistics — Autenticación
+   Login, registro, recuperación de contraseña y fotografía.
+   Requiere css/base.css. Layout: únicamente Flexbox y CSS Grid
+   ========================================================= */
+
+/* ---------- Shell con panel lateral (login / registro) ---------- */
+.auth-shell {
+  display: grid;
+  grid-template-columns: 384px minmax(0, 1fr);
+  min-height: 100vh;
+  background: linear-gradient(152deg, var(--navy-900) 0%, var(--navy-700) 100%);
+}
+
+.auth-aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 40px;
+  border-right: 1px solid var(--white-10);
+}
+
+.auth-aside__top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.auth-aside .logo__text {
+  align-items: flex-start;
+}
+
+.auth-aside__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 64px;
+}
+
+.auth-aside__title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.auth-aside__text {
+  font-size: 14px;
+  line-height: 22.75px;
+  color: var(--white-50);
+}
+
+.auth-aside__copy {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--white-20);
+}
+
+/* ---------- Lista con check ---------- */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+}
+
+.auth-aside .checklist {
+  padding-top: 40px;
+}
+
+.checklist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--white-60);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: var(--blue-600);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+.checklist--success .check {
+  background: var(--green-600);
+}
+
+.checklist--center .checklist__item {
+  align-items: center;
+  color: var(--white-70);
+}
+
+.checklist--center .check {
+  margin-top: 0;
+}
+
+.checklist--tight {
+  gap: 12px;
+}
+
+/* ---------- Columna principal ---------- */
+.auth-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.auth-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 384px;
+}
+
+.auth-box--wide {
+  max-width: 448px;
+}
+
+.auth-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.auth-subtitle {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--white-50);
+}
+
+.auth-subtitle--lg {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.pill {
+  display: flex;
+  align-self: flex-start;
+  margin-bottom: 8px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.pill--success {
+  background: rgba(0, 153, 102, 0.2);
+  border: 1px solid rgba(0, 188, 125, 0.3);
+  color: var(--green-300);
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.notice--success {
+  background: rgba(0, 153, 102, 0.2);
+  border: 1px solid rgba(0, 188, 125, 0.3);
+  color: var(--green-300);
+}
+
+/* ---------- Formularios ---------- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field__label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--white-80);
+}
+
+.req {
+  color: var(--red-400);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--white-20);
+  border-radius: var(--radius-sm);
+  background: var(--white-10);
+  color: var(--white);
+  font-size: 14px;
+  line-height: 20px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.input::placeholder {
+  color: var(--white-30);
+}
+
+.input:hover {
+  border-color: var(--white-30);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--blue-400);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.select {
+  appearance: none;
+  padding-right: 32px;
+  background-image: url("../assets/chevron-down.svg");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 10px 6px;
+  cursor: pointer;
+}
+
+.select option {
+  background: var(--navy-900);
+  color: var(--white);
+}
+
+/* Contraseña: input y botón comparten la misma celda de grid */
+.input-group {
+  display: grid;
+  grid-template-areas: "stack";
+  align-items: center;
+}
+
+.input-group > * {
+  grid-area: stack;
+}
+
+.input-group .input {
+  padding-right: 36px;
+}
+
+.input-group__btn {
+  display: flex;
+  justify-self: end;
+  margin-right: 10px;
+  border: 0;
+  background: none;
+  color: var(--white-40);
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.form__forgot {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.link {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--blue-400);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link--strong {
+  font-weight: 500;
+}
+
+.link--success {
+  color: var(--green-400);
+}
+
+.auth-alt {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--white-40);
+}
+
+.auth-alt--sm {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--white-30);
+}
+
+.auth-alt--sm .link {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--white-25);
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--white-10);
+}
+
+.back-link {
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--white-25);
+}
+
+.back-link a:hover {
+  color: var(--white-60);
+}
+
+.back-link--lg {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--white-40);
+}
+
+.back-link--dim {
+  color: var(--white-30);
+}
+
+/* Recuperar: el botón queda atenuado mientras el correo esté vacío (solo CSS) */
+.form--recover:has(.input:placeholder-shown) .btn--primary {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ---------- Pantallas centradas (recuperar / correo / foto) ---------- */
+.auth-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 32px;
+  background: linear-gradient(152deg, var(--navy-900) 0%, var(--navy-700) 100%);
+}
+
+.auth-center .logo {
+  align-self: flex-start;
+}
+
+.auth-center .logo__text {
+  align-items: flex-start;
+}
+
+.auth-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.auth-head--center {
+  align-items: center;
+  text-align: center;
+}
+
+.auth-head--tight {
+  margin-top: 32px;
+}
+
+.auth-head__text {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--white-50);
+}
+
+.auth-head__text strong {
+  font-weight: 500;
+  color: var(--white);
+}
+
+.auth-head__text--relaxed {
+  margin-top: 4px;
+  line-height: 22.75px;
+}
+
+.icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background: rgba(21, 93, 252, 0.2);
+  border: 1px solid rgba(43, 127, 255, 0.3);
+  font-size: 36px;
+  line-height: 40px;
+}
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 32px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: var(--white-05);
+  border: 1px solid var(--white-10);
+  list-style: none;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--white-50);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.actions--sent {
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.actions--sent .back-link {
+  margin-top: 4px;
+}
+
+/* ---------- Fotografía ---------- */
+.photo-card {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  background: var(--white-05);
+  border: 1px solid var(--white-10);
+}
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 24px;
+  padding: 32px;
+  border: 2px dashed var(--white-20);
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.dropzone:hover {
+  border-color: var(--blue-400);
+  background: var(--white-05);
+}
+
+.dropzone__icon {
+  font-size: 36px;
+  line-height: 40px;
+}
+
+.dropzone__title {
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.dropzone__hint {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--white-40);
+}
+
+.photo-card .actions {
+  margin-top: 16px;
+}
+
+.photo-card__note {
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--white-20);
+  text-align: center;
+}
+
+.photo-done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.photo-done__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: var(--blue-600);
+  box-shadow: var(--shadow-lg);
+  font-size: 48px;
+  line-height: 48px;
+}
+
+.photo-done__title {
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.photo-done__text {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--white-40);
+}
+
+.photo-done + .actions {
+  margin-top: 24px;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 900px) {
+  .auth-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .auth-aside {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-main,
+  .auth-center {
+    padding: 32px 16px;
+  }
+
+  .photo-card {
+    padding: 20px;
+  }
+
+  .dropzone {
+    padding: 24px 16px;
+  }
+
+  .field-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .auth-subtitle--lg {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
