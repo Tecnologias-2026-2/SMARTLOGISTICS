@@ -5,7 +5,7 @@ Plataforma web que conecta a **trabajadores logísticos** con las **empresas** q
 | | Enlace |
 |---|---|
 | 🚀 Sitio publicado | https://tecnologias-2026-2.github.io/SMARTLOGISTICS/ |
-| 🎨 Prototipo en Figma | https://www.figma.com/proto/UC5jZyfvzl0GwUQVzHdGSJ/Smart-logistics |
+| 🎨 Prototipo en Figma | https://www.figma.com/design/9Deq4FV8q5Fo29FYCCl4Mm/Untitled?node-id=8-3&t=aw6M8h1xU90aWpyA-0 |
 | 📄 Documento de ingeniería | [docs/Smart_Logistics_Documento_Ingenieria.pdf](docs/Smart_Logistics_Documento_Ingenieria.pdf) |
 
 > Proyecto del curso **Tecnologías del Internet** · 2026-2
@@ -203,7 +203,7 @@ La solución se organiza en cuatro capas: **presentación** (clientes web y móv
 
 Enlace público del prototipo interactivo en Figma:
 
-**https://www.figma.com/proto/UC5jZyfvzl0GwUQVzHdGSJ/Smart-logistics**
+**https://www.figma.com/design/9Deq4FV8q5Fo29FYCCl4Mm/Untitled?node-id=8-3&t=aw6M8h1xU90aWpyA-0**
 
 La navegación se organiza en tres zonas: la **zona pública** (presentación, inicio de sesión, registro y recuperación de contraseña), la **zona del modo trabajador** (con eje en el panel de actividad V-10) y la **zona del modo empresa** (con eje en el panel de empresa V-18), conectadas por el control de cambio de modo.
 
