@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar contraseña · Smart Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+  <!-- Figma: nodo 8:791 -->
+  <main class="auth-center">
+    <div class="auth-box">
+      <a href="../index.html" class="logo">
+          <span class="logo__mark">SL</span>
+          <span class="logo__text">
+            <span class="logo__title">SMART</span>
+            <span class="logo__subtitle">LOGISTICS</span>
+          </span>
+        </a>
+      <div class="auth-head">
+        <h1 class="auth-title">Recuperar contraseña</h1>
+        <p class="auth-head__text">Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
+      </div>
+
+      <form class="form form--recover" action="#" onsubmit="return false">
+          <div class="field">
+            <label class="field__label" for="email">Correo electrónico</label>
+            <input class="input" id="email" name="email" type="email" placeholder="tu@correo.com" autocomplete="email">
+          </div>
+        <a href="correo-enviado-trabajador.html" class="btn btn--primary btn--lg btn--block">Enviar enlace de recuperación</a>
+        <p class="back-link back-link--lg"><a href="login-trabajador.html">← Volver al inicio de sesión</a></p>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

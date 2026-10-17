@@ -1,0 +1,16 @@
+# Material de trabajo local (el documento final vive en docs/)
+context/
+
+# Configuración local del editor y de Claude Code
+.claude/
+.vscode/
+.idea/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dependencias y registros
+node_modules/
+*.log

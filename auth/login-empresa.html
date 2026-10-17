@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso empresarial · Smart Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+  <!-- Figma: nodo 9:833 -->
+  <div class="auth-shell">
+    <aside class="auth-aside">
+      <div class="auth-aside__top">
+        <a href="../index.html" class="logo">
+          <span class="logo__mark">SL</span>
+          <span class="logo__text">
+            <span class="logo__title">SMART</span>
+            <span class="logo__subtitle">LOGISTICS</span>
+          </span>
+        </a>
+        <div class="auth-aside__intro">
+          <h2 class="auth-aside__title">Plataforma logística profesional</h2>
+          <p class="auth-aside__text">Conectamos talento verificado con empresas que buscan excelencia en logística, eventos y operaciones.</p>
+        </div>
+        <ul class="checklist">
+            <li class="checklist__item"><span class="check">✓</span>Reputación verificada por empresas reales</li>
+            <li class="checklist__item"><span class="check">✓</span>Historial laboral acumulado y visible</li>
+            <li class="checklist__item"><span class="check">✓</span>Asignación directa de trabajadores de confianza</li>
+            <li class="checklist__item"><span class="check">✓</span>Notificaciones en tiempo real</li>
+        </ul>
+      </div>
+      <p class="auth-aside__copy">© 2026 Smart Logistics</p>
+    </aside>
+
+    <main class="auth-main">
+      <div class="auth-box">
+        <h1 class="auth-title">Acceso empresarial</h1>
+        <p class="auth-subtitle">Portal exclusivo para coordinadores y empresas</p>
+
+        <form class="form" action="#" onsubmit="return false">
+          <div class="notice notice--success"><span>🏢</span> Acceso exclusivo para empresas</div>
+          <div class="field">
+            <label class="field__label" for="email">Correo electrónico <span class="req">*</span></label>
+            <input class="input" id="email" name="email" type="email" placeholder="contacto@empresa.com" value="coordinacion@eventosnova.com" autocomplete="email">
+          </div>
+          <div class="field">
+            <label class="field__label" for="password">Contraseña <span class="req">*</span></label>
+            <div class="input-group">
+              <input class="input" id="password" name="password" type="password" placeholder="Tu contraseña" autocomplete="current-password">
+              <button class="input-group__btn" type="button" aria-label="Mostrar contraseña">👁</button>
+            </div>
+          </div>
+          <div class="form__forgot">
+            <a href="recuperar-empresa.html" class="link">¿Olvidaste tu contraseña?</a>
+          </div>
+          <!-- TODO: enlazar a la página principal de la empresa cuando exista -->
+          <a href="#" class="btn btn--success btn--lg btn--block">Iniciar sesión</a>
+          <p class="auth-alt">¿No tienes cuenta? <a href="registro-empresa.html" class="link link--strong">Regístrate gratis</a></p>
+          <p class="back-link"><a href="../index.html">← Volver al inicio</a></p>
+        </form>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

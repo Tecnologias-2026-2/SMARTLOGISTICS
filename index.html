@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+  <div class="landing">
+
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+      <a href="#" class="logo" aria-label="Smart Logistics, ir al inicio">
+        <span class="logo__mark" aria-hidden="true">SL</span>
+        <span class="logo__text" aria-hidden="true">
+          <span class="logo__title">SMART</span>
+          <span class="logo__subtitle">LOGISTICS</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#como-funciona" class="nav__link">¿Cómo funciona?</a>
+        <a href="#por-que" class="nav__link">Por qué elegir Smart Logistics</a>
+        <a href="#empezar" class="nav__link">¿Listo para empezar?</a>
+      </nav>
+
+      <div class="header__actions">
+        <a href="auth/login-trabajador.html" class="btn btn--ghost">Iniciar sesión</a>
+        <a href="auth/registro-trabajador.html" class="btn btn--primary">Registrarme</a>
+      </div>
+    </header>
+
+    <main class="landing__main">
+
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+      <div class="hero__grid">
+        <div class="hero__content">
+          <span class="badge">Plataforma logística líder en Colombia</span>
+
+          <h1 class="hero__title">
+            Conectamos talento<br>
+            <span class="text-accent">logístico</span> con<br>
+            oportunidades reales
+          </h1>
+
+          <p class="hero__text">
+            Smart Logistics une a trabajadores logísticos certificados con empresas que necesitan
+            personal para eventos, almacenes, montajes y reparto. Profesionalismo, confianza y resultados.
+          </p>
+
+          <div class="hero__stats">
+            <div class="stat">
+              <span class="stat__value">4.800+</span>
+              <span class="stat__label">Trabajadores activos</span>
+            </div>
+            <div class="stat">
+              <span class="stat__value">320+</span>
+              <span class="stat__label">Empresas verificadas</span>
+            </div>
+            <div class="stat">
+              <span class="stat__value">12.000+</span>
+              <span class="stat__label">Servicios completados</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual: tarjeta de perfil + tarjeta flotante (apiladas con Grid) -->
+        <div class="hero__visual">
+          <div class="panel">
+            <div class="profile">
+              <span class="avatar">CR</span>
+              <div class="profile__info">
+                <span class="profile__name">Carlos Rodríguez</span>
+                <span class="profile__role">Auxiliar Logístico · Bogotá</span>
+              </div>
+              <span class="profile__rating">★ 4.8</span>
+            </div>
+
+            <div class="selected">
+              <div class="selected__top">
+                <span class="selected__status">✓ Seleccionado</span>
+                <span class="selected__time">Hace 2 min</span>
+              </div>
+              <p class="selected__title">Personal para Evento Corporativo</p>
+              <p class="selected__meta">Corporate Events &amp; Co. · $90.000 COP</p>
+            </div>
+
+            <div class="metrics">
+              <div class="metric">
+                <span class="metric__value">96%</span>
+                <span class="metric__label">Puntualidad</span>
+              </div>
+              <div class="metric">
+                <span class="metric__value">47</span>
+                <span class="metric__label">Trabajos</span>
+              </div>
+              <div class="metric">
+                <span class="metric__value">12</span>
+                <span class="metric__label">Empresas</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="float-card">
+            <span class="float-card__eyebrow">Nueva convocatoria</span>
+            <span class="float-card__title">Feria Tecnológica</span>
+            <span class="float-card__meta">Eventos Nova · 15 Sep 2026</span>
+            <div class="float-card__bottom">
+              <span class="float-card__price">$80.000</span>
+              <span class="tag">Montaje</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CÓMO FUNCIONA ========== -->
+    <section class="section" id="como-funciona">
+      <div class="section__head">
+        <h2 class="section__title">¿Cómo funciona?</h2>
+        <p class="section__subtitle">Un proceso simple, transparente y verificado.</p>
+      </div>
+
+      <div class="steps">
+        <article class="step">
+          <span class="icon-box">📝</span>
+          <span class="step__label">PASO 01</span>
+          <h3 class="step__title">Regístrate</h3>
+          <p class="step__text">Crea tu perfil profesional como trabajador o empresa. Verifica tu experiencia y construye tu reputación.</p>
+        </article>
+        <article class="step">
+          <span class="icon-box">🔍</span>
+          <span class="step__label">PASO 02</span>
+          <h3 class="step__title">Encuentra o publica</h3>
+          <p class="step__text">Los trabajadores exploran convocatorias activas. Las empresas publican sus necesidades de personal.</p>
+        </article>
+        <article class="step">
+          <span class="icon-box">⭐</span>
+          <span class="step__label">PASO 03</span>
+          <h3 class="step__title">Trabaja y crece</h3>
+          <p class="step__text">Completa servicios, recibe calificaciones verificadas y construye una reputación profesional sólida.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== POR QUÉ ELEGIR ========== -->
+    <section class="section" id="por-que">
+      <div class="section__head">
+        <h2 class="section__title section__title--sm">Por qué elegir Smart Logistics</h2>
+      </div>
+
+      <div class="features">
+        <article class="feature">
+          <span class="feature__icon">🏆</span>
+          <div class="feature__body">
+            <h3 class="feature__title">Reputación verificada</h3>
+            <p class="feature__text">Cada calificación proviene de un servicio real. Construye un historial laboral confiable y verificable.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <span class="feature__icon">🔒</span>
+          <div class="feature__body">
+            <h3 class="feature__title">Empresas verificadas</h3>
+            <p class="feature__text">Solo empresas verificadas pueden publicar convocatorias. Trabaja con total confianza y seguridad.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <span class="feature__icon">⚡</span>
+          <div class="feature__body">
+            <h3 class="feature__title">Asignación rápida</h3>
+            <p class="feature__text">Las empresas pueden asignar directamente trabajadores de confianza para urgencias o proyectos recurrentes.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <span class="feature__icon">📊</span>
+          <div class="feature__body">
+            <h3 class="feature__title">Transparencia total</h3>
+            <p class="feature__text">Seguimiento en tiempo real del estado de cada postulación. Sin incertidumbre, sin demoras en la información.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== LISTO PARA EMPEZAR ========== -->
+    <section class="section" id="empezar">
+      <div class="section__head">
+        <h2 class="section__title">¿Listo para empezar?</h2>
+        <p class="section__subtitle">Selecciona tu tipo de acceso y únete a la red logística más confiable de Colombia.</p>
+      </div>
+
+      <div class="access">
+        <article class="access-card">
+          <span class="icon-box icon-box--sm icon-box--blue">👤</span>
+          <div class="access-card__text">
+            <h3 class="access-card__title">Soy Trabajador</h3>
+            <p class="access-card__desc">Encuentra empleos logísticos verificados</p>
+          </div>
+          <div class="access-card__actions">
+            <a href="auth/login-trabajador.html" class="btn btn--primary btn--block">Iniciar sesión</a>
+            <a href="auth/registro-trabajador.html" class="btn btn--muted btn--block">Registrarme</a>
+          </div>
+        </article>
+
+        <article class="access-card">
+          <span class="icon-box icon-box--sm icon-box--green">🏢</span>
+          <div class="access-card__text">
+            <h3 class="access-card__title">Soy Empresa</h3>
+            <p class="access-card__desc">Publica convocatorias y gestiona personal</p>
+          </div>
+          <div class="access-card__actions">
+            <a href="auth/login-empresa.html" class="btn btn--success btn--block">Iniciar sesión</a>
+            <a href="auth/registro-empresa.html" class="btn btn--muted btn--block">Registrar empresa</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+      <a href="#" class="logo logo--sm">
+        <span class="logo__mark">SL</span>
+        <span class="logo__text">
+          <span class="logo__title">SMART</span>
+          <span class="logo__subtitle">LOGISTICS</span>
+        </span>
+      </a>
+      <p class="footer__copy">© 2026 Smart Logistics. Todos los derechos reservados.</p>
+    </footer>
+
+  </div>
+</body>
+</html>
