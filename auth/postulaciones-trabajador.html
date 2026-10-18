@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis postulaciones · Smart Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/trabajador.css">
+  <link rel="stylesheet" href="../css/postulaciones.css">
+</head>
+<body class="worker-dashboard">
+  <div class="dashboard">
+    <aside class="sidebar">
+      <a href="inicio-trabajador.html#inicio" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
+        <span class="logo__mark" aria-hidden="true">SL</span>
+        <span class="logo__text" aria-hidden="true">
+          <span class="logo__title">SMART</span>
+          <span class="logo__subtitle">LOGISTICS</span>
+        </span>
+      </a>
+
+      <a href="inicio-trabajador.html#perfil" class="sidebar__profile">
+        <span class="sidebar__avatar" aria-hidden="true">👤</span>
+        <span class="sidebar__identity">
+          <strong>Carlos Rodríguez</strong>
+          <span>Auxiliar Logístico</span>
+        </span>
+      </a>
+
+      <nav class="sidebar__nav" aria-label="Navegación del trabajador">
+        <a class="sidebar__link" href="inicio-trabajador.html#inicio"><span aria-hidden="true">🏠</span>Inicio</a>
+        <a class="sidebar__link" href="ofertas-trabajador.html"><span aria-hidden="true">💼</span>Ofertas</a>
+        <a class="sidebar__link sidebar__link--active" href="postulaciones-trabajador.html" aria-current="page"><span aria-hidden="true">📋</span>Postulaciones</a>
+        <a class="sidebar__link" href="inicio-trabajador.html#historial"><span aria-hidden="true">📊</span>Historial</a>
+        <a class="sidebar__link" href="inicio-trabajador.html#perfil"><span aria-hidden="true">👤</span>Mi Perfil</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <span class="session-pill"><span aria-hidden="true">•</span> Sesión de trabajador</span>
+        <a class="sidebar__link sidebar__logout" href="login-trabajador.html"><span aria-hidden="true">📜</span>Cerrar sesión</a>
+      </div>
+    </aside>
+
+    <main class="dashboard__main applications-main">
+      <header class="applications-header">
+        <h1>Mis postulaciones</h1>
+        <p id="application-count" aria-live="polite">2 postulaciones en total</p>
+      </header>
+
+      <section class="assignment-card" id="assignment-card" aria-labelledby="assignment-title">
+        <span class="assignment-card__icon" aria-hidden="true">📌</span>
+        <div class="assignment-card__body">
+          <h2 id="assignment-title">Asignación directa pendiente</h2>
+          <p class="assignment-card__message" id="assignment-message" aria-live="polite">Eventos Nova te ha asignado directamente.</p>
+          <h3>Auxiliares Logísticos – Concierto Internacional</h3>
+          <div class="assignment-card__meta">
+            <span>🗓️ 30 Sep 2026</span>
+            <span>◷ 10:00 – 22:00</span>
+            <span>💰 $95.000 COP</span>
+          </div>
+          <div class="assignment-card__actions" id="assignment-actions">
+            <button type="button" class="assignment-button assignment-button--reject" id="reject-assignment">Rechazar</button>
+            <button type="button" class="assignment-button assignment-button--accept" id="accept-assignment">Aceptar asignación</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="application-filters" role="group" aria-label="Filtrar postulaciones">
+        <button class="application-filter is-selected" type="button" data-status="all" aria-pressed="true">Todas</button>
+        <button class="application-filter" type="button" data-status="review" aria-pressed="false">En revisión (0)</button>
+        <button class="application-filter" type="button" data-status="selected" aria-pressed="false">Seleccionado (1)</button>
+        <button class="application-filter" type="button" data-status="rejected" aria-pressed="false">No seleccionado (1)</button>
+      </div>
+
+      <section class="application-list" aria-label="Historial de postulaciones">
+        <article class="application-card" data-status="selected">
+          <span class="application-card__icon application-card__icon--selected" aria-hidden="true">🎉</span>
+          <div class="application-card__body">
+            <h2>Personal para Evento Corporativo</h2>
+            <p class="application-card__company">Corporate Events &amp; Co.</p>
+            <div class="application-card__meta">
+              <span>🗓️ 20 Ago 2026</span><span>📍 Bogotá, Hotel Tequendama</span><span>◷ 14:00 – 23:00</span>
+            </div>
+            <strong class="application-card__pay">$90.000 COP</strong>
+          </div>
+          <span class="application-status application-status--selected">● Seleccionado</span>
+          <p class="application-card__note">¡Felicitaciones! Has sido seleccionado para este trabajo.</p>
+        </article>
+
+        <article class="application-card" data-status="rejected">
+          <span class="application-card__icon application-card__icon--rejected" aria-hidden="true">✖</span>
+          <div class="application-card__body">
+            <h2>Auxiliares de Montaje – Feria Tecnológica</h2>
+            <p class="application-card__company">Eventos Nova</p>
+            <div class="application-card__meta">
+              <span>🗓️ 15 Ago 2026</span><span>📍 Bogotá, Corferias</span><span>◷ 08:00 – 18:00</span>
+            </div>
+            <strong class="application-card__pay">$80.000 COP</strong>
+          </div>
+          <span class="application-status application-status--rejected">● No seleccionado</span>
+          <p class="application-card__note">No fuiste seleccionado en esta oportunidad. ¡Sigue intentando!</p>
+        </article>
+
+      </section>
+    </main>
+  </div>
+
+  <dialog class="cancel-application-dialog" id="cancel-application-dialog" aria-labelledby="cancel-application-title">
+    <div class="cancel-application-dialog__content">
+      <span class="cancel-application-dialog__icon" aria-hidden="true">!</span>
+      <h2 id="cancel-application-title">¿Estás seguro de cancelar tu postulación?</h2>
+      <p id="cancel-application-name"></p>
+      <div class="cancel-application-dialog__actions">
+        <button class="cancel-application-dialog__button cancel-application-dialog__button--secondary" type="button" id="keep-application">No, volver</button>
+        <button class="cancel-application-dialog__button cancel-application-dialog__button--danger" type="button" id="confirm-cancel-application">Sí, cancelar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    const filterButtons = [...document.querySelectorAll(".application-filter")];
+    const APPLICATIONS_STORAGE_KEY = "smart-logistics:worker-applications";
+    const applicationList = document.querySelector(".application-list");
+    const applicationCount = document.querySelector("#application-count");
+    let applicationCards = [...applicationList.querySelectorAll(".application-card")];
+    const assignmentTitle = document.querySelector("#assignment-title");
+    const assignmentMessage = document.querySelector("#assignment-message");
+    const assignmentActions = document.querySelector("#assignment-actions");
+    const cancelApplicationDialog = document.querySelector("#cancel-application-dialog");
+    const cancelApplicationName = document.querySelector("#cancel-application-name");
+    const confirmCancelApplicationButton = document.querySelector("#confirm-cancel-application");
+    let applicationToCancel = null;
+    let activeStatus = "all";
+
+    function readApplications() {
+      const storedApplications = localStorage.getItem(APPLICATIONS_STORAGE_KEY);
+      if (!storedApplications) return [];
+
+      const applications = JSON.parse(storedApplications);
+      if (!Array.isArray(applications)) {
+        throw new Error("El almacenamiento de postulaciones no tiene un formato válido.");
+      }
+      return applications;
+    }
+
+    function createTextElement(tagName, className, text) {
+      const element = document.createElement(tagName);
+      element.className = className;
+      element.textContent = text;
+      return element;
+    }
+
+    function createApplicationCard(application) {
+      const card = document.createElement("article");
+      card.className = "application-card";
+      card.dataset.status = application.status;
+      card.dataset.offerId = application.id;
+
+      const statusDetails = {
+        review: {
+          icon: "⌛",
+          label: "En revisión",
+          note: "Tu candidatura está siendo evaluada por la empresa."
+        },
+        selected: {
+          icon: "🎉",
+          label: "● Seleccionado",
+          note: "¡Felicitaciones! Has aceptado esta asignación directa."
+        },
+        rejected: {
+          icon: "✖",
+          label: "● No seleccionado",
+          note: "No fuiste seleccionado en esta oportunidad. ¡Sigue intentando!"
+        }
+      }[application.status];
+      if (!statusDetails) throw new Error("La postulación tiene un estado no válido.");
+
+      const icon = createTextElement("span", `application-card__icon application-card__icon--${application.status}`, statusDetails.icon);
+      icon.setAttribute("aria-hidden", "true");
+      const body = document.createElement("div");
+      body.className = "application-card__body";
+      body.append(
+        createTextElement("h2", "", application.title),
+        createTextElement("p", "application-card__company", application.company)
+      );
+
+      const meta = document.createElement("div");
+      meta.className = "application-card__meta";
+      [
+        application.date,
+        application.location,
+        application.hours
+      ].forEach((value) => meta.append(createTextElement("span", "", value)));
+      body.append(meta, createTextElement("strong", "application-card__pay", application.pay));
+
+      card.append(
+        icon,
+        body,
+        createTextElement("span", `application-status application-status--${application.status}`, statusDetails.label),
+        createTextElement("p", "application-card__note", statusDetails.note)
+      );
+      if (application.status === "review") {
+        const cancelButton = createTextElement("button", "application-cancel-button", "Cancelar postulación");
+        cancelButton.type = "button";
+        cancelButton.addEventListener("click", () => {
+          applicationToCancel = application.id;
+          cancelApplicationName.textContent = application.title;
+          cancelApplicationDialog.showModal();
+        });
+        body.append(cancelButton);
+      }
+      return card;
+    }
+
+    function loadSavedApplications() {
+      const applications = readApplications();
+      applications.forEach((application) => {
+        if (!application || typeof application.id !== "string" || typeof application.title !== "string") {
+          throw new Error("Se encontró una postulación guardada con datos incompletos.");
+        }
+
+        applicationList.querySelectorAll("[data-offer-id]").forEach((card) => {
+          if (card.dataset.offerId === application.id) card.remove();
+        });
+        applicationList.append(createApplicationCard(application));
+      });
+      applicationCards = [...applicationList.querySelectorAll(".application-card")];
+      applicationCount.textContent = `${applicationCards.length} ${applicationCards.length === 1 ? "postulación" : "postulaciones"} en total`;
+    }
+
+    function updateFilterCounts() {
+      const counts = applicationCards.reduce((totals, card) => {
+        totals[card.dataset.status] += 1;
+        return totals;
+      }, { review: 0, selected: 0, rejected: 0 });
+      const labels = {
+        review: `En revisión (${counts.review})`,
+        selected: `Seleccionado (${counts.selected})`,
+        rejected: `No seleccionado (${counts.rejected})`
+      };
+
+      filterButtons.forEach((button) => {
+        if (button.dataset.status !== "all") {
+          button.textContent = labels[button.dataset.status];
+        }
+      });
+    }
+
+    function updateVisibleApplications() {
+      applicationCards.forEach((card) => {
+        card.hidden = activeStatus !== "all" && card.dataset.status !== activeStatus;
+      });
+    }
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeStatus = button.dataset.status;
+        filterButtons.forEach((filter) => {
+          const selected = filter === button;
+          filter.classList.toggle("is-selected", selected);
+          filter.setAttribute("aria-pressed", String(selected));
+        });
+
+        updateVisibleApplications();
+      });
+    });
+
+    document.querySelector("#keep-application").addEventListener("click", () => {
+      applicationToCancel = null;
+      cancelApplicationDialog.close();
+    });
+
+    confirmCancelApplicationButton.addEventListener("click", () => {
+      if (!applicationToCancel) return;
+      try {
+        const remainingApplications = readApplications().filter((application) => application.id !== applicationToCancel);
+        localStorage.setItem(APPLICATIONS_STORAGE_KEY, JSON.stringify(remainingApplications));
+        applicationList.querySelectorAll("[data-offer-id]").forEach((card) => {
+          if (card.dataset.offerId === applicationToCancel) card.remove();
+        });
+        applicationToCancel = null;
+        cancelApplicationDialog.close();
+        applicationCards = [...applicationList.querySelectorAll(".application-card")];
+        applicationCount.textContent = `${applicationCards.length} ${applicationCards.length === 1 ? "postulación" : "postulaciones"} en total`;
+        updateFilterCounts();
+        updateVisibleApplications();
+      } catch (error) {
+        console.error("No fue posible cancelar la postulación.", error);
+        cancelApplicationName.textContent = "No se pudo cancelar la postulación. Inténtalo de nuevo.";
+      }
+    });
+
+    document.querySelector("#accept-assignment").addEventListener("click", () => {
+      assignmentTitle.textContent = "Asignación directa aceptada";
+      assignmentMessage.textContent = "Has aceptado la asignación directa de Eventos Nova.";
+      assignmentActions.hidden = true;
+      if (!applicationList.querySelector('[data-offer-id="asignacion-directa-concierto"]')) {
+        applicationList.append(createApplicationCard({
+          id: "asignacion-directa-concierto",
+          title: "Auxiliares Logísticos – Concierto Internacional",
+          company: "Eventos Nova",
+          date: "🗓️ 30 Sep 2026",
+          location: "📍 Bogotá, El Campín",
+          hours: "◷ 10:00 – 22:00",
+          pay: "$95.000 COP",
+          status: "selected"
+        }));
+        applicationCards = [...applicationList.querySelectorAll(".application-card")];
+        applicationCount.textContent = `${applicationCards.length} ${applicationCards.length === 1 ? "postulación" : "postulaciones"} en total`;
+        updateFilterCounts();
+        updateVisibleApplications();
+      }
+    });
+
+    document.querySelector("#reject-assignment").addEventListener("click", () => {
+      assignmentTitle.textContent = "Asignación directa rechazada";
+      assignmentMessage.textContent = "Has rechazado la asignación directa de Eventos Nova.";
+      assignmentActions.hidden = true;
+    });
+
+    try {
+      loadSavedApplications();
+    } catch (error) {
+      applicationCount.textContent = "No se pudieron cargar las postulaciones guardadas.";
+      console.error("No fue posible cargar las postulaciones guardadas.", error);
+    }
+    updateFilterCounts();
+    updateVisibleApplications();
+  </script>
+</body>
+</html>

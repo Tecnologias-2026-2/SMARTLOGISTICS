@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ofertas laborales · Smart Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/trabajador.css">
+  <link rel="stylesheet" href="../css/ofertas.css">
+</head>
+<body class="worker-dashboard">
+  <div class="dashboard">
+    <aside class="sidebar">
+      <a href="inicio-trabajador.html#inicio" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
+        <span class="logo__mark" aria-hidden="true">SL</span>
+        <span class="logo__text" aria-hidden="true">
+          <span class="logo__title">SMART</span>
+          <span class="logo__subtitle">LOGISTICS</span>
+        </span>
+      </a>
+
+      <a href="inicio-trabajador.html#perfil" class="sidebar__profile">
+        <span class="sidebar__avatar" aria-hidden="true">👤</span>
+        <span class="sidebar__identity">
+          <strong>Carlos Rodríguez</strong>
+          <span>Auxiliar Logístico</span>
+        </span>
+      </a>
+
+      <nav class="sidebar__nav" aria-label="Navegación del trabajador">
+        <a class="sidebar__link" href="inicio-trabajador.html#inicio"><span aria-hidden="true">🏠</span>Inicio</a>
+        <a class="sidebar__link sidebar__link--active" href="ofertas-trabajador.html" aria-current="page"><span aria-hidden="true">💼</span>Ofertas</a>
+        <a class="sidebar__link" href="postulaciones-trabajador.html"><span aria-hidden="true">📋</span>Postulaciones</a>
+        <a class="sidebar__link" href="inicio-trabajador.html#historial"><span aria-hidden="true">📊</span>Historial</a>
+        <a class="sidebar__link" href="inicio-trabajador.html#perfil"><span aria-hidden="true">👤</span>Mi Perfil</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <span class="session-pill"><span aria-hidden="true">•</span> Sesión de trabajador</span>
+        <a class="sidebar__link sidebar__logout" href="login-trabajador.html"><span aria-hidden="true">📜</span>Cerrar sesión</a>
+      </div>
+    </aside>
+
+    <main class="dashboard__main offers-main">
+      <div class="offers-list-view" id="offers-list-view">
+      <header class="offers-header">
+        <h1>Ofertas laborales</h1>
+        <p id="offer-count" aria-live="polite">5 convocatorias disponibles</p>
+      </header>
+
+      <section class="offer-filters" aria-label="Buscar y filtrar ofertas">
+        <div class="offer-filters__row">
+          <label class="search-field">
+            <span class="visually-hidden">Buscar por evento, empresa o ubicación</span>
+            <input id="offer-search" type="search" placeholder="Buscar por evento, empresa o ubicación..." autocomplete="off">
+          </label>
+          <label class="sort-field">
+            <span class="visually-hidden">Ordenar ofertas</span>
+            <select id="offer-sort">
+              <option value="date">Por fecha</option>
+              <option value="pay-desc">Mayor pago</option>
+              <option value="pay-asc">Menor pago</option>
+            </select>
+          </label>
+        </div>
+        <div class="category-filters" role="group" aria-label="Filtrar por categoría">
+          <button type="button" class="category-filter is-selected" data-category="all" aria-pressed="true">Todos</button>
+          <button type="button" class="category-filter" data-category="evento" aria-pressed="false">Evento</button>
+          <button type="button" class="category-filter" data-category="almacen" aria-pressed="false">Almacén</button>
+          <button type="button" class="category-filter" data-category="montaje" aria-pressed="false">Montaje</button>
+          <button type="button" class="category-filter" data-category="reparto" aria-pressed="false">Reparto</button>
+        </div>
+      </section>
+
+      <section class="offers-results" aria-label="Resultados de ofertas laborales">
+        <div class="offer-list offers-results__list" id="offer-list">
+          <article class="offer-card listing-card" data-category="montaje" data-date="2026-09-15" data-pay="80000">
+            <span class="offer-card__icon" aria-hidden="true">🔧</span>
+            <div class="offer-card__details">
+              <div class="offer-card__title-row">
+                <h2>Auxiliares de Montaje – Feria Tecnológica</h2>
+                <span class="offer-tag offer-tag--blue">Montaje</span>
+              </div>
+              <p class="offer-card__company">Eventos Nova <span class="verified">✓ Verificada</span> <span class="offer-rating">★ 4.7</span></p>
+              <div class="offer-card__meta">
+                <span>📍 Bogotá, Corferias</span><span>🗓️ 15 Sep 2026</span><span>◷ 08:00 – 18:00</span>
+              </div>
+              <div class="listing-card__pay-row">
+                <strong class="offer-card__pay">$80.000 COP</strong><span class="places-pill">4/12 plazas</span>
+              </div>
+              <a class="offer-detail-link" href="#detalle-montaje">Ver detalle <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="offer-card listing-card" data-category="almacen" data-date="2026-09-20" data-pay="65000">
+            <span class="offer-card__icon" aria-hidden="true">📦</span>
+            <div class="offer-card__details">
+              <div class="offer-card__title-row">
+                <h2>Operarios de Almacén – Temporada Alta</h2>
+                <span class="offer-tag offer-tag--green">Almacén</span>
+              </div>
+              <p class="offer-card__company">LogiMax S.A.S. <span class="verified">✓ Verificada</span> <span class="offer-rating">★ 4.5</span></p>
+              <div class="offer-card__meta">
+                <span>📍 Bogotá, Zona Franca</span><span>🗓️ 20 Sep 2026</span><span>◷ 06:00 – 14:00</span>
+              </div>
+              <div class="listing-card__pay-row">
+                <strong class="offer-card__pay">$65.000 COP</strong><span class="places-pill">3/8 plazas</span>
+              </div>
+              <a class="offer-detail-link" href="#detalle-almacen">Ver detalle <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="offer-card listing-card" data-category="reparto" data-date="2026-09-18" data-pay="70000">
+            <span class="offer-card__icon" aria-hidden="true">🚚</span>
+            <div class="offer-card__details">
+              <div class="offer-card__title-row">
+                <h2>Auxiliares de Reparto – Última Milla</h2>
+                <span class="offer-tag offer-tag--orange">Reparto</span>
+              </div>
+              <p class="offer-card__company">DeliverGo Colombia <span class="verified">✓ Verificada</span> <span class="offer-rating">★ 4.2</span></p>
+              <div class="offer-card__meta">
+                <span>📍 Bogotá Norte</span><span>🗓️ 18 Sep 2026</span><span>◷ 07:00 – 15:00</span>
+              </div>
+              <div class="listing-card__pay-row">
+                <strong class="offer-card__pay">$70.000 COP</strong><span class="places-pill">8/15 plazas</span>
+              </div>
+              <a class="offer-detail-link" href="#detalle-reparto">Ver detalle <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="offer-card listing-card" data-category="evento" data-date="2026-09-22" data-pay="90000">
+            <span class="offer-card__icon" aria-hidden="true">🎪</span>
+            <div class="offer-card__details">
+              <div class="offer-card__title-row">
+                <h2>Personal para Evento Corporativo</h2>
+                <span class="offer-tag offer-tag--purple">Evento</span>
+              </div>
+              <p class="offer-card__company">Corporate Events &amp; Co. <span class="verified">✓ Verificada</span> <span class="offer-rating">★ 4.8</span></p>
+              <div class="offer-card__meta">
+                <span>📍 Bogotá, Hotel Tequendama</span><span>🗓️ 22 Sep 2026</span><span>◷ 14:00 – 23:00</span>
+              </div>
+              <div class="listing-card__pay-row">
+                <strong class="offer-card__pay">$90.000 COP</strong><span class="places-pill">2/6 plazas</span>
+              </div>
+              <a class="offer-detail-link" href="#detalle-evento-corporativo">Ver detalle <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="offer-card listing-card" data-category="evento" data-date="2026-09-30" data-pay="95000">
+            <span class="offer-card__icon" aria-hidden="true">🎪</span>
+            <div class="offer-card__details">
+              <div class="offer-card__title-row">
+                <h2>Auxiliares Logísticos – Concierto Internacional</h2>
+                <span class="offer-tag offer-tag--purple">Evento</span>
+              </div>
+              <p class="offer-card__company">Eventos Nova <span class="verified">✓ Verificada</span> <span class="offer-rating">★ 4.7</span></p>
+              <div class="offer-card__meta">
+                <span>📍 Bogotá, El Campín</span><span>🗓️ 30 Sep 2026</span><span>◷ 10:00 – 22:00</span>
+              </div>
+              <div class="listing-card__pay-row">
+                <strong class="offer-card__pay">$95.000 COP</strong><span class="places-pill">10/25 plazas</span>
+              </div>
+              <a class="offer-detail-link" href="#detalle-concierto">Ver detalle <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+        <p class="offers-empty" id="offers-empty" hidden>No encontramos ofertas que coincidan con tu búsqueda.</p>
+      </section>
+      </div>
+
+      <section class="job-detail" id="offer-detail-view" data-offer-id="montaje" data-company="Eventos Nova" aria-labelledby="job-title" hidden>
+        <header class="job-detail__header">
+          <span class="job-detail__icon" aria-hidden="true">🔧</span>
+          <div class="job-detail__heading">
+            <div class="job-detail__title-row">
+              <h1 id="job-title" tabindex="-1">Auxiliares de Montaje – Feria Tecnológica</h1>
+              <span class="offer-tag offer-tag--blue">Montaje</span>
+            </div>
+            <p class="job-detail__company">Eventos Nova <span class="verified">✓ Empresa verificada</span></p>
+            <p class="job-detail__rating" aria-label="Calificación de empresa: 4.7 de 5">
+              <span aria-hidden="true">★★★★★</span> 4.7 <span class="job-detail__rating-label">calificación empresa</span>
+            </p>
+          </div>
+        </header>
+
+        <section class="job-facts" aria-label="Datos de la oferta">
+          <article class="job-fact"><span>Remuneración</span><strong>💰 $80.000 COP</strong></article>
+          <article class="job-fact"><span>Ubicación</span><strong>📍 Bogotá, Corferias</strong></article>
+          <article class="job-fact"><span>Fecha</span><strong>🗓️ 15 Sep 2026</strong></article>
+          <article class="job-fact"><span>Horario</span><strong>⏱️ 08:00 – 18:00</strong></article>
+          <article class="job-fact"><span>Plazas totales</span><strong>👥 12 trabajadores</strong></article>
+          <article class="job-fact"><span>Plazas disponibles</span><strong>✅ 4 disponibles</strong></article>
+        </section>
+
+        <section class="job-panel" aria-labelledby="description-title">
+          <h2 id="description-title">Descripción del cargo</h2>
+          <p>Se requieren auxiliares de montaje para la instalación de stands y estructuras de la Feria Tecnológica Colombia 2026. El trabajo incluye armado de estructuras metálicas, montaje de mobiliario, instalación de señalética y verificación de los espacios asignados.</p>
+        </section>
+
+        <section class="job-panel" aria-labelledby="requirements-title">
+          <h2 id="requirements-title">Requisitos</h2>
+          <ul class="requirements-list">
+            <li>Experiencia mínima de 1 año en montaje de eventos</li>
+            <li>Capacidad para trabajo físico moderado</li>
+            <li>Disponibilidad de 08:00 a 18:00</li>
+            <li>Responsabilidad y puntualidad</li>
+            <li>Trabajo en equipo</li>
+          </ul>
+        </section>
+
+        <section class="job-panel company-panel" aria-labelledby="company-title">
+          <h2 id="company-title">Sobre la empresa</h2>
+          <div class="company-panel__identity">
+            <span class="company-panel__icon" aria-hidden="true">🏢</span>
+            <div>
+              <p>Eventos Nova</p>
+              <span class="company-panel__rating"><span aria-hidden="true">★★★★★</span> 4.7</span>
+              <span class="verified">✓ Verificada</span>
+            </div>
+          </div>
+          <p class="company-panel__candidates">23 candidatos postulados · 4 plazas disponibles</p>
+        </section>
+
+        <footer class="apply-bar">
+          <div>
+            <strong>$80.000 COP</strong>
+            <span>15 Sep 2026 · 08:00 – 18:00</span>
+          </div>
+          <button class="btn btn--primary apply-bar__button" type="button" data-apply>Postularme</button>
+        </footer>
+        <a class="job-detail__back" href="#listado-ofertas">← Volver a ofertas</a>
+      </section>
+
+      <section class="job-detail" id="delivery-detail-view" data-offer-id="reparto" data-company="DeliverCo Colombia" aria-labelledby="delivery-job-title" hidden>
+        <header class="job-detail__header">
+          <span class="job-detail__icon" aria-hidden="true">🚚</span>
+          <div class="job-detail__heading">
+            <div class="job-detail__title-row">
+              <h1 id="delivery-job-title" tabindex="-1">Auxiliares de Reparto – Última Milla</h1>
+              <span class="offer-tag offer-tag--orange">Reparto</span>
+            </div>
+            <p class="job-detail__company">DeliverCo Colombia</p>
+            <p class="job-detail__rating" aria-label="Calificación de empresa: 4.2 de 5">
+              <span aria-hidden="true">★★★★★</span> 4.2 <span class="job-detail__rating-label">calificación empresa</span>
+            </p>
+          </div>
+        </header>
+
+        <section class="job-facts" aria-label="Datos de la oferta">
+          <article class="job-fact"><span>Remuneración</span><strong>💰 $70.000 COP</strong></article>
+          <article class="job-fact"><span>Ubicación</span><strong>📍 Bogotá Norte</strong></article>
+          <article class="job-fact"><span>Fecha</span><strong>🗓️ 18 Sep 2026</strong></article>
+          <article class="job-fact"><span>Horario</span><strong>⏱️ 07:00 – 15:00</strong></article>
+          <article class="job-fact"><span>Plazas totales</span><strong>👥 15 trabajadores</strong></article>
+          <article class="job-fact"><span>Plazas disponibles</span><strong>✅ 8 disponibles</strong></article>
+        </section>
+
+        <section class="job-panel" aria-labelledby="delivery-description-title">
+          <h2 id="delivery-description-title">Descripción del cargo</h2>
+          <p>Se requieren auxiliares para apoyo en reparto de última milla en la zona norte de Bogotá. El trabajo consiste en cargue, descargue y entrega de paquetes en las rutas asignadas, con apoyo de aplicación móvil de seguimiento.</p>
+        </section>
+
+        <section class="job-panel" aria-labelledby="delivery-requirements-title">
+          <h2 id="delivery-requirements-title">Requisitos</h2>
+          <ul class="requirements-list">
+            <li>Experiencia en reparto o mensajería</li>
+            <li>Buen estado físico</li>
+            <li>Habilidad para manejo de app móvil</li>
+            <li>Conocimiento de la zona norte de Bogotá</li>
+          </ul>
+        </section>
+
+        <section class="job-panel company-panel" aria-labelledby="delivery-company-title">
+          <h2 id="delivery-company-title">Sobre la empresa</h2>
+          <div class="company-panel__identity">
+            <span class="company-panel__icon" aria-hidden="true">🏢</span>
+            <div>
+              <p>DeliverCo Colombia</p>
+              <span class="company-panel__rating"><span aria-hidden="true">★★★★★</span> 4.2</span>
+            </div>
+          </div>
+          <p class="company-panel__candidates">31 candidatos postulados · 8 plazas disponibles</p>
+        </section>
+
+        <footer class="apply-bar">
+          <div>
+            <strong>$70.000 COP</strong>
+            <span>18 Sep 2026 · 07:00 – 15:00</span>
+          </div>
+          <button class="btn btn--primary apply-bar__button" type="button" data-apply>Postularme</button>
+        </footer>
+        <a class="job-detail__back" href="#listado-ofertas">← Volver a ofertas</a>
+      </section>
+
+      <section class="job-detail" id="warehouse-detail-view" data-offer-id="almacen" data-company="LogiMax S.A.S." aria-labelledby="warehouse-job-title" hidden>
+        <header class="job-detail__header">
+          <span class="job-detail__icon" aria-hidden="true">📦</span>
+          <div class="job-detail__heading">
+            <div class="job-detail__title-row">
+              <h1 id="warehouse-job-title" tabindex="-1">Operarios de Almacén – Temporada Alta</h1>
+              <span class="offer-tag offer-tag--green">Almacén</span>
+            </div>
+            <p class="job-detail__company">LogiMax S.A.S. <span class="verified">✓ Empresa verificada</span></p>
+            <p class="job-detail__rating" aria-label="Calificación de empresa: 4.5 de 5">
+              <span aria-hidden="true">★★★★★</span> 4.5 <span class="job-detail__rating-label">calificación empresa</span>
+            </p>
+          </div>
+        </header>
+
+        <section class="job-facts" aria-label="Datos de la oferta">
+          <article class="job-fact"><span>Remuneración</span><strong>💰 $65.000 COP</strong></article>
+          <article class="job-fact"><span>Ubicación</span><strong>📍 Bogotá, Zona Franca</strong></article>
+          <article class="job-fact"><span>Fecha</span><strong>🗓️ 20 Sep 2026</strong></article>
+          <article class="job-fact"><span>Horario</span><strong>⏱️ 06:00 – 14:00</strong></article>
+          <article class="job-fact"><span>Plazas totales</span><strong>👥 8 trabajadores</strong></article>
+          <article class="job-fact"><span>Plazas disponibles</span><strong>✅ 3 disponibles</strong></article>
+        </section>
+
+        <section class="job-panel" aria-labelledby="warehouse-description-title">
+          <h2 id="warehouse-description-title">Descripción del cargo</h2>
+          <p>Buscamos operarios para apoyar la gestión de inventario y despacho de mercancía durante la temporada alta de fin de año. Actividades incluyen recepción de mercancía, clasificación, almacenamiento y preparación de pedidos.</p>
+        </section>
+
+        <section class="job-panel" aria-labelledby="warehouse-requirements-title">
+          <h2 id="warehouse-requirements-title">Requisitos</h2>
+          <ul class="requirements-list">
+            <li>Experiencia en manejo de inventarios</li>
+            <li>Conocimiento básico de WMS o RF</li>
+            <li>Disponibilidad para turno matutino</li>
+            <li>Certificado de alturas (deseable)</li>
+          </ul>
+        </section>
+
+        <section class="job-panel company-panel" aria-labelledby="warehouse-company-title">
+          <h2 id="warehouse-company-title">Sobre la empresa</h2>
+          <div class="company-panel__identity">
+            <span class="company-panel__icon" aria-hidden="true">🏢</span>
+            <div>
+              <p>LogiMax S.A.S.</p>
+              <span class="company-panel__rating"><span aria-hidden="true">★★★★★</span> 4.5</span>
+              <span class="verified">✓ Verificada</span>
+            </div>
+          </div>
+          <p class="company-panel__candidates">15 candidatos postulados · 3 plazas disponibles</p>
+        </section>
+
+        <footer class="apply-bar">
+          <div>
+            <strong>$65.000 COP</strong>
+            <span>20 Sep 2026 · 06:00 – 14:00</span>
+          </div>
+          <button class="btn btn--primary apply-bar__button" type="button" data-apply>Postularme</button>
+        </footer>
+        <a class="job-detail__back" href="#listado-ofertas">← Volver a ofertas</a>
+      </section>
+
+      <section class="job-detail" id="corporate-event-detail-view" data-offer-id="evento-corporativo" data-company="Corporate Events &amp; Co." aria-labelledby="corporate-event-job-title" hidden>
+        <header class="job-detail__header">
+          <span class="job-detail__icon" aria-hidden="true">🎪</span>
+          <div class="job-detail__heading">
+            <div class="job-detail__title-row">
+              <h1 id="corporate-event-job-title" tabindex="-1">Personal para Evento Corporativo</h1>
+              <span class="offer-tag offer-tag--purple">Evento</span>
+            </div>
+            <p class="job-detail__company">Corporate Events &amp; Co. <span class="verified">✓ Empresa verificada</span></p>
+            <p class="job-detail__rating" aria-label="Calificación de empresa: 4.8 de 5">
+              <span aria-hidden="true">★★★★★</span> 4.8 <span class="job-detail__rating-label">calificación empresa</span>
+            </p>
+          </div>
+        </header>
+
+        <section class="job-facts" aria-label="Datos de la oferta">
+          <article class="job-fact"><span>Remuneración</span><strong>💰 $90.000 COP</strong></article>
+          <article class="job-fact"><span>Ubicación</span><strong>📍 Bogotá, Hotel Tequendama</strong></article>
+          <article class="job-fact"><span>Fecha</span><strong>🗓️ 22 Sep 2026</strong></article>
+          <article class="job-fact"><span>Horario</span><strong>⏱️ 14:00 – 23:00</strong></article>
+          <article class="job-fact"><span>Plazas totales</span><strong>👥 6 trabajadores</strong></article>
+          <article class="job-fact"><span>Plazas disponibles</span><strong>✅ 2 disponibles</strong></article>
+        </section>
+
+        <section class="job-panel" aria-labelledby="corporate-event-description-title">
+          <h2 id="corporate-event-description-title">Descripción del cargo</h2>
+          <p>Se busca personal logístico para evento corporativo de empresa multinacional. Las actividades incluyen registro de asistentes, logística de materiales, apoyo en sala, coordinación de catering y desmontaje al finalizar el evento.</p>
+        </section>
+
+        <section class="job-panel" aria-labelledby="corporate-event-requirements-title">
+          <h2 id="corporate-event-requirements-title">Requisitos</h2>
+          <ul class="requirements-list">
+            <li>Presentación formal obligatoria</li>
+            <li>Experiencia en eventos corporativos</li>
+            <li>Inglés básico (deseable)</li>
+            <li>Excelente actitud de servicio</li>
+            <li>Disponibilidad nocturna</li>
+          </ul>
+        </section>
+
+        <section class="job-panel company-panel" aria-labelledby="corporate-event-company-title">
+          <h2 id="corporate-event-company-title">Sobre la empresa</h2>
+          <div class="company-panel__identity">
+            <span class="company-panel__icon" aria-hidden="true">🏢</span>
+            <div>
+              <p>Corporate Events &amp; Co.</p>
+              <span class="company-panel__rating"><span aria-hidden="true">★★★★★</span> 4.8</span>
+              <span class="verified">✓ Verificada</span>
+            </div>
+          </div>
+          <p class="company-panel__candidates">12 candidatos postulados · 2 plazas disponibles</p>
+        </section>
+
+        <footer class="apply-bar">
+          <div>
+            <strong>$90.000 COP</strong>
+            <span>22 Sep 2026 · 14:00 – 23:00</span>
+          </div>
+          <button class="btn btn--primary apply-bar__button" type="button" data-apply>Postularme</button>
+        </footer>
+        <a class="job-detail__back" href="#listado-ofertas">← Volver a ofertas</a>
+      </section>
+
+      <section class="job-detail" id="concert-detail-view" data-offer-id="concierto" data-company="Eventos Nova" aria-labelledby="concert-job-title" hidden>
+        <header class="job-detail__header">
+          <span class="job-detail__icon" aria-hidden="true">🎪</span>
+          <div class="job-detail__heading">
+            <div class="job-detail__title-row">
+              <h1 id="concert-job-title" tabindex="-1">Auxiliares Logísticos – Concierto Internacional</h1>
+              <span class="offer-tag offer-tag--purple">Evento</span>
+            </div>
+            <p class="job-detail__company">Eventos Nova <span class="verified">✓ Empresa verificada</span></p>
+            <p class="job-detail__rating" aria-label="Calificación de empresa: 4.7 de 5">
+              <span aria-hidden="true">★★★★★</span> 4.7 <span class="job-detail__rating-label">calificación empresa</span>
+            </p>
+          </div>
+        </header>
+
+        <section class="job-facts" aria-label="Datos de la oferta">
+          <article class="job-fact"><span>Remuneración</span><strong>💰 $95.000 COP</strong></article>
+          <article class="job-fact"><span>Ubicación</span><strong>📍 Bogotá, El Campín</strong></article>
+          <article class="job-fact"><span>Fecha</span><strong>🗓️ 30 Sep 2026</strong></article>
+          <article class="job-fact"><span>Horario</span><strong>⏱️ 10:00 – 22:00</strong></article>
+          <article class="job-fact"><span>Plazas totales</span><strong>👥 25 trabajadores</strong></article>
+          <article class="job-fact"><span>Plazas disponibles</span><strong>✅ 10 disponibles</strong></article>
+        </section>
+
+        <section class="job-panel" aria-labelledby="concert-description-title">
+          <h2 id="concert-description-title">Descripción del cargo</h2>
+          <p>Gran convocatoria para el concierto internacional más importante del año. Se requiere personal para logística general, control de accesos, manejo de materiales escénicos y apoyo en producción.</p>
+        </section>
+
+        <section class="job-panel" aria-labelledby="concert-requirements-title">
+          <h2 id="concert-requirements-title">Requisitos</h2>
+          <ul class="requirements-list">
+            <li>Experiencia en eventos masivos</li>
+            <li>Capacidad para trabajo bajo presión</li>
+            <li>Disponibilidad de 10:00 a 22:00</li>
+            <li>Certificado de curso de primeros auxilios (deseable)</li>
+          </ul>
+        </section>
+
+        <section class="job-panel company-panel" aria-labelledby="concert-company-title">
+          <h2 id="concert-company-title">Sobre la empresa</h2>
+          <div class="company-panel__identity">
+            <span class="company-panel__icon" aria-hidden="true">🏢</span>
+            <div>
+              <p>Eventos Nova</p>
+              <span class="company-panel__rating"><span aria-hidden="true">★★★★★</span> 4.7</span>
+              <span class="verified">✓ Verificada</span>
+            </div>
+          </div>
+          <p class="company-panel__candidates">67 candidatos postulados · 10 plazas disponibles</p>
+        </section>
+
+        <footer class="apply-bar">
+          <div>
+            <strong>$95.000 COP</strong>
+            <span>30 Sep 2026 · 10:00 – 22:00</span>
+          </div>
+          <button class="btn btn--primary apply-bar__button" type="button" data-apply>Postularme</button>
+        </footer>
+        <a class="job-detail__back" href="#listado-ofertas">← Volver a ofertas</a>
+      </section>
+    </main>
+  </div>
+
+  <dialog class="application-dialog" id="application-dialog" aria-labelledby="application-dialog-title">
+    <div class="application-dialog__content" id="application-confirmation">
+      <span class="application-dialog__icon" aria-hidden="true">📋</span>
+      <p class="application-dialog__eyebrow">Confirmación de postulación</p>
+      <h2 id="application-dialog-title">¿Quieres postularte a esta oferta?</h2>
+      <p class="application-dialog__offer-title" id="application-offer-title"></p>
+      <p class="application-dialog__company" id="application-company"></p>
+      <div class="application-dialog__details" id="application-details"></div>
+      <p class="application-dialog__error" id="application-error" role="alert" hidden></p>
+      <div class="application-dialog__actions">
+        <button class="application-dialog__button application-dialog__button--secondary" type="button" data-close-dialog>Cancelar</button>
+        <button class="application-dialog__button application-dialog__button--primary" type="button" id="confirm-application">Confirmar postulación</button>
+      </div>
+    </div>
+    <div class="application-dialog__content" id="application-success" hidden>
+      <span class="application-dialog__icon application-dialog__icon--success" aria-hidden="true">✓</span>
+      <p class="application-dialog__eyebrow">Postulación enviada</p>
+      <h2>¡Listo! Tu postulación está en revisión</h2>
+      <p class="application-dialog__success-copy">La empresa revisará tu perfil. Puedes consultar el estado desde Mis postulaciones.</p>
+      <a class="application-dialog__button application-dialog__button--primary" href="postulaciones-trabajador.html">Ver mis postulaciones</a>
+      <button class="application-dialog__text-button" type="button" data-close-dialog>Seguir explorando ofertas</button>
+    </div>
+  </dialog>
+
+  <script>
+    const APPLICATIONS_STORAGE_KEY = "smart-logistics:worker-applications";
+    const searchInput = document.querySelector("#offer-search");
+    const sortSelect = document.querySelector("#offer-sort");
+    const categoryButtons = [...document.querySelectorAll(".category-filter")];
+    const offerList = document.querySelector("#offer-list");
+    const offerCount = document.querySelector("#offer-count");
+    const emptyMessage = document.querySelector("#offers-empty");
+    const offerCards = [...offerList.querySelectorAll(".listing-card")];
+    const listView = document.querySelector("#offers-list-view");
+    const detailViews = [...document.querySelectorAll(".job-detail")];
+    const applicationDialog = document.querySelector("#application-dialog");
+    const confirmationPanel = document.querySelector("#application-confirmation");
+    const successPanel = document.querySelector("#application-success");
+    const applicationOfferTitle = document.querySelector("#application-offer-title");
+    const applicationCompany = document.querySelector("#application-company");
+    const applicationDetails = document.querySelector("#application-details");
+    const applicationError = document.querySelector("#application-error");
+    const confirmApplicationButton = document.querySelector("#confirm-application");
+    let selectedOffer = null;
+    let activeCategory = "all";
+
+    function readApplications() {
+      const storedApplications = localStorage.getItem(APPLICATIONS_STORAGE_KEY);
+      if (!storedApplications) return [];
+
+      const applications = JSON.parse(storedApplications);
+      if (!Array.isArray(applications)) {
+        throw new Error("El almacenamiento de postulaciones no tiene un formato válido.");
+      }
+      return applications;
+    }
+
+    function getOfferDetails(detail) {
+      const facts = [...detail.querySelectorAll(".job-fact strong")].map((fact) => fact.textContent.trim());
+      return {
+        id: detail.dataset.offerId,
+        title: detail.querySelector("h1").textContent.trim(),
+        company: detail.dataset.company,
+        pay: facts[0],
+        location: facts[1],
+        date: facts[2],
+        hours: facts[3],
+        status: "review",
+        appliedAt: new Date().toISOString()
+      };
+    }
+
+    function updateApplyButtons() {
+      const applications = readApplications();
+      detailViews.forEach((detail) => {
+        const button = detail.querySelector("[data-apply]");
+        const alreadyApplied = applications.some((application) => application.id === detail.dataset.offerId);
+        button.disabled = alreadyApplied;
+        button.textContent = alreadyApplied ? "Ya postulaste" : "Postularme";
+      });
+    }
+
+    function openApplicationDialog(detail) {
+      try {
+        const applications = readApplications();
+        selectedOffer = getOfferDetails(detail);
+        const alreadyApplied = applications.some((application) => application.id === selectedOffer.id);
+        if (alreadyApplied) {
+          updateApplyButtons();
+          return;
+        }
+
+        applicationCompany.textContent = selectedOffer.company;
+        applicationOfferTitle.textContent = selectedOffer.title;
+        applicationDetails.replaceChildren();
+        [
+          ["Remuneración", selectedOffer.pay],
+          ["Ubicación", selectedOffer.location],
+          ["Fecha", selectedOffer.date],
+          ["Horario", selectedOffer.hours]
+        ].forEach(([label, value]) => {
+          const row = document.createElement("p");
+          const name = document.createElement("strong");
+          name.textContent = label;
+          row.append(name, document.createTextNode(value));
+          applicationDetails.append(row);
+        });
+        applicationError.hidden = true;
+        confirmationPanel.hidden = false;
+        successPanel.hidden = true;
+        applicationDialog.showModal();
+      } catch (error) {
+        applicationError.textContent = "No se pudieron cargar tus postulaciones. Recarga la página e inténtalo de nuevo.";
+        applicationError.hidden = false;
+        confirmationPanel.hidden = false;
+        successPanel.hidden = true;
+        applicationDialog.showModal();
+        console.error("No fue posible abrir la confirmación de postulación.", error);
+      }
+    }
+
+    function updateView() {
+      const detailId = {
+        "#detalle-montaje": "offer-detail-view",
+        "#detalle-reparto": "delivery-detail-view",
+        "#detalle-almacen": "warehouse-detail-view",
+        "#detalle-evento-corporativo": "corporate-event-detail-view",
+        "#detalle-concierto": "concert-detail-view"
+      }[window.location.hash];
+      const activeDetail = detailViews.find((detail) => detail.id === detailId);
+      listView.hidden = Boolean(activeDetail);
+      detailViews.forEach((detail) => {
+        detail.hidden = detail !== activeDetail;
+      });
+
+      if (activeDetail) {
+        activeDetail.querySelector("h1").focus({ preventScroll: true });
+        window.scrollTo(0, 0);
+      }
+    }
+
+    function updateOffers() {
+      const searchTerm = searchInput.value.trim().toLocaleLowerCase("es");
+      const sortOrder = sortSelect.value;
+      const matchingCards = offerCards.filter((card) => {
+        const matchesCategory = activeCategory === "all" || card.dataset.category === activeCategory;
+        const matchesSearch = card.textContent.toLocaleLowerCase("es").includes(searchTerm);
+        return matchesCategory && matchesSearch;
+      });
+
+      matchingCards.sort((first, second) => {
+        if (sortOrder === "pay-desc") return Number(second.dataset.pay) - Number(first.dataset.pay);
+        if (sortOrder === "pay-asc") return Number(first.dataset.pay) - Number(second.dataset.pay);
+        return first.dataset.date.localeCompare(second.dataset.date);
+      });
+
+      offerCards.forEach((card) => {
+        card.hidden = !matchingCards.includes(card);
+      });
+      matchingCards.forEach((card) => offerList.append(card));
+      offerCount.textContent = `${matchingCards.length} ${matchingCards.length === 1 ? "convocatoria disponible" : "convocatorias disponibles"}`;
+      emptyMessage.hidden = matchingCards.length > 0;
+    }
+
+    searchInput.addEventListener("input", updateOffers);
+    sortSelect.addEventListener("change", updateOffers);
+    categoryButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeCategory = button.dataset.category;
+        categoryButtons.forEach((categoryButton) => {
+          const isSelected = categoryButton === button;
+          categoryButton.classList.toggle("is-selected", isSelected);
+          categoryButton.setAttribute("aria-pressed", String(isSelected));
+        });
+        updateOffers();
+      });
+    });
+
+    window.addEventListener("hashchange", updateView);
+    detailViews.forEach((detail) => {
+      detail.querySelector("[data-apply]").addEventListener("click", () => openApplicationDialog(detail));
+    });
+    document.querySelectorAll("[data-close-dialog]").forEach((button) => {
+      button.addEventListener("click", () => applicationDialog.close());
+    });
+    confirmApplicationButton.addEventListener("click", () => {
+      if (!selectedOffer) return;
+      try {
+        const applications = readApplications();
+        if (!applications.some((application) => application.id === selectedOffer.id)) {
+          applications.push(selectedOffer);
+          localStorage.setItem(APPLICATIONS_STORAGE_KEY, JSON.stringify(applications));
+        }
+        updateApplyButtons();
+        confirmationPanel.hidden = true;
+        successPanel.hidden = false;
+      } catch (error) {
+        applicationError.textContent = "No se pudo guardar tu postulación. Verifica el almacenamiento del navegador e inténtalo de nuevo.";
+        applicationError.hidden = false;
+        console.error("No fue posible guardar la postulación.", error);
+      }
+    });
+    updateView();
+    updateOffers();
+    try {
+      updateApplyButtons();
+    } catch (error) {
+      console.error("No fue posible cargar las postulaciones guardadas.", error);
+    }
+  </script>
+</body>
+</html>
