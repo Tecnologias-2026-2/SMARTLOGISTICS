@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio · Smart Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/trabajador.css">
+</head>
+<body class="worker-dashboard">
+  <div class="dashboard">
+    <aside class="sidebar">
+      <a href="#inicio" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
+        <span class="logo__mark" aria-hidden="true">SL</span>
+        <span class="logo__text" aria-hidden="true">
+          <span class="logo__title">SMART</span>
+          <span class="logo__subtitle">LOGISTICS</span>
+        </span>
+      </a>
+
+      <a href="#perfil" class="sidebar__profile">
+        <span class="sidebar__avatar" aria-hidden="true">👤</span>
+        <span class="sidebar__identity">
+          <strong>Carlos Rodríguez</strong>
+          <span>Auxiliar Logístico</span>
+        </span>
+      </a>
+
+      <nav class="sidebar__nav" aria-label="Navegación del trabajador">
+        <a class="sidebar__link sidebar__link--active" href="#inicio" aria-current="page"><span aria-hidden="true">🏠</span>Inicio</a>
+        <a class="sidebar__link" href="#ofertas"><span aria-hidden="true">💼</span>Ofertas</a>
+        <a class="sidebar__link" href="#postulaciones"><span aria-hidden="true">📋</span>Postulaciones</a>
+        <a class="sidebar__link" href="#historial"><span aria-hidden="true">📊</span>Historial</a>
+        <a class="sidebar__link" href="#perfil"><span aria-hidden="true">👤</span>Mi Perfil</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <span class="session-pill"><span aria-hidden="true">•</span> Sesión de trabajador</span>
+        <a class="sidebar__link sidebar__logout" href="login-trabajador.html"><span aria-hidden="true">📜</span>Cerrar sesión</a>
+      </div>
+    </aside>
+
+    <main class="dashboard__main" id="inicio">
+      <section class="welcome-card" id="perfil" aria-labelledby="welcome-title">
+        <div>
+          <p class="welcome-card__eyebrow">Buenas tardes</p>
+          <h1 id="welcome-title">Carlos 👋</h1>
+          <p class="welcome-card__meta">Auxiliar Logístico · Bogotá, Colombia</p>
+        </div>
+        <div class="welcome-card__rating" aria-label="Calificación global: 4.8 de 5">
+          <strong><span aria-hidden="true">★</span> 4.8</strong>
+          <span>Calificación global</span>
+        </div>
+      </section>
+
+      <section class="metric-grid" aria-label="Resumen de desempeño">
+        <article class="metric-card metric-card--blue">
+          <div><p>Reputación logística</p><strong>4.9★</strong></div>
+          <span class="metric-card__icon" aria-hidden="true">🏅</span>
+        </article>
+        <article class="metric-card metric-card--purple">
+          <div><p>Reputación coordinador</p><strong>4.6★</strong></div>
+          <span class="metric-card__icon" aria-hidden="true">👑</span>
+        </article>
+        <article class="metric-card metric-card--green">
+          <div><p>Trabajos realizados</p><strong>47</strong></div>
+          <span class="metric-card__icon" aria-hidden="true">💼</span>
+        </article>
+        <article class="metric-card metric-card--orange">
+          <div><p>Puntualidad</p><strong>96%</strong></div>
+          <span class="metric-card__icon" aria-hidden="true">⏱️</span>
+        </article>
+      </section>
+
+      <section class="profile-stats" aria-label="Estadísticas del perfil">
+        <div><strong>3</strong><span>Años exp.</span></div>
+        <div><strong>12</strong><span>Empresas</span></div>
+        <div><strong>4.8★</strong><span>Calificación</span></div>
+        <div><strong>4.9★</strong><span>Rep. logística</span></div>
+        <div><strong>4.6★</strong><span>Rep. coordinador</span></div>
+        <div><strong>96%</strong><span>Puntualidad</span></div>
+      </section>
+
+      <section class="quick-access" id="postulaciones" aria-labelledby="quick-access-title">
+        <h2 class="section-title" id="quick-access-title">Acceso rápido</h2>
+        <div class="quick-access__grid">
+          <a class="quick-card quick-card--blue" href="#ofertas"><span aria-hidden="true">💼</span><strong>Ver ofertas</strong></a>
+          <a class="quick-card quick-card--purple" href="#postulaciones"><span aria-hidden="true">📋</span><strong>Mis postulaciones</strong></a>
+          <a class="quick-card quick-card--green" id="historial" href="#historial"><span aria-hidden="true">📊</span><strong>Historial</strong></a>
+          <a class="quick-card quick-card--orange" href="#perfil"><span aria-hidden="true">⭐</span><strong>Mi reputación</strong></a>
+        </div>
+      </section>
+
+      <section class="recommended" id="ofertas" aria-labelledby="offers-title">
+        <div class="section-heading">
+          <h2 class="section-title" id="offers-title">Ofertas recomendadas</h2>
+          <a href="#ofertas">Ver todas <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="offer-list">
+          <article class="offer-card">
+            <span class="offer-card__icon" aria-hidden="true">🔧</span>
+            <div class="offer-card__details">
+              <div class="offer-card__title-row">
+                <h3>Auxiliares de Montaje – Feria Tecnológica</h3>
+                <span class="offer-tag offer-tag--blue">Montaje</span>
+              </div>
+              <p class="offer-card__company">Eventos Nova <span class="verified">✓ Verificada</span></p>
+              <div class="offer-card__meta">
+                <span>📍 Bogotá, Corferias</span><span>🗓️ 15 Sep 2026</span><span>◷ 08:00 – 18:00</span>
+              </div>
+              <strong class="offer-card__pay">$80.000 COP</strong>
+            </div>
+            <span class="offer-card__availability">4 plazas disp.</span>
+          </article>
+
+          <article class="offer-card">
+            <span class="offer-card__icon" aria-hidden="true">📦</span>
+            <div class="offer-card__details">
+              <div class="offer-card__title-row">
+                <h3>Operarios de Almacén – Temporada Alta</h3>
+                <span class="offer-tag offer-tag--green">Almacén</span>
+              </div>
+              <p class="offer-card__company">LogiMax S.A.S. <span class="verified">✓ Verificada</span></p>
+              <div class="offer-card__meta">
+                <span>📍 Bogotá, Zona Franca</span><span>🗓️ 20 Sep 2026</span><span>◷ 06:00 – 14:00</span>
+              </div>
+              <strong class="offer-card__pay">$65.000 COP</strong>
+            </div>
+            <span class="offer-card__availability">3 plazas disp.</span>
+          </article>
+
+          <article class="offer-card">
+            <span class="offer-card__icon" aria-hidden="true">🚚</span>
+            <div class="offer-card__details">
+              <div class="offer-card__title-row">
+                <h3>Auxiliares de Reparto – Última Milla</h3>
+                <span class="offer-tag offer-tag--orange">Reparto</span>
+              </div>
+              <p class="offer-card__company">DeliverGo Colombia <span class="verified">✓ Verificada</span></p>
+              <div class="offer-card__meta">
+                <span>📍 Bogotá Norte</span><span>🗓️ 18 Sep 2026</span><span>◷ 07:00 – 15:00</span>
+              </div>
+              <strong class="offer-card__pay">$70.000 COP</strong>
+            </div>
+            <span class="offer-card__availability">8 plazas disp.</span>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
