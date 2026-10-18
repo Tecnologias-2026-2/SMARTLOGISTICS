@@ -1,0 +1,242 @@
+.history-main {
+  gap: 18px;
+  padding: 28px;
+}
+
+.history-header h1 {
+  color: #17233b;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.history-header p {
+  margin-top: 3px;
+  color: #7588a3;
+  font-size: 12px;
+  line-height: 17px;
+}
+
+.history-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.history-metric {
+  display: flex;
+  min-height: 103px;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 17px;
+  border-radius: 11px;
+  box-shadow: 0 4px 8px rgba(15, 23, 43, 0.16);
+  color: #fff;
+}
+
+.history-metric--blue {
+  background: linear-gradient(110deg, #2b7fff, #155dfc);
+}
+
+.history-metric--purple {
+  background: linear-gradient(110deg, #b32cff, #9810fa);
+}
+
+.history-metric--green {
+  background: linear-gradient(110deg, #00bc7d, #009966);
+}
+
+.history-metric--orange {
+  background: linear-gradient(110deg, #ff9800, #ed7900);
+}
+
+.history-metric p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.history-metric strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 30px;
+}
+
+.history-metric strong span {
+  font-size: 21px;
+}
+
+.history-metric__icon {
+  display: grid;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  margin-top: 1px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 16px;
+}
+
+.history-panel {
+  overflow: hidden;
+  border: 1px solid #e1e7ef;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(15, 23, 43, 0.08);
+}
+
+.history-panel h2 {
+  padding: 15px 19px;
+  border-bottom: 1px solid #edf1f6;
+  color: #17233b;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.history-table-scroll {
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.history-table th,
+.history-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #edf1f6;
+  white-space: nowrap;
+}
+
+.history-table th {
+  color: #91a1b9;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.history-table td {
+  color: #7588a3;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.history-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.history-job {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #17233b;
+  font-weight: 600;
+}
+
+.history-job__icon {
+  display: grid;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 7px;
+  background: #eff6ff;
+  font-size: 14px;
+}
+
+.history-category {
+  display: inline-block;
+  padding: 3px 9px;
+  border: 1px solid transparent;
+  border-radius: 99px;
+  font-size: 9px;
+  line-height: 12px;
+}
+
+.history-category--blue {
+  border-color: #bfdbfe;
+  background: #dbeafe;
+  color: #155dfc;
+}
+
+.history-category--green {
+  border-color: #99f6e4;
+  background: #ccfbf1;
+  color: #008b72;
+}
+
+.history-category--purple {
+  border-color: #e9d5ff;
+  background: #f3e8ff;
+  color: #9333ea;
+}
+
+.history-category--orange {
+  border-color: #fde68a;
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.history-pay {
+  color: #155dfc !important;
+  font-weight: 700;
+}
+
+.history-rating {
+  color: #f59e0b;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.history-rating span {
+  margin-left: 4px;
+  color: #52647d;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@media (max-width: 900px) {
+  .history-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .history-main {
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .history-metric {
+    min-height: 88px;
+    padding: 13px;
+  }
+
+  .history-metric p {
+    font-size: 10px;
+  }
+
+  .history-metric strong {
+    font-size: 22px;
+  }
+
+  .history-panel h2 {
+    padding: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .history-metrics {
+    grid-template-columns: 1fr;
+  }
+}

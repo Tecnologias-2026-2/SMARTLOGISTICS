@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi perfil · Smart Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/trabajador.css">
+  <link rel="stylesheet" href="../css/perfil.css">
+</head>
+<body class="worker-dashboard">
+  <div class="dashboard">
+    <aside class="sidebar">
+      <a href="inicio-trabajador.html#inicio" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
+        <span class="logo__mark" aria-hidden="true">SL</span>
+        <span class="logo__text" aria-hidden="true">
+          <span class="logo__title">SMART</span>
+          <span class="logo__subtitle">LOGISTICS</span>
+        </span>
+      </a>
+
+      <a href="perfil-trabajador.html" class="sidebar__profile">
+        <span class="sidebar__avatar" aria-hidden="true">👤</span>
+        <span class="sidebar__identity">
+          <strong>Carlos Rodríguez</strong>
+          <span>Auxiliar Logístico</span>
+        </span>
+      </a>
+
+      <nav class="sidebar__nav" aria-label="Navegación del trabajador">
+        <a class="sidebar__link" href="inicio-trabajador.html#inicio"><span aria-hidden="true">🏠</span>Inicio</a>
+        <a class="sidebar__link" href="ofertas-trabajador.html"><span aria-hidden="true">💼</span>Ofertas</a>
+        <a class="sidebar__link" href="postulaciones-trabajador.html"><span aria-hidden="true">📋</span>Postulaciones</a>
+        <a class="sidebar__link" href="historial-trabajador.html"><span aria-hidden="true">📊</span>Historial</a>
+        <a class="sidebar__link sidebar__link--active" href="perfil-trabajador.html" aria-current="page"><span aria-hidden="true">👤</span>Mi Perfil</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <span class="session-pill"><span aria-hidden="true">•</span> Sesión de trabajador</span>
+        <a class="sidebar__link sidebar__logout" href="login-trabajador.html"><span aria-hidden="true">📜</span>Cerrar sesión</a>
+      </div>
+    </aside>
+
+    <main class="dashboard__main profile-main">
+      <header class="profile-page-header">
+        <div>
+          <h1>Mi perfil</h1>
+          <p>Información profesional y reputación</p>
+        </div>
+        <button class="profile-edit-button" type="button">✏️ Editar perfil</button>
+      </header>
+
+      <section class="profile-hero" aria-label="Resumen del perfil">
+        <div class="profile-avatar" aria-hidden="true">CR</div>
+        <div class="profile-hero__body">
+          <h2>Carlos Rodríguez</h2>
+          <p class="profile-hero__role">Auxiliar Logístico</p>
+          <p class="profile-hero__location"><span aria-hidden="true">📍</span> Bogotá, Colombia</p>
+          <div class="profile-hero__stats">
+            <div><span>Calificación</span><strong><span class="profile-star" aria-hidden="true">★</span> 4.8</strong></div>
+            <div><span>Puntualidad</span><strong>96%</strong></div>
+            <div><span>Trabajos</span><strong>47</strong></div>
+            <div><span>Empresas</span><strong>12</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="profile-info-grid">
+        <section class="profile-panel contact-panel" aria-labelledby="contact-title">
+          <h2 id="contact-title">Información de contacto</h2>
+          <dl class="contact-list">
+            <div>
+              <dt><span aria-hidden="true">✉️</span>Correo electrónico</dt>
+              <dd>carlos.rodriguez@gmail.com <span>(no editable)</span></dd>
+            </div>
+            <div>
+              <dt><span aria-hidden="true">📱</span>Celular</dt>
+              <dd>+57 300 123 4567</dd>
+            </div>
+            <div>
+              <dt><span aria-hidden="true">📍</span>Ubicación</dt>
+              <dd>Bogotá, Colombia</dd>
+            </div>
+            <div>
+              <dt><span aria-hidden="true">💼</span>Cargo</dt>
+              <dd>Auxiliar Logístico</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="profile-panel reputation-panel" aria-labelledby="reputation-title">
+          <h2 id="reputation-title">Reputación y calificaciones</h2>
+          <div class="reputation-list">
+            <div>
+              <span>Calificación global</span>
+              <strong><span class="rating-stars" aria-label="5 estrellas">★★★★★</span> 4.8</strong>
+            </div>
+            <div>
+              <span>Calificación logística</span>
+              <strong><span class="rating-stars" aria-label="5 estrellas">★★★★★</span> 4.9</strong>
+            </div>
+            <div>
+              <span>Calificación coordinador</span>
+              <strong><span class="rating-stars" aria-label="5 estrellas">★★★★★</span> 4.6</strong>
+            </div>
+          </div>
+          <div class="experience-years"><span>Años de experiencia</span><strong>3 años</strong></div>
+        </section>
+      </div>
+
+      <section class="profile-panel skills-panel" aria-labelledby="skills-title">
+        <div class="profile-panel__heading">
+          <h2 id="skills-title">Habilidades</h2>
+          <button class="profile-inline-edit" type="button">✏️ Editar</button>
+        </div>
+        <ul class="skill-list">
+          <li>Manejo de inventario</li>
+          <li>Montaje de stands</li>
+          <li>Carga y descarga</li>
+          <li>Atención al cliente</li>
+          <li>Logística de eventos</li>
+          <li>Excel básico</li>
+          <li>Coordinación de equipos</li>
+          <li>Seguridad industrial</li>
+        </ul>
+      </section>
+
+      <section class="profile-panel recent-experience" aria-labelledby="recent-experience-title">
+        <div class="profile-panel__heading">
+          <h2 id="recent-experience-title">Experiencia reciente</h2>
+          <a href="historial-trabajador.html">Ver historial <span aria-hidden="true">→</span></a>
+        </div>
+        <ul class="recent-job-list">
+          <li>
+            <span class="recent-job__icon" aria-hidden="true">🔧</span>
+            <div><strong>Auxiliar de Montaje – Expo Construcción</strong><span>Eventos Nova · 10 Ago 2026</span></div>
+            <span class="recent-job__rating"><span aria-hidden="true">★★★★★</span> <span class="recent-job__rating-value">4.9</span></span>
+          </li>
+          <li>
+            <span class="recent-job__icon" aria-hidden="true">📦</span>
+            <div><strong>Operario de Almacén – Despachos</strong><span>LogiMax S.A.S. · 25 Jul 2026</span></div>
+            <span class="recent-job__rating"><span aria-hidden="true">★★★★★</span> <span class="recent-job__rating-value">4.8</span></span>
+          </li>
+          <li>
+            <span class="recent-job__icon" aria-hidden="true">🎪</span>
+            <div><strong>Personal Logístico – Feria del Hogar</strong><span>Eventos Nova · 12 Jul 2026</span></div>
+            <span class="recent-job__rating"><span aria-hidden="true">★★★★★</span> <span class="recent-job__rating-value">5.0</span></span>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

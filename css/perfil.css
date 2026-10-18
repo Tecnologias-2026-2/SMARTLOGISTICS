@@ -1,0 +1,391 @@
+.profile-main {
+  gap: 14px;
+  padding: 22px;
+}
+
+.profile-page-header,
+.profile-panel__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.profile-page-header h1 {
+  color: #17233b;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 21px;
+}
+
+.profile-page-header p {
+  margin-top: 2px;
+  color: #8293ad;
+  font-size: 10px;
+  line-height: 14px;
+}
+
+.profile-edit-button,
+.profile-inline-edit {
+  border: 1px solid #155dfc;
+  border-radius: 6px;
+  background: #fff;
+  color: #155dfc;
+  font: inherit;
+  cursor: pointer;
+}
+
+.profile-edit-button {
+  min-height: 27px;
+  padding: 5px 10px;
+  font-size: 9px;
+}
+
+.profile-hero {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 106px;
+  padding: 15px;
+  border: 1px solid #e1e7ef;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(15, 23, 43, 0.08);
+}
+
+.profile-avatar {
+  display: grid;
+  flex: 0 0 58px;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border-radius: 50%;
+  background: #a238f4;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.profile-hero__body {
+  min-width: 0;
+}
+
+.profile-hero__body h2 {
+  color: #17233b;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 19px;
+}
+
+.profile-hero__role,
+.profile-hero__location {
+  color: #7588a3;
+  font-size: 10px;
+  line-height: 14px;
+}
+
+.profile-hero__location {
+  margin-top: 2px;
+}
+
+.profile-hero__stats {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.profile-hero__stats > div {
+  display: flex;
+  min-width: 54px;
+  flex-direction: column;
+  gap: 1px;
+  padding: 0 9px;
+  border-right: 1px solid #edf1f6;
+  text-align: center;
+}
+
+.profile-hero__stats > div:first-child {
+  padding-left: 0;
+}
+
+.profile-hero__stats > div:last-child {
+  border-right: 0;
+}
+
+.profile-hero__stats span {
+  color: #91a1b9;
+  font-size: 8px;
+  line-height: 11px;
+}
+
+.profile-hero__stats strong {
+  color: #17233b;
+  font-size: 10px;
+  line-height: 13px;
+}
+
+.profile-star,
+.rating-stars,
+.recent-job__rating {
+  color: #f59e0b !important;
+}
+
+.profile-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.profile-panel {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #e1e7ef;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(15, 23, 43, 0.08);
+}
+
+.profile-panel h2 {
+  color: #17233b;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 15px;
+}
+
+.contact-panel,
+.reputation-panel {
+  min-height: 178px;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 11px;
+}
+
+.contact-list > div {
+  display: grid;
+  grid-template-columns: 15px minmax(0, 1fr);
+  column-gap: 8px;
+}
+
+.contact-list dt {
+  display: contents;
+  color: #91a1b9;
+  font-size: 8px;
+  line-height: 11px;
+}
+
+.contact-list dt > span {
+  grid-row: span 2;
+  padding-top: 2px;
+  font-size: 9px;
+}
+
+.contact-list dd {
+  grid-column: 2;
+  color: #17233b;
+  font-size: 9px;
+  line-height: 13px;
+}
+
+.contact-list dd span {
+  margin-left: 4px;
+  color: #91a1b9;
+  font-size: 8px;
+}
+
+.reputation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.reputation-list > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reputation-list > div > span {
+  color: #91a1b9;
+  font-size: 8px;
+  line-height: 11px;
+}
+
+.reputation-list strong {
+  color: #52647d;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 13px;
+}
+
+.rating-stars {
+  margin-right: 4px;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.experience-years {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 9px;
+  padding-top: 8px;
+  border-top: 1px solid #edf1f6;
+  color: #7588a3;
+  font-size: 9px;
+}
+
+.experience-years strong {
+  color: #17233b;
+  font-size: 9px;
+}
+
+.profile-panel__heading a,
+.profile-inline-edit {
+  color: #155dfc;
+  font-size: 9px;
+}
+
+.profile-panel__heading a:hover {
+  text-decoration: underline;
+}
+
+.profile-inline-edit {
+  padding: 2px 4px;
+  border: 0;
+}
+
+.skills-panel {
+  padding: 13px 14px;
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  list-style: none;
+}
+
+.skill-list li {
+  padding: 4px 8px;
+  border: 1px solid #e1e7ef;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #52647d;
+  font-size: 8px;
+  line-height: 11px;
+}
+
+.recent-experience {
+  padding: 14px;
+}
+
+.recent-job-list {
+  margin-top: 9px;
+  list-style: none;
+}
+
+.recent-job-list li {
+  display: grid;
+  grid-template-columns: 27px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 5px 0;
+  border-bottom: 1px solid #edf1f6;
+}
+
+.recent-job-list li:last-child {
+  border-bottom: 0;
+}
+
+.recent-job__icon {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  border-radius: 7px;
+  background: #eff6ff;
+  font-size: 13px;
+}
+
+.recent-job-list li > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.recent-job-list li > div strong {
+  overflow: hidden;
+  color: #17233b;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recent-job-list li > div > span {
+  color: #91a1b9;
+  font-size: 8px;
+  line-height: 11px;
+}
+
+.recent-job__rating {
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.recent-job__rating-value {
+  color: #52647d;
+  font-size: 9px;
+  letter-spacing: 0;
+}
+
+@media (max-width: 800px) {
+  .profile-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-panel,
+  .reputation-panel {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .profile-main {
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .profile-hero {
+    align-items: flex-start;
+    padding: 12px;
+  }
+
+  .profile-avatar {
+    flex-basis: 46px;
+    width: 46px;
+    height: 46px;
+  }
+
+  .profile-hero__stats > div {
+    min-width: 48px;
+    padding: 0 6px;
+  }
+
+  .recent-job-list li {
+    grid-template-columns: 27px minmax(0, 1fr);
+  }
+
+  .recent-job__rating {
+    grid-column: 2;
+  }
+}
