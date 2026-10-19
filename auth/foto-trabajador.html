@@ -9,10 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/auth.css">
+  <script src="../js/accesibilidad.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
   <!-- Figma: nodo 9:2123 -->
-  <main class="auth-center">
+  <main class="auth-center" id="contenido" tabindex="-1">
     <div class="auth-box auth-box--wide">
       <a href="../index.html" class="logo">
           <span class="logo__mark">SL</span>
@@ -33,21 +35,23 @@
           <li class="checklist__item"><span class="check">✓</span>Tu perfil aparece en mejores posiciones</li>
         </ul>
 
-        <a href="foto-cargada-trabajador.html" class="dropzone">
-          <span class="dropzone__icon">📷</span>
+        <label class="dropzone" for="photo-input" id="photo-dropzone">
+          <span class="dropzone__icon" aria-hidden="true">📷</span>
           <span class="dropzone__title">Seleccionar fotografía</span>
-          <span class="dropzone__hint">JPG o PNG · Máx. 5 MB · Mín. 400×400 px</span>
-        </a>
+          <span class="dropzone__hint" id="photo-hint">JPG o PNG · Máx. 5 MB · Mín. 400×400 px</span>
+        </label>
+        <input class="visually-hidden" type="file" id="photo-input" accept="image/jpeg,image/png" aria-describedby="photo-hint photo-error">
+        <p class="field__error" id="photo-error" role="alert" hidden></p>
 
         <div class="actions">
-          <a href="foto-cargada-trabajador.html" class="btn btn--primary btn--block">Cargar desde galería</a>
-          <!-- TODO: enlazar al perfil del trabajador cuando exista -->
-          <a href="#" class="btn btn--muted btn--block">Omitir por ahora</a>
+          <button type="button" class="btn btn--primary btn--block" id="pick-photo">Cargar desde galería</button>
+          <a href="../trabajador/inicio.html" class="btn btn--muted btn--block" id="skip-photo">Omitir por ahora</a>
         </div>
 
         <p class="photo-card__note">Podrás agregar tu foto más tarde desde tu perfil.</p>
       </section>
     </div>
   </main>
+  <script src="../js/auth.js"></script>
 </body>
 </html>

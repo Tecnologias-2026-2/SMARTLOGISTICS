@@ -9,10 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/auth.css">
+  <script src="../js/accesibilidad.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
   <!-- Figma: nodo 9:2202 -->
-  <main class="auth-center">
+  <main class="auth-center" id="contenido" tabindex="-1">
     <div class="auth-box auth-box--wide">
       <a href="../index.html" class="logo">
           <span class="logo__mark">SL</span>
@@ -28,18 +30,18 @@
 
       <section class="photo-card">
         <div class="photo-done">
-          <span class="photo-done__avatar">👤</span>
+          <span class="photo-done__avatar" id="photo-preview" aria-hidden="true">👤</span>
           <p class="photo-done__title">¡Fotografía cargada!</p>
           <p class="photo-done__text">Tu foto se ve excelente.</p>
         </div>
 
         <div class="actions">
-          <!-- TODO: enlazar al perfil del trabajador cuando exista -->
-          <a href="#" class="btn btn--primary btn--block">Continuar al perfil</a>
+          <a href="../trabajador/perfil.html" class="btn btn--primary btn--block">Continuar al perfil</a>
           <a href="foto-trabajador.html" class="btn btn--muted btn--block">Cambiar fotografía</a>
         </div>
       </section>
     </div>
   </main>
+  <script src="../js/auth.js"></script>
 </body>
 </html>

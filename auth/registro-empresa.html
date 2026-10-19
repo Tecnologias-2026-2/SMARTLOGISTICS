@@ -9,8 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/auth.css">
+  <script src="../js/accesibilidad.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
   <!-- Figma: nodo 9:952 -->
   <div class="auth-shell">
     <aside class="auth-aside">
@@ -36,20 +38,20 @@
       <p class="auth-aside__copy">© 2026 Smart Logistics</p>
     </aside>
 
-    <main class="auth-main">
+    <main class="auth-main" id="contenido" tabindex="-1">
       <div class="auth-box">
         <span class="pill pill--success">🏢 Registro de empresa</span>
         <h1 class="auth-title">Registra tu empresa</h1>
         <p class="auth-subtitle">Crea la cuenta de tu empresa en Smart Logistics</p>
 
-        <form class="form" action="#" onsubmit="return false">
+        <form class="form" method="post" novalidate data-auth-form="register" data-next="../empresa/inicio.html">
           <div class="field">
             <label class="field__label" for="razon_social">Razón social <span class="req">*</span></label>
-            <input class="input" id="razon_social" name="razon_social" type="text" placeholder="Eventos Nova S.A.S." autocomplete="organization">
+            <input class="input" id="razon_social" name="razon_social" type="text" placeholder="Eventos Nova S.A.S." autocomplete="organization" required>
           </div>
           <div class="field">
             <label class="field__label" for="sector">Sector / tipo de empresa <span class="req">*</span></label>
-            <select class="input select" id="sector" name="sector">
+            <select class="input select" id="sector" name="sector" required>
               <option selected value="" disabled>Selecciona un sector</option>
               <option>Eventos y espectáculos</option>
               <option>Logística y almacenamiento</option>
@@ -60,49 +62,49 @@
           </div>
           <div class="field">
             <label class="field__label" for="email">Correo corporativo <span class="req">*</span></label>
-            <input class="input" id="email" name="email" type="email" placeholder="contacto@empresa.com" autocomplete="email">
+            <input class="input" id="email" name="email" type="email" placeholder="contacto@empresa.com" autocomplete="email" required>
           </div>
           <div class="field-row">
           <div class="field">
             <label class="field__label" for="pais">País <span class="req">*</span></label>
-            <select class="input select" id="pais" name="pais">
+            <select class="input select" id="pais" name="pais" required>
               <option selected>Colombia</option>
             </select>
           </div>
           <div class="field">
             <label class="field__label" for="ciudad">Ciudad <span class="req">*</span></label>
-            <input class="input" id="ciudad" name="ciudad" type="text" placeholder="Bogotá" autocomplete="address-level2">
+            <input class="input" id="ciudad" name="ciudad" type="text" placeholder="Bogotá" autocomplete="address-level2" required>
           </div>
           </div>
           <div class="field">
             <label class="field__label" for="telefono">Teléfono de contacto <span class="req">*</span></label>
-            <input class="input" id="telefono" name="telefono" type="tel" placeholder="+57 300 000 0000" autocomplete="tel">
+            <input class="input" id="telefono" name="telefono" type="tel" placeholder="+57 300 000 0000" autocomplete="tel" required>
           </div>
           <div class="field">
             <label class="field__label" for="responsable">Nombre del responsable <span class="req">*</span></label>
-            <input class="input" id="responsable" name="responsable" type="text" placeholder="Nombre completo del coordinador" autocomplete="name">
+            <input class="input" id="responsable" name="responsable" type="text" placeholder="Nombre completo del coordinador" autocomplete="name" required>
           </div>
           <div class="field">
             <label class="field__label" for="password">Contraseña <span class="req">*</span></label>
             <div class="input-group">
-              <input class="input" id="password" name="password" type="password" placeholder="Mínimo 8 caracteres" autocomplete="new-password">
+              <input class="input" id="password" name="password" type="password" placeholder="Mínimo 8 caracteres" autocomplete="new-password" required>
               <button class="input-group__btn" type="button" aria-label="Mostrar contraseña">👁</button>
             </div>
           </div>
           <div class="field">
             <label class="field__label" for="password2">Confirmar contraseña <span class="req">*</span></label>
             <div class="input-group">
-              <input class="input" id="password2" name="password2" type="password" placeholder="Repite tu contraseña" autocomplete="new-password">
+              <input class="input" id="password2" name="password2" type="password" placeholder="Repite tu contraseña" autocomplete="new-password" required>
               <button class="input-group__btn" type="button" aria-label="Mostrar contraseña">👁</button>
             </div>
           </div>
-          <!-- TODO: definir destino tras registrar la empresa -->
-          <a href="#" class="btn btn--success btn--lg btn--block">Registrar empresa</a>
+          <button type="submit" class="btn btn--success btn--lg btn--block">Registrar empresa</button>
           <p class="auth-alt auth-alt--sm">¿Ya tienes cuenta? <a href="login-empresa.html" class="link link--strong link--success">Iniciar sesión</a></p>
           <p class="back-link"><a href="../index.html">← Volver al inicio</a></p>
         </form>
       </div>
     </main>
   </div>
+  <script src="../js/auth.js"></script>
 </body>
 </html>
