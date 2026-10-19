@@ -272,59 +272,89 @@ El modelo es relacional y único para toda la solución. Tiene **13 entidades** 
 
 ```
 SMARTLOGISTICS/
-├── index.html              # V-01 · Página pública (landing)
-├── auth/                   # Zona pública: acceso y cuenta (módulo M1)
-│   ├── login-trabajador.html
-│   ├── login-empresa.html
-│   ├── registro-trabajador.html
-│   ├── registro-empresa.html
-│   ├── foto-trabajador.html
-│   ├── foto-cargada-trabajador.html
-│   ├── recuperar-trabajador.html / recuperar-empresa.html
-│   ├── correo-enviado-trabajador.html / correo-enviado-empresa.html
-│   └── reenviar-trabajador.html / reenviar-empresa.html
+├── index.html                   # V-01 · Página pública (landing)
+├── auth/                        # Zona pública: acceso y cuenta (módulo M1)
+│   ├── login-trabajador.html · login-empresa.html
+│   ├── registro-trabajador.html · registro-empresa.html
+│   ├── foto-trabajador.html · foto-cargada-trabajador.html
+│   └── recuperar-*.html · correo-enviado-*.html · reenviar-*.html
+├── trabajador/                  # Zona del modo trabajador (V-10 a V-17)
+│   ├── inicio.html              # Panel de actividad
+│   ├── ofertas.html             # Ofertas, detalle y postulación
+│   ├── postulaciones.html       # Mis postulaciones y asignaciones directas
+│   ├── historial.html           # Historial laboral
+│   └── perfil.html              # Perfil, reputación y edición
+├── empresa/                     # Zona del modo empresa (V-18 a V-23)
+│   ├── inicio.html              # Panel de la empresa
+│   ├── convocatorias.html       # Convocatorias publicadas y calificación
+│   ├── crear-convocatoria.html
+│   ├── editar-convocatoria.html
+│   ├── candidatos.html          # Candidatos, selección y asignación directa
+│   └── perfil.html              # Perfil público de la empresa
 ├── css/
-│   ├── base.css            # Variables de diseño, reset, logo y botones compartidos
-│   ├── landing.css         # Estilos exclusivos de la página pública
-│   └── auth.css            # Estilos de inicio de sesión, registro y recuperación
-├── assets/
-│   └── chevron-down.svg    # Ícono del desplegable, exportado de Figma
-└── docs/
-    ├── Smart_Logistics_Documento_Ingenieria.pdf
-    ├── diagramas/          # Casos de uso, actividades, secuencia, ER, arquitectura y navegación
-    └── prototipo/          # Capturas de las vistas del prototipo
+│   ├── base.css                 # Variables de diseño, reset, botones y widget de accesibilidad
+│   ├── landing.css · auth.css   # Página pública y zona de acceso
+│   ├── app.css                  # Armazón de las zonas autenticadas y componentes compartidos
+│   └── trabajador-*.css · empresa-*.css   # Una hoja por vista
+├── js/
+│   ├── accesibilidad.js         # Widget de accesibilidad (todas las páginas)
+│   ├── auth.js                  # Validaciones y comportamiento de la zona de acceso
+│   └── trabajador-*.js · empresa-*.js     # Interacción de cada vista
+├── assets/                      # Íconos exportados de Figma
+└── docs/                        # Documento de ingeniería, diagramas y capturas del prototipo
 ```
 
 | Carpeta | Contenido |
 |---|---|
 | `/` (raíz) | `index.html`, la página pública y punto de entrada del sitio. |
-| `/auth` | Las 12 pantallas de la zona pública de acceso: inicio de sesión, registro, fotografía de perfil y recuperación de contraseña, para trabajador y empresa. |
-| `/css` | Hojas de estilo. `base.css` define las variables de diseño (colores, radios, sombras) y los componentes comunes; cada zona tiene su propia hoja. |
+| `/auth` | Las 12 pantallas de acceso: inicio de sesión, registro, fotografía de perfil y recuperación de contraseña, para trabajador y empresa. |
+| `/trabajador` | Las vistas del modo trabajador, que comparten el menú lateral. |
+| `/empresa` | Las vistas del modo empresa, que comparten el menú lateral. |
+| `/css` | `base.css` define las variables de diseño (colores, radios, sombras) y los componentes comunes; `app.css` el armazón de las zonas con sesión; cada vista tiene su propia hoja. |
+| `/js` | Un archivo por vista, sin frameworks, más el widget de accesibilidad que cargan todas las páginas. |
 | `/assets` | Recursos gráficos exportados del diseño. |
 | `/docs` | Documento de ingeniería de software, diagramas UML, modelo de datos y capturas del prototipo. |
 
 ### Vistas implementadas
 
-| Vista | Pantalla | Archivo | Requerimiento |
+| Vista | Pantalla | Archivo | Requerimientos |
 |---|---|---|---|
 | V-01 | Página pública | [`index.html`](index.html) | RF-01 |
 | V-02 | Inicio de sesión del trabajador | [`auth/login-trabajador.html`](auth/login-trabajador.html) | RF-04 |
 | V-03 | Inicio de sesión de la empresa | [`auth/login-empresa.html`](auth/login-empresa.html) | RF-04 |
-| V-04 | Registro de trabajador | [`auth/registro-trabajador.html`](auth/registro-trabajador.html) | RF-02 |
-| — | Registro de empresa | [`auth/registro-empresa.html`](auth/registro-empresa.html) | Complementaria |
-| V-05 a V-07 | Fotografía profesional y foto cargada | [`auth/foto-trabajador.html`](auth/foto-trabajador.html), [`auth/foto-cargada-trabajador.html`](auth/foto-cargada-trabajador.html) | RF-03 |
-| V-08, V-09 | Recuperar contraseña, correo enviado y reenvío | `auth/recuperar-*.html`, `auth/correo-enviado-*.html`, `auth/reenviar-*.html` | RF-05 |
+| V-04 | Registro de trabajador (y registro de empresa) | [`auth/registro-trabajador.html`](auth/registro-trabajador.html), [`auth/registro-empresa.html`](auth/registro-empresa.html) | RF-02 |
+| V-05 a V-07 | Fotografía de perfil profesional | [`auth/foto-trabajador.html`](auth/foto-trabajador.html), [`auth/foto-cargada-trabajador.html`](auth/foto-cargada-trabajador.html) | RF-03 |
+| V-08, V-09 | Recuperación de contraseña | `auth/recuperar-*.html`, `auth/correo-enviado-*.html`, `auth/reenviar-*.html` | RF-05 |
+| V-10 | Panel de actividad del trabajador | [`trabajador/inicio.html`](trabajador/inicio.html) | RF-10 |
+| V-11, V-12 | Ofertas laborales, detalle y postulación | [`trabajador/ofertas.html`](trabajador/ofertas.html) | RF-15, RF-16, RF-17 |
+| V-13 | Mis postulaciones y respuesta a asignaciones | [`trabajador/postulaciones.html`](trabajador/postulaciones.html) | RF-18, RF-22 |
+| V-14 | Historial laboral | [`trabajador/historial.html`](trabajador/historial.html) | RF-11 |
+| V-16, V-17 | Perfil, reputación y edición de perfil y habilidades | [`trabajador/perfil.html`](trabajador/perfil.html) | RF-08, RF-09, RF-24 |
+| V-18 | Panel de la empresa | [`empresa/inicio.html`](empresa/inicio.html) | RF-26 |
+| V-19 | Crear convocatoria | [`empresa/crear-convocatoria.html`](empresa/crear-convocatoria.html) | RF-13 |
+| V-20 | Convocatorias publicadas y edición | [`empresa/convocatorias.html`](empresa/convocatorias.html), [`empresa/editar-convocatoria.html`](empresa/editar-convocatoria.html) | RF-14 |
+| V-21 | Candidatos: filtrado, selección, descarte, asignación directa y perfil | [`empresa/candidatos.html`](empresa/candidatos.html) | RF-19, RF-20, RF-21 |
+| V-22 | Calificación post-servicio (diálogo en Convocatorias) | [`empresa/convocatorias.html`](empresa/convocatorias.html) | RF-23 |
+| V-23 | Perfil público de la empresa | [`empresa/perfil.html`](empresa/perfil.html) | RF-12 |
+| Transversal | Cierre de sesión desde el menú lateral | Todas las vistas con sesión | RF-07 |
 
-Las vistas de las zonas autenticadas (V-10 a V-23, modo trabajador y modo empresa) están diseñadas en el prototipo y se implementarán en las siguientes entregas.
+**Pendiente para la siguiente entrega:** la vista de notificaciones (V-15, RF-25) y el control de cambio de modo (RF-06), que aún no tienen diseño en el prototipo. La plataforma no tiene servidor en esta entrega: los datos son de demostración y las acciones (postularse, seleccionar, crear, editar o calificar) se guardan en el navegador con `localStorage` para simular el flujo completo.
 
 ### Decisiones técnicas
 
-- **HTML5 semántico:** `header`, `nav`, `main`, `section`, `article`, `aside`, `footer`, formularios con `label` asociados a cada campo e idioma declarado (`lang="es"`).
-- **Maquetación solo con Flexbox y CSS Grid:** no se usan `position` ni `float`. Las superposiciones del diseño (por ejemplo, la tarjeta flotante del inicio o el botón dentro del campo de contraseña) se resuelven ubicando dos elementos en la misma celda de Grid.
-- **Diseño adaptable:** la web se adapta a escritorio, tableta y celular con puntos de quiebre en 1024 px, 900 px, 768 px, 560 px y 480 px. En celular el panel lateral de acceso se oculta y los formularios pasan a una columna.
-- **Accesibilidad básica:** todos los controles son enlaces, botones o campos nativos, por lo que se puede navegar con el teclado (`Tab` / `Enter`); el foco es visible con un contorno de alto contraste (`:focus-visible`); los campos tienen etiquetas y los botones de solo ícono tienen `aria-label`.
-- **Variables de diseño:** los colores, radios y sombras de Figma están definidos como propiedades personalizadas de CSS en `css/base.css`, de modo que un cambio se aplica a todo el sitio.
-- **Sin dependencias:** HTML y CSS puros; la única fuente externa es la tipografía Inter de Google Fonts.
+- **HTML5 semántico:** `header`, `nav`, `main`, `section`, `article`, `aside`, `footer`; tablas con `caption` y `th scope`; formularios con `label`, `fieldset` y `legend`; diálogos con el elemento nativo `<dialog>`.
+- **Maquetación solo con Flexbox y CSS Grid:** ningún archivo CSS usa `position` ni `float`. El menú lateral fijo es una columna de Grid con scroll independiente del contenido; las superposiciones (tarjeta flotante del inicio, botón dentro del campo de contraseña, icono de búsqueda) comparten una celda de Grid; los diálogos usan `<dialog>` y el widget de accesibilidad la API `popover`, que el navegador coloca en su capa superior.
+- **Coherencia con el prototipo:** los tamaños de texto, espaciados, colores y radios se tomaron de las medidas exactas de Figma. Cada vista se comparó con su frame a 1537 px de ancho.
+- **Diseño adaptable:** todas las vistas se verificaron a 375 px (celular), 768 px (tableta), 1280 px y 1537 px (escritorio) sin scroll horizontal. Por debajo de 900 px el menú lateral pasa a una barra superior desplazable y las tablas se desplazan dentro de su tarjeta.
+- **Accesibilidad:**
+  - Navegación completa con teclado (`Tab`, `Enter`, `Escape` en diálogos) y foco siempre visible.
+  - Enlace **«Saltar al contenido principal»** al inicio de cada página.
+  - Etiquetas en todos los campos; errores de validación anunciados con `aria-invalid`, `aria-describedby` y regiones `aria-live`.
+  - Botones de solo ícono con `aria-label`; íconos decorativos ocultos con `aria-hidden`.
+  - **Widget de accesibilidad** (botón ♿ en la esquina inferior derecha de todas las páginas): tamaño del texto, alto contraste, escala de grises, resaltar enlaces, más espaciado y detener animaciones. Las preferencias se recuerdan al cambiar de página.
+- **Validaciones del documento:** registro (RF-02: correo válido, contraseña de 8 caracteres y confirmación), fotografía (RF-03: JPG/PNG, máximo 5 MB, mínimo 400×400 px), convocatoria (RF-13: campos obligatorios y fecha no anterior a hoy), plazas disponibles al seleccionar (RF-20) y calificación única por trabajador (RF-23).
+- **Variables de diseño:** los colores, radios y sombras de Figma están definidos como propiedades personalizadas de CSS en `css/base.css`.
+- **Sin dependencias:** HTML, CSS y JavaScript puros; la única fuente externa es la tipografía Inter de Google Fonts.
 
 ### Tecnologías
 
@@ -332,14 +362,16 @@ Las vistas de las zonas autenticadas (V-10 a V-23, modo trabajador y modo empres
 |---|---|
 | HTML5 | Estructura semántica de las vistas |
 | CSS3 (Flexbox, Grid, variables) | Estilos y maquetación adaptable |
+| JavaScript (sin frameworks) | Filtros, diálogos, validaciones y estado de la demostración |
 | Figma | Diseño y prototipo interactivo |
 | Git y GitHub | Control de versiones y publicación (GitHub Pages) |
 
 ### Convenciones del repositorio
 
-- **Ramas:** `main` contiene la versión estable publicada; cada funcionalidad se desarrolla en una rama `feature/…` y se integra mediante *pull request*.
-- **Commits:** mensajes en español con prefijo de tipo (`feat`, `fix`, `docs`, `chore`) y alcance, por ejemplo `feat(auth): implementar inicio de sesión`.
-- **CSS:** nombres de clase con convención tipo BEM (`bloque__elemento--modificador`).
+- **Ramas:** `main` contiene la versión estable publicada; cada funcionalidad se desarrolla en una rama `feature/…` o `fix/…` y se integra mediante *pull request*.
+- **Commits:** mensajes en español con prefijo de tipo (`feat`, `fix`, `refactor`, `style`, `docs`, `chore`) y alcance, por ejemplo `feat(auth): implementar inicio de sesión`.
+- **CSS:** nombres de clase con convención tipo BEM (`bloque__elemento--modificador`); una hoja por vista con el prefijo de su zona.
+- **JavaScript:** un archivo por vista en `js/`, cargado al final del `body`.
 
 ---
 
@@ -376,6 +408,15 @@ Las vistas de las zonas autenticadas (V-10 a V-23, modo trabajador y modo empres
      ```
 
 3. Si se usó un servidor, entrar a **http://localhost:5173**.
+
+### Recorrido sugerido
+
+1. Desde la página pública, entrar a **Iniciar sesión** como trabajador (cualquier correo válido y contraseña sirven en esta demostración).
+2. En **Ofertas**, filtrar por categoría, abrir un detalle y pulsar **Postularme**; la postulación aparece en **Postulaciones**.
+3. En **Postulaciones**, aceptar o rechazar la asignación directa pendiente.
+4. Cerrar sesión y entrar como empresa: en **Candidatos**, seleccionar, descartar o asignar directamente a un candidato y abrir su perfil.
+5. En **Crear**, publicar una convocatoria (la validación impide fechas pasadas) y verla en **Convocatorias**; desde allí, **Editar** o **Calificar**.
+6. Probar el botón ♿ para activar las opciones de accesibilidad y recorrer cualquier vista solo con el teclado.
 
 ### Publicación
 

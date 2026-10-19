@@ -9,8 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/auth.css">
+  <script src="../js/accesibilidad.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
   <!-- Figma: nodo 8:348 -->
   <div class="auth-shell">
     <aside class="auth-aside">
@@ -36,27 +38,27 @@
       <p class="auth-aside__copy">© 2026 Smart Logistics</p>
     </aside>
 
-    <main class="auth-main">
+    <main class="auth-main" id="contenido" tabindex="-1">
       <div class="auth-box">
         <h1 class="auth-title">Bienvenido de vuelta</h1>
         <p class="auth-subtitle auth-subtitle--lg">Inicia sesión en tu cuenta de trabajador</p>
 
-        <form class="form" action="#" onsubmit="return false">
+        <form class="form" method="post" novalidate data-auth-form="login" data-next="../trabajador/inicio.html">
           <div class="field">
             <label class="field__label" for="email">Correo electrónico <span class="req">*</span></label>
-            <input class="input" id="email" name="email" type="email" placeholder="tu@correo.com" value="carlos.rodriguez@gmail.com" autocomplete="email">
+            <input class="input" id="email" name="email" type="email" placeholder="tu@correo.com" value="carlos.rodriguez@gmail.com" autocomplete="email" required>
           </div>
           <div class="field">
             <label class="field__label" for="password">Contraseña <span class="req">*</span></label>
             <div class="input-group">
-              <input class="input" id="password" name="password" type="password" placeholder="Tu contraseña" autocomplete="current-password">
+              <input class="input" id="password" name="password" type="password" placeholder="Tu contraseña" autocomplete="current-password" required>
               <button class="input-group__btn" type="button" aria-label="Mostrar contraseña">👁</button>
             </div>
           </div>
           <div class="form__forgot">
             <a href="recuperar-trabajador.html" class="link">¿Olvidaste tu contraseña?</a>
           </div>
-          <a href="inicio-trabajador.html" class="btn btn--primary btn--lg btn--block">Iniciar sesión</a>
+          <button type="submit" class="btn btn--primary btn--lg btn--block">Iniciar sesión</button>
           <p class="auth-alt">¿No tienes cuenta? <a href="registro-trabajador.html" class="link link--strong">Regístrate gratis</a></p>
           <div class="divider">o</div>
           <a href="login-empresa.html" class="btn btn--soft-success btn--block"><span>🏢</span> ¿Quieres iniciar sesión como Empresa?</a>
@@ -65,5 +67,6 @@
       </div>
     </main>
   </div>
+  <script src="../js/auth.js"></script>
 </body>
 </html>

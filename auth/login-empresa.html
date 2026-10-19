@@ -9,8 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/auth.css">
+  <script src="../js/accesibilidad.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
   <!-- Figma: nodo 9:833 -->
   <div class="auth-shell">
     <aside class="auth-aside">
@@ -36,34 +38,34 @@
       <p class="auth-aside__copy">© 2026 Smart Logistics</p>
     </aside>
 
-    <main class="auth-main">
+    <main class="auth-main" id="contenido" tabindex="-1">
       <div class="auth-box">
         <h1 class="auth-title">Acceso empresarial</h1>
         <p class="auth-subtitle">Portal exclusivo para coordinadores y empresas</p>
 
-        <form class="form" action="#" onsubmit="return false">
+        <form class="form" method="post" novalidate data-auth-form="login" data-next="../empresa/inicio.html">
           <div class="notice notice--success"><span>🏢</span> Acceso exclusivo para empresas</div>
           <div class="field">
             <label class="field__label" for="email">Correo electrónico <span class="req">*</span></label>
-            <input class="input" id="email" name="email" type="email" placeholder="contacto@empresa.com" value="coordinacion@eventosnova.com" autocomplete="email">
+            <input class="input" id="email" name="email" type="email" placeholder="contacto@empresa.com" value="coordinacion@eventosnova.com" autocomplete="email" required>
           </div>
           <div class="field">
             <label class="field__label" for="password">Contraseña <span class="req">*</span></label>
             <div class="input-group">
-              <input class="input" id="password" name="password" type="password" placeholder="Tu contraseña" autocomplete="current-password">
+              <input class="input" id="password" name="password" type="password" placeholder="Tu contraseña" autocomplete="current-password" required>
               <button class="input-group__btn" type="button" aria-label="Mostrar contraseña">👁</button>
             </div>
           </div>
           <div class="form__forgot">
             <a href="recuperar-empresa.html" class="link">¿Olvidaste tu contraseña?</a>
           </div>
-          <!-- TODO: enlazar a la página principal de la empresa cuando exista -->
-          <a href="#" class="btn btn--success btn--lg btn--block">Iniciar sesión</a>
+          <button type="submit" class="btn btn--success btn--lg btn--block">Iniciar sesión</button>
           <p class="auth-alt">¿No tienes cuenta? <a href="registro-empresa.html" class="link link--strong">Regístrate gratis</a></p>
           <p class="back-link"><a href="../index.html">← Volver al inicio</a></p>
         </form>
       </div>
     </main>
   </div>
+  <script src="../js/auth.js"></script>
 </body>
 </html>

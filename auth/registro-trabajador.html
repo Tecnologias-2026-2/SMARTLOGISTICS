@@ -9,8 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/auth.css">
+  <script src="../js/accesibilidad.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
   <!-- Figma: nodo 8:616 -->
   <div class="auth-shell">
     <aside class="auth-aside">
@@ -36,57 +38,57 @@
       <p class="auth-aside__copy">© 2026 Smart Logistics</p>
     </aside>
 
-    <main class="auth-main">
+    <main class="auth-main" id="contenido" tabindex="-1">
       <div class="auth-box">
         <h1 class="auth-title">Crea tu cuenta Crea como trabajador</h1>
         <p class="auth-subtitle">Únete a la red de talento logístico más grande de Colombia</p>
 
-        <form class="form" action="#" onsubmit="return false">
+        <form class="form" method="post" novalidate data-auth-form="register" data-next="foto-trabajador.html">
           <div class="field-row">
           <div class="field">
             <label class="field__label" for="nombres">Nombres <span class="req">*</span></label>
-            <input class="input" id="nombres" name="nombres" type="text" placeholder="Carlos" autocomplete="given-name">
+            <input class="input" id="nombres" name="nombres" type="text" placeholder="Carlos" autocomplete="given-name" required>
           </div>
           <div class="field">
             <label class="field__label" for="apellidos">Apellidos <span class="req">*</span></label>
-            <input class="input" id="apellidos" name="apellidos" type="text" placeholder="Rodríguez" autocomplete="family-name">
+            <input class="input" id="apellidos" name="apellidos" type="text" placeholder="Rodríguez" autocomplete="family-name" required>
           </div>
           </div>
           <div class="field">
             <label class="field__label" for="email">Correo electrónico <span class="req">*</span></label>
-            <input class="input" id="email" name="email" type="email" placeholder="tu@correo.com" autocomplete="email">
+            <input class="input" id="email" name="email" type="email" placeholder="tu@correo.com" autocomplete="email" required>
           </div>
           <div class="field-row">
           <div class="field">
             <label class="field__label" for="pais">País <span class="req">*</span></label>
-            <select class="input select" id="pais" name="pais">
+            <select class="input select" id="pais" name="pais" required>
               <option selected>Colombia</option>
             </select>
           </div>
           <div class="field">
             <label class="field__label" for="departamento">Departamento <span class="req">*</span></label>
-            <input class="input" id="departamento" name="departamento" type="text" placeholder="Cundinamarca">
+            <input class="input" id="departamento" name="departamento" type="text" placeholder="Cundinamarca" required>
           </div>
           </div>
           <div class="field">
             <label class="field__label" for="celular">Celular <span class="req">*</span></label>
-            <input class="input" id="celular" name="celular" type="tel" placeholder="+57 300 000 0000" autocomplete="tel">
+            <input class="input" id="celular" name="celular" type="tel" placeholder="+57 300 000 0000" autocomplete="tel" required>
           </div>
           <div class="field">
             <label class="field__label" for="password">Contraseña <span class="req">*</span></label>
             <div class="input-group">
-              <input class="input" id="password" name="password" type="password" placeholder="Mínimo 8 caracteres" autocomplete="new-password">
+              <input class="input" id="password" name="password" type="password" placeholder="Mínimo 8 caracteres" autocomplete="new-password" required>
               <button class="input-group__btn" type="button" aria-label="Mostrar contraseña">👁</button>
             </div>
           </div>
           <div class="field">
             <label class="field__label" for="password2">Confirmar contraseña <span class="req">*</span></label>
             <div class="input-group">
-              <input class="input" id="password2" name="password2" type="password" placeholder="Repite tu contraseña" autocomplete="new-password">
+              <input class="input" id="password2" name="password2" type="password" placeholder="Repite tu contraseña" autocomplete="new-password" required>
               <button class="input-group__btn" type="button" aria-label="Mostrar contraseña">👁</button>
             </div>
           </div>
-          <a href="foto-trabajador.html" class="btn btn--primary btn--lg btn--block">Crear mi cuenta</a>
+          <button type="submit" class="btn btn--primary btn--lg btn--block">Crear mi cuenta</button>
           <p class="auth-alt auth-alt--sm">¿Ya tienes cuenta? <a href="login-trabajador.html" class="link link--strong">Inicia sesión</a></p>
           <div class="divider">o</div>
           <a href="registro-empresa.html" class="btn btn--soft-success btn--block"><span>🏢</span> ¿Quieres registrarte como Empresa?</a>
@@ -95,5 +97,6 @@
       </div>
     </main>
   </div>
+  <script src="../js/auth.js"></script>
 </body>
 </html>

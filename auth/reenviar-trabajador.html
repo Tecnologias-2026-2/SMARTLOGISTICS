@@ -9,10 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/auth.css">
+  <script src="../js/accesibilidad.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
   <!-- Figma: nodo 9:1639 -->
-  <main class="auth-center">
+  <main class="auth-center" id="contenido" tabindex="-1">
     <div class="auth-box">
       <a href="../index.html" class="logo">
           <span class="logo__mark">SL</span>
@@ -38,10 +40,12 @@
 
       <div class="actions actions--sent">
         <a href="mailto:" class="btn btn--primary btn--lg btn--block">📬 Abrir mi correo</a>
-        <span class="btn btn--outline btn--block" aria-disabled="true">Reenviar en 41s</span>
+        <button type="button" class="btn btn--outline btn--block" id="resend-button" data-countdown="41" disabled>Reenviar en 41s</button>
+        <p class="resend-status" id="resend-status" role="status" hidden></p>
         <p class="back-link back-link--lg back-link--dim"><a href="login-trabajador.html">← Volver al inicio de sesión</a></p>
       </div>
     </div>
   </main>
+  <script src="../js/auth.js"></script>
 </body>
 </html>

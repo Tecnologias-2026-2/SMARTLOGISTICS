@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convocatorias · Smart Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/app.css">
+  <link rel="stylesheet" href="../css/empresa-convocatorias.css">
+  <link rel="stylesheet" href="../css/empresa-crear-convocatoria.css">
+  <script src="../js/accesibilidad.js" defer></script>
+</head>
+<body class="worker-dashboard">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <a href="inicio.html" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
+        <span class="logo__mark" aria-hidden="true">SL</span>
+        <span class="logo__text" aria-hidden="true">
+          <span class="logo__title">SMART</span>
+          <span class="logo__subtitle">LOGISTICS</span>
+        </span>
+      </a>
+
+      <a href="perfil.html" class="sidebar__profile">
+        <span class="sidebar__avatar" aria-hidden="true">🏢</span>
+        <span class="sidebar__identity">
+          <strong>Eventos Nova</strong>
+          <span>Coordinador de empresa</span>
+        </span>
+      </a>
+
+      <nav class="sidebar__nav" aria-label="Navegación de la empresa">
+        <a class="sidebar__link" href="inicio.html"><span aria-hidden="true">🏠</span>Inicio</a>
+        <a class="sidebar__link sidebar__link--active" href="convocatorias.html" aria-current="page"><span aria-hidden="true">📣</span>Convocatorias</a>
+        <a class="sidebar__link" href="crear-convocatoria.html"><span aria-hidden="true">➕</span>Crear</a>
+        <a class="sidebar__link" href="candidatos.html"><span aria-hidden="true">👥</span>Candidatos</a>
+        <a class="sidebar__link" href="perfil.html"><span aria-hidden="true">🏢</span>Empresa</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <span class="session-pill session-pill--empresa"><span aria-hidden="true">•</span> Sesión de empresa</span>
+        <a class="sidebar__link sidebar__logout" href="../auth/login-empresa.html"><span aria-hidden="true">🚪</span>Cerrar sesión</a>
+      </div>
+    </aside>
+
+    <main class="dashboard__main company-table-main" id="contenido" tabindex="-1">
+      <header class="company-table-header">
+        <div>
+          <h1>Convocatorias</h1>
+          <p id="postings-count">3 convocatorias publicadas</p>
+        </div>
+        <a href="crear-convocatoria.html" class="btn btn--primary company-new-button"><span aria-hidden="true">＋</span> Nueva convocatoria</a>
+      </header>
+
+      <div class="notice-banner" id="postings-notice" role="status" hidden>
+        <span class="notice-banner__icon" aria-hidden="true">✓</span>
+        <div>
+          <strong id="postings-notice-title"></strong>
+          <p id="postings-notice-text"></p>
+        </div>
+      </div>
+
+      <section class="company-table-panel" aria-label="Listado de convocatorias">
+        <div class="company-table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Convocatoria</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Plazas</th>
+                <th scope="col">Candidatos</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="postings-body">
+              <tr data-id="montaje">
+                <td class="company-event-name">
+                  <span class="company-icon company-icon--tool" aria-hidden="true">🔧</span>
+                  <div>
+                    <strong>Auxiliares de Montaje – Feria Tecnológica</strong>
+                    <small>Bogotá, Corferias</small>
+                  </div>
+                </td>
+                <td><span class="company-tag company-tag--soft-blue">Montaje</span></td>
+                <td class="company-date">15 Sep 2026</td>
+                <td>
+                  <div class="company-vacancies"><strong>4</strong><span>/12</span></div>
+                  <div class="scale" aria-label="4 de 12 plazas cubiertas"><span style="width: 33.33%;"></span></div>
+                </td>
+                <td><a class="company-count" href="candidatos.html"><span aria-hidden="true">👥</span>23</a></td>
+                <td><span class="status-pill status-pill--active"><span aria-hidden="true">•</span> Activa</span></td>
+                <td class="company-actions">
+                  <a href="candidatos.html" class="action-btn action-btn--primary">Candidatos</a>
+                  <a href="editar-convocatoria.html?id=montaje" class="action-btn action-btn--edit">Editar</a>
+                </td>
+              </tr>
+              <tr data-id="concierto">
+                <td class="company-event-name">
+                  <span class="company-icon company-icon--event" aria-hidden="true">🎪</span>
+                  <div>
+                    <strong>Auxiliares Logísticos – Concierto Internacional</strong>
+                    <small>Bogotá, El Campín</small>
+                  </div>
+                </td>
+                <td><span class="company-tag company-tag--soft-purple">Evento</span></td>
+                <td class="company-date">30 Sep 2026</td>
+                <td>
+                  <div class="company-vacancies"><strong>10</strong><span>/25</span></div>
+                  <div class="scale" aria-label="10 de 25 plazas cubiertas"><span style="width: 40%;"></span></div>
+                </td>
+                <td><a class="company-count" href="candidatos.html"><span aria-hidden="true">👥</span>67</a></td>
+                <td><span class="status-pill status-pill--active"><span aria-hidden="true">•</span> Activa</span></td>
+                <td class="company-actions">
+                  <a href="candidatos.html" class="action-btn action-btn--primary">Candidatos</a>
+                  <a href="editar-convocatoria.html?id=concierto" class="action-btn action-btn--edit">Editar</a>
+                </td>
+              </tr>
+              <tr data-id="evento-corporativo">
+                <td class="company-event-name">
+                  <span class="company-icon company-icon--event" aria-hidden="true">🎪</span>
+                  <div>
+                    <strong>Personal para Evento Corporativo</strong>
+                    <small>Bogotá, Hotel Tequendama</small>
+                  </div>
+                </td>
+                <td><span class="company-tag company-tag--soft-purple">Evento</span></td>
+                <td class="company-date">22 Sep 2026</td>
+                <td>
+                  <div class="company-vacancies"><strong>0</strong><span>/6</span></div>
+                  <div class="scale"><span style="width: 0%;"></span></div>
+                </td>
+                <td><a class="company-count" href="candidatos.html"><span aria-hidden="true">👥</span>6</a></td>
+                <td><span class="status-pill status-pill--finished"><span aria-hidden="true">•</span> Finalizada</span></td>
+                <td class="company-actions">
+                  <a href="candidatos.html" class="action-btn action-btn--primary">Candidatos</a>
+                  <button type="button" class="action-btn action-btn--rate" id="open-rating">Calificar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog class="sl-dialog rating-dialog" id="rating-dialog" aria-labelledby="rating-title">
+    <form class="sl-dialog__form" id="rating-form" novalidate>
+      <header class="sl-dialog__header">
+        <h2 id="rating-title">Calificar servicio</h2>
+        <button class="sl-dialog__close" type="button" data-close-rating aria-label="Cerrar">✕</button>
+      </header>
+      <div class="sl-dialog__body">
+        <p class="sl-dialog__text">Personal para Evento Corporativo · 22 Sep 2026</p>
+
+        <div class="posting-field">
+          <label for="rating-worker">Trabajador <span class="req" aria-hidden="true">*</span></label>
+          <select id="rating-worker" required>
+            <option value="" selected disabled>Selecciona un trabajador</option>
+            <option value="carlos">Carlos Rodríguez</option>
+            <option value="maria">María Torres</option>
+            <option value="sandra">Sandra Pérez</option>
+          </select>
+        </div>
+
+        <fieldset class="rating-role">
+          <legend>Rol evaluado <span class="req" aria-hidden="true">*</span></legend>
+          <label><input type="radio" name="role" value="logistica" checked> Logística</label>
+          <label><input type="radio" name="role" value="coordinador"> Coordinador</label>
+        </fieldset>
+
+        <fieldset class="star-input" data-criterion="puntualidad">
+          <legend>Puntualidad <span class="req" aria-hidden="true">*</span></legend>
+          <div class="star-input__options"></div>
+        </fieldset>
+        <fieldset class="star-input" data-criterion="eficiencia">
+          <legend>Eficiencia <span class="req" aria-hidden="true">*</span></legend>
+          <div class="star-input__options"></div>
+        </fieldset>
+        <fieldset class="star-input" data-criterion="actitud">
+          <legend>Actitud <span class="req" aria-hidden="true">*</span></legend>
+          <div class="star-input__options"></div>
+        </fieldset>
+
+        <div class="posting-field">
+          <label for="rating-comment">Comentario <span class="optional">(opcional)</span></label>
+          <textarea id="rating-comment" maxlength="300" placeholder="Describe brevemente el desempeño del trabajador..."></textarea>
+        </div>
+
+        <p class="posting-field__error" id="rating-error" role="alert" hidden></p>
+
+        <div class="sl-dialog__actions">
+          <button class="sl-btn sl-btn--secondary" type="button" data-close-rating>Cancelar</button>
+          <button class="sl-btn sl-btn--primary" type="submit">Guardar calificación</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="../js/empresa-convocatorias.js"></script>
+</body>
+</html>

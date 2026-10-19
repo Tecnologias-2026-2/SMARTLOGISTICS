@@ -8,13 +8,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/trabajador.css">
-  <link rel="stylesheet" href="../css/empresa.css">
+  <link rel="stylesheet" href="../css/app.css">
+  <link rel="stylesheet" href="../css/empresa-perfil.css">
+  <script src="../js/accesibilidad.js" defer></script>
 </head>
 <body class="worker-dashboard">
+  <a class="skip-link" href="#inicio">Saltar al contenido principal</a>
   <div class="dashboard">
     <aside class="sidebar">
-      <a href="inicio-empresa.html" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
+      <a href="inicio.html" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
         <span class="logo__mark" aria-hidden="true">SL</span>
         <span class="logo__text" aria-hidden="true">
           <span class="logo__title">SMART</span>
@@ -22,7 +24,7 @@
         </span>
       </a>
 
-      <a href="perfil-empresa.html" class="sidebar__profile">
+      <a href="perfil.html" class="sidebar__profile">
         <span class="sidebar__avatar" aria-hidden="true">🏢</span>
         <span class="sidebar__identity">
           <strong>Eventos Nova</strong>
@@ -31,20 +33,20 @@
       </a>
 
       <nav class="sidebar__nav" aria-label="Navegación de la empresa">
-        <a class="sidebar__link" href="inicio-empresa.html"><span aria-hidden="true">🏠</span>Inicio</a>
-        <a class="sidebar__link" href="convocatorias-empresa.html"><span aria-hidden="true">📣</span>Convocatorias</a>
-        <a class="sidebar__link" href="crear-convocatoria-empresa.html"><span aria-hidden="true">➕</span>Crear</a>
-        <a class="sidebar__link" href="candidatos-empresa.html"><span aria-hidden="true">👥</span>Candidatos</a>
-        <a class="sidebar__link sidebar__link--active" href="perfil-empresa.html" aria-current="page"><span aria-hidden="true">🏢</span>Empresa</a>
+        <a class="sidebar__link" href="inicio.html"><span aria-hidden="true">🏠</span>Inicio</a>
+        <a class="sidebar__link" href="convocatorias.html"><span aria-hidden="true">📣</span>Convocatorias</a>
+        <a class="sidebar__link" href="crear-convocatoria.html"><span aria-hidden="true">➕</span>Crear</a>
+        <a class="sidebar__link" href="candidatos.html"><span aria-hidden="true">👥</span>Candidatos</a>
+        <a class="sidebar__link sidebar__link--active" href="perfil.html" aria-current="page"><span aria-hidden="true">🏢</span>Empresa</a>
       </nav>
 
       <div class="sidebar__footer">
-        <span class="session-pill"><span aria-hidden="true">•</span> Sesión de empresa</span>
-        <a class="sidebar__link sidebar__logout" href="login-empresa.html"><span aria-hidden="true">📜</span>Cerrar sesión</a>
+        <span class="session-pill session-pill--empresa"><span aria-hidden="true">•</span> Sesión de empresa</span>
+        <a class="sidebar__link sidebar__logout" href="../auth/login-empresa.html"><span aria-hidden="true">🚪</span>Cerrar sesión</a>
       </div>
     </aside>
 
-    <main class="dashboard__main company-main" id="inicio">
+    <main class="dashboard__main company-main" id="inicio" tabindex="-1">
       <header class="company-page-header">
         <h1>Perfil de empresa</h1>
         <p>Información pública de tu empresa</p>
@@ -108,7 +110,7 @@
       <section class="company-panel company-opportunities" id="convocatorias" aria-labelledby="opportunities-heading">
         <div class="company-panel__heading">
           <h2 id="opportunities-heading">Convocatorias publicadas</h2>
-          <a href="convocatorias-empresa.html">Ver todas <span aria-hidden="true">→</span></a>
+          <a href="convocatorias.html">Ver todas <span aria-hidden="true">→</span></a>
         </div>
         <ul class="company-opportunity-list">
           <li>

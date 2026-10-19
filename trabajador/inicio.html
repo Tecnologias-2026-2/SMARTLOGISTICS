@@ -8,9 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/trabajador.css">
+  <link rel="stylesheet" href="../css/app.css">
+  <script src="../js/accesibilidad.js" defer></script>
 </head>
 <body class="worker-dashboard">
+  <a class="skip-link" href="#inicio">Saltar al contenido principal</a>
   <div class="dashboard">
     <aside class="sidebar">
       <a href="#inicio" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
@@ -21,7 +23,7 @@
         </span>
       </a>
 
-      <a href="perfil-trabajador.html" class="sidebar__profile">
+      <a href="perfil.html" class="sidebar__profile">
         <span class="sidebar__avatar" aria-hidden="true">👤</span>
         <span class="sidebar__identity">
           <strong>Carlos Rodríguez</strong>
@@ -31,19 +33,19 @@
 
       <nav class="sidebar__nav" aria-label="Navegación del trabajador">
         <a class="sidebar__link sidebar__link--active" href="#inicio" aria-current="page"><span aria-hidden="true">🏠</span>Inicio</a>
-        <a class="sidebar__link" href="ofertas-trabajador.html"><span aria-hidden="true">💼</span>Ofertas</a>
-        <a class="sidebar__link" href="postulaciones-trabajador.html"><span aria-hidden="true">📋</span>Postulaciones</a>
-        <a class="sidebar__link" href="historial-trabajador.html"><span aria-hidden="true">📊</span>Historial</a>
-        <a class="sidebar__link" href="perfil-trabajador.html"><span aria-hidden="true">👤</span>Mi Perfil</a>
+        <a class="sidebar__link" href="ofertas.html"><span aria-hidden="true">💼</span>Ofertas</a>
+        <a class="sidebar__link" href="postulaciones.html"><span aria-hidden="true">📋</span>Postulaciones</a>
+        <a class="sidebar__link" href="historial.html"><span aria-hidden="true">📊</span>Historial</a>
+        <a class="sidebar__link" href="perfil.html"><span aria-hidden="true">👤</span>Mi Perfil</a>
       </nav>
 
       <div class="sidebar__footer">
         <span class="session-pill"><span aria-hidden="true">•</span> Sesión de trabajador</span>
-        <a class="sidebar__link sidebar__logout" href="login-trabajador.html"><span aria-hidden="true">📜</span>Cerrar sesión</a>
+        <a class="sidebar__link sidebar__logout" href="../auth/login-trabajador.html"><span aria-hidden="true">🚪</span>Cerrar sesión</a>
       </div>
     </aside>
 
-    <main class="dashboard__main" id="inicio">
+    <main class="dashboard__main" id="inicio" tabindex="-1">
       <section class="welcome-card" id="perfil" aria-labelledby="welcome-title">
         <div>
           <p class="welcome-card__eyebrow">Buenas tardes</p>
@@ -87,17 +89,17 @@
       <section class="quick-access" id="postulaciones" aria-labelledby="quick-access-title">
         <h2 class="section-title" id="quick-access-title">Acceso rápido</h2>
         <div class="quick-access__grid">
-          <a class="quick-card quick-card--blue" href="ofertas-trabajador.html"><span aria-hidden="true">💼</span><strong>Ver ofertas</strong></a>
-          <a class="quick-card quick-card--purple" href="postulaciones-trabajador.html"><span aria-hidden="true">📋</span><strong>Mis postulaciones</strong></a>
-          <a class="quick-card quick-card--green" href="historial-trabajador.html"><span aria-hidden="true">📊</span><strong>Historial</strong></a>
-          <a class="quick-card quick-card--orange" href="perfil-trabajador.html"><span aria-hidden="true">⭐</span><strong>Mi reputación</strong></a>
+          <a class="quick-card quick-card--blue" href="ofertas.html"><span aria-hidden="true">💼</span><strong>Ver ofertas</strong></a>
+          <a class="quick-card quick-card--purple" href="postulaciones.html"><span aria-hidden="true">📋</span><strong>Mis postulaciones</strong></a>
+          <a class="quick-card quick-card--green" href="historial.html"><span aria-hidden="true">📊</span><strong>Historial</strong></a>
+          <a class="quick-card quick-card--orange" href="perfil.html"><span aria-hidden="true">⭐</span><strong>Mi reputación</strong></a>
         </div>
       </section>
 
       <section class="recommended" id="ofertas" aria-labelledby="offers-title">
         <div class="section-heading">
           <h2 class="section-title" id="offers-title">Ofertas recomendadas</h2>
-          <a href="ofertas-trabajador.html">Ver todas <span aria-hidden="true">→</span></a>
+          <a href="ofertas.html">Ver todas <span aria-hidden="true">→</span></a>
         </div>
         <div class="offer-list">
           <article class="offer-card">

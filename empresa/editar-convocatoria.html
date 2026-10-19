@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar convocatoria · Smart Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/app.css">
+  <link rel="stylesheet" href="../css/empresa-crear-convocatoria.css">
+  <script src="../js/accesibilidad.js" defer></script>
+</head>
+<body class="worker-dashboard">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <a href="inicio.html" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
+        <span class="logo__mark" aria-hidden="true">SL</span>
+        <span class="logo__text" aria-hidden="true">
+          <span class="logo__title">SMART</span>
+          <span class="logo__subtitle">LOGISTICS</span>
+        </span>
+      </a>
+
+      <a href="perfil.html" class="sidebar__profile">
+        <span class="sidebar__avatar" aria-hidden="true">🏢</span>
+        <span class="sidebar__identity">
+          <strong>Eventos Nova</strong>
+          <span>Coordinador de empresa</span>
+        </span>
+      </a>
+
+      <nav class="sidebar__nav" aria-label="Navegación de la empresa">
+        <a class="sidebar__link" href="inicio.html"><span aria-hidden="true">🏠</span>Inicio</a>
+        <a class="sidebar__link sidebar__link--active" href="convocatorias.html" aria-current="page"><span aria-hidden="true">📣</span>Convocatorias</a>
+        <a class="sidebar__link" href="crear-convocatoria.html"><span aria-hidden="true">➕</span>Crear</a>
+        <a class="sidebar__link" href="candidatos.html"><span aria-hidden="true">👥</span>Candidatos</a>
+        <a class="sidebar__link" href="perfil.html"><span aria-hidden="true">🏢</span>Empresa</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <span class="session-pill session-pill--empresa"><span aria-hidden="true">•</span> Sesión de empresa</span>
+        <a class="sidebar__link sidebar__logout" href="../auth/login-empresa.html"><span aria-hidden="true">🚪</span>Cerrar sesión</a>
+      </div>
+    </aside>
+
+    <main class="dashboard__main posting-main" id="contenido" tabindex="-1">
+      <div class="posting">
+        <a class="posting-back" href="convocatorias.html">← Volver a convocatorias</a>
+        <header class="posting-header">
+          <div>
+            <h1>Editar convocatoria</h1>
+            <p>Modifica los datos de la convocatoria activa</p>
+          </div>
+          <span class="status-pill status-pill--active"><span aria-hidden="true">●</span> Activa</span>
+        </header>
+
+        <form class="posting-form" id="edit-posting-form" novalidate>
+          <section class="posting-card" aria-labelledby="info-title">
+            <h2 id="info-title">Información del trabajo</h2>
+            <div class="detail-list">
+            <div class="detail-row" data-field="title" data-kind="text">
+              <span class="detail-row__label" id="label-title">Cargo / título</span>
+              <div class="detail-row__value" data-value></div>
+              <button class="detail-row__edit" type="button" aria-describedby="label-title">✏️ Editar</button>
+            </div>
+            <div class="detail-row" data-field="category" data-kind="category">
+              <span class="detail-row__label" id="label-category">Categoría</span>
+              <div class="detail-row__value" data-value></div>
+              <button class="detail-row__edit" type="button" aria-describedby="label-category">✏️ Editar</button>
+            </div>
+            <div class="detail-row" data-field="location" data-kind="text">
+              <span class="detail-row__label" id="label-location">Ubicación</span>
+              <div class="detail-row__value" data-value></div>
+              <button class="detail-row__edit" type="button" aria-describedby="label-location">✏️ Editar</button>
+            </div>
+            <div class="detail-row" data-field="workers" data-kind="number">
+              <span class="detail-row__label" id="label-workers">N.° de trabajadores</span>
+              <div class="detail-row__value" data-value></div>
+              <button class="detail-row__edit" type="button" aria-describedby="label-workers">✏️ Editar</button>
+            </div>
+            </div>
+          </section>
+
+          <section class="posting-card" aria-labelledby="schedule-title">
+            <h2 id="schedule-title">Fecha y horario</h2>
+            <div class="detail-list">
+            <div class="detail-row" data-field="date" data-kind="text">
+              <span class="detail-row__label" id="label-date">Fecha</span>
+              <div class="detail-row__value" data-value></div>
+              <button class="detail-row__edit" type="button" aria-describedby="label-date">✏️ Editar</button>
+            </div>
+            <div class="detail-row" data-field="hours" data-kind="text">
+              <span class="detail-row__label" id="label-hours">Horario</span>
+              <div class="detail-row__value" data-value></div>
+              <button class="detail-row__edit" type="button" aria-describedby="label-hours">✏️ Editar</button>
+            </div>
+            </div>
+          </section>
+
+          <section class="posting-card" aria-labelledby="pay-title">
+            <h2 id="pay-title">Remuneración</h2>
+            <div class="detail-list">
+            <div class="detail-row" data-field="pay" data-kind="pay">
+              <span class="detail-row__label" id="label-pay">Pago por trabajador</span>
+              <div class="detail-row__value" data-value></div>
+              <button class="detail-row__edit" type="button" aria-describedby="label-pay">✏️ Editar</button>
+            </div>
+            </div>
+          </section>
+
+          <section class="posting-card" aria-labelledby="description-title">
+            <h2 id="description-title">Descripción y requisitos</h2>
+            <div class="detail-list">
+            <div class="detail-row" data-field="description" data-kind="textarea">
+              <span class="detail-row__label" id="label-description">Descripción</span>
+              <div class="detail-row__value" data-value></div>
+              <button class="detail-row__edit" type="button" aria-describedby="label-description">✏️ Editar</button>
+            </div>
+            <div class="detail-row" data-field="requirements" data-kind="list">
+              <span class="detail-row__label" id="label-requirements">Requisitos</span>
+              <div class="detail-row__value" data-value></div>
+              <button class="detail-row__edit" type="button" aria-describedby="label-requirements">✏️ Editar</button>
+            </div>
+            </div>
+          </section>
+
+          <div class="posting-actions">
+            <a class="posting-actions__cancel" href="convocatorias.html">Cancelar</a>
+            <button class="sl-btn sl-btn--primary sl-btn--lg posting-actions__submit" type="submit">Guardar cambios</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="sl-dialog success-dialog" id="saved-dialog" aria-labelledby="saved-title">
+    <div class="sl-dialog__body">
+      <span class="success-dialog__icon" aria-hidden="true">✓</span>
+      <h2 id="saved-title">¡Cambios guardados!</h2>
+      <p class="sl-dialog__text">La convocatoria ha sido actualizada correctamente.</p>
+      <div class="success-dialog__summary" id="saved-summary"></div>
+      <a class="sl-btn sl-btn--primary" href="convocatorias.html">Ver convocatorias</a>
+    </div>
+  </dialog>
+
+  <script src="../js/empresa-editar-convocatoria.js"></script>
+</body>
+</html>
