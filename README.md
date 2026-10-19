@@ -16,7 +16,7 @@ Plataforma web que conecta a **trabajadores logísticos** con las **empresas** q
 
 | Nombre completo | Código |
 |---|---|
-| Samuel Cortés Páez | 120850 |
+| Samuel Cortés Páez | 1202850 |
 | Jonatan David Benavides Mora | 1202860 |
 | Andrés Sánchez | 1202828 |
 
