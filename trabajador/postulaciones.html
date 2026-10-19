@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis postulaciones · Smart Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/app.css">
+  <link rel="stylesheet" href="../css/trabajador-postulaciones.css">
+  <script src="../js/accesibilidad.js" defer></script>
+</head>
+<body class="worker-dashboard">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <a href="inicio.html#inicio" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
+        <span class="logo__mark" aria-hidden="true">SL</span>
+        <span class="logo__text" aria-hidden="true">
+          <span class="logo__title">SMART</span>
+          <span class="logo__subtitle">LOGISTICS</span>
+        </span>
+      </a>
+
+      <a href="perfil.html" class="sidebar__profile">
+        <span class="sidebar__avatar" aria-hidden="true">👤</span>
+        <span class="sidebar__identity">
+          <strong>Carlos Rodríguez</strong>
+          <span>Auxiliar Logístico</span>
+        </span>
+      </a>
+
+      <nav class="sidebar__nav" aria-label="Navegación del trabajador">
+        <a class="sidebar__link" href="inicio.html#inicio"><span aria-hidden="true">🏠</span>Inicio</a>
+        <a class="sidebar__link" href="ofertas.html"><span aria-hidden="true">💼</span>Ofertas</a>
+        <a class="sidebar__link sidebar__link--active" href="postulaciones.html" aria-current="page"><span aria-hidden="true">📋</span>Postulaciones</a>
+        <a class="sidebar__link" href="historial.html"><span aria-hidden="true">📊</span>Historial</a>
+        <a class="sidebar__link" href="perfil.html"><span aria-hidden="true">👤</span>Mi Perfil</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <span class="session-pill"><span aria-hidden="true">•</span> Sesión de trabajador</span>
+        <a class="sidebar__link sidebar__logout" href="../auth/login-trabajador.html"><span aria-hidden="true">🚪</span>Cerrar sesión</a>
+      </div>
+    </aside>
+
+    <main class="dashboard__main applications-main" id="contenido" tabindex="-1">
+      <header class="applications-header">
+        <h1>Mis postulaciones</h1>
+        <p id="application-count" aria-live="polite">2 postulaciones en total</p>
+      </header>
+
+      <section class="assignment-card" id="assignment-card" aria-labelledby="assignment-title">
+        <span class="assignment-card__icon" aria-hidden="true">📌</span>
+        <div class="assignment-card__body">
+          <h2 id="assignment-title">Asignación directa pendiente</h2>
+          <p class="assignment-card__message" id="assignment-message" aria-live="polite">Eventos Nova te ha asignado directamente.</p>
+          <h3>Auxiliares Logísticos – Concierto Internacional</h3>
+          <div class="assignment-card__meta">
+            <span>🗓️ 30 Sep 2026</span>
+            <span>◷ 10:00 – 22:00</span>
+            <span>💰 $95.000 COP</span>
+          </div>
+          <div class="assignment-card__actions" id="assignment-actions">
+            <button type="button" class="assignment-button assignment-button--reject" id="reject-assignment">Rechazar</button>
+            <button type="button" class="assignment-button assignment-button--accept" id="accept-assignment">Aceptar asignación</button>
+            <button type="button" class="assignment-button assignment-button--details" id="view-assignment-details">Ver detalles</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="application-filters" role="group" aria-label="Filtrar postulaciones">
+        <button class="application-filter is-selected" type="button" data-status="all" aria-pressed="true">Todas</button>
+        <button class="application-filter" type="button" data-status="review" aria-pressed="false">En revisión (0)</button>
+        <button class="application-filter" type="button" data-status="selected" aria-pressed="false">Seleccionado (1)</button>
+        <button class="application-filter" type="button" data-status="rejected" aria-pressed="false">No seleccionado (1)</button>
+      </div>
+
+      <section class="application-list" aria-label="Historial de postulaciones">
+        <article class="application-card" data-status="selected">
+          <span class="application-card__icon application-card__icon--selected" aria-hidden="true">🎉</span>
+          <div class="application-card__body">
+            <h2>Personal para Evento Corporativo</h2>
+            <p class="application-card__company">Corporate Events &amp; Co.</p>
+            <div class="application-card__meta">
+              <span>🗓️ 22 Sep 2026</span><span>📍 Bogotá, Hotel Tequendama</span><span>◷ 14:00 – 23:00</span>
+            </div>
+            <strong class="application-card__pay">$90.000 COP</strong>
+          </div>
+          <span class="application-status application-status--selected">● Seleccionado</span>
+          <p class="application-card__note">¡Felicitaciones! Has sido seleccionado para este trabajo.</p>
+        </article>
+
+        <article class="application-card" data-status="rejected">
+          <span class="application-card__icon application-card__icon--rejected" aria-hidden="true">✖</span>
+          <div class="application-card__body">
+            <h2>Auxiliares de Montaje – Feria Tecnológica</h2>
+            <p class="application-card__company">Eventos Nova</p>
+            <div class="application-card__meta">
+              <span>🗓️ 15 Sep 2026</span><span>📍 Bogotá, Corferias</span><span>◷ 08:00 – 18:00</span>
+            </div>
+            <strong class="application-card__pay">$80.000 COP</strong>
+          </div>
+          <span class="application-status application-status--rejected">● No seleccionado</span>
+          <p class="application-card__note">No fuiste seleccionado en esta oportunidad. ¡Sigue intentando!</p>
+        </article>
+
+      </section>
+    </main>
+  </div>
+
+  <dialog class="cancel-application-dialog" id="cancel-application-dialog" aria-labelledby="cancel-application-title">
+    <div class="cancel-application-dialog__content">
+      <span class="cancel-application-dialog__icon" aria-hidden="true">!</span>
+      <h2 id="cancel-application-title">¿Estás seguro de cancelar tu postulación?</h2>
+      <p id="cancel-application-name"></p>
+      <div class="cancel-application-dialog__actions">
+        <button class="cancel-application-dialog__button cancel-application-dialog__button--secondary" type="button" id="keep-application">No, volver</button>
+        <button class="cancel-application-dialog__button cancel-application-dialog__button--danger" type="button" id="confirm-cancel-application">Sí, cancelar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="assignment-details-dialog" id="assignment-details-dialog" aria-labelledby="assignment-details-title">
+    <div class="assignment-details-dialog__content">
+      <div class="dialog-head">
+        <span class="assignment-details-dialog__icon" aria-hidden="true">🎪</span>
+        <button class="assignment-details-dialog__close" type="button" id="close-assignment-details" aria-label="Cerrar detalles">×</button>
+      </div>
+      <p class="assignment-details-dialog__eyebrow">Eventos Nova · Evento</p>
+      <h2 id="assignment-details-title">Auxiliares Logísticos – Concierto Internacional</h2>
+      <div class="assignment-details-dialog__facts">
+        <p><strong>Fecha</strong><span>30 Sep 2026</span></p>
+        <p><strong>Horario</strong><span>10:00 – 22:00</span></p>
+        <p><strong>Ubicación</strong><span>Bogotá, El Campín</span></p>
+        <p><strong>Remuneración</strong><span>$95.000 COP</span></p>
+        <p><strong>Plazas disponibles</strong><span>10 de 25</span></p>
+      </div>
+      <section>
+        <h3>Descripción del cargo</h3>
+        <p>Apoyo en la logística general del concierto, control de accesos, manejo de materiales escénicos y soporte a producción.</p>
+      </section>
+      <section>
+        <h3>Requisitos</h3>
+        <ul>
+          <li>Experiencia en eventos masivos.</li>
+          <li>Capacidad para trabajar bajo presión.</li>
+          <li>Disponibilidad de 10:00 a 22:00.</li>
+          <li>Curso de primeros auxilios deseable.</li>
+        </ul>
+      </section>
+      <button class="assignment-details-dialog__done" type="button" id="dismiss-assignment-details">Cerrar</button>
+    </div>
+  </dialog>
+
+  <dialog class="application-summary-dialog" id="application-summary-dialog" aria-labelledby="application-summary-title">
+    <div class="application-summary-dialog__content">
+      <div class="dialog-head">
+        <span class="assignment-details-dialog__icon" aria-hidden="true">📋</span>
+        <button class="assignment-details-dialog__close" type="button" id="close-application-summary" aria-label="Cerrar resumen">×</button>
+      </div>
+      <p class="application-summary-dialog__eyebrow">Resumen de postulación</p>
+      <h2 id="application-summary-title"></h2>
+      <p class="application-summary-dialog__company" id="application-summary-company"></p>
+      <span class="application-summary-dialog__status" id="application-summary-status"></span>
+      <div class="application-summary-dialog__facts" id="application-summary-facts"></div>
+      <p class="application-summary-dialog__note" id="application-summary-note"></p>
+      <button class="assignment-details-dialog__done" type="button" id="dismiss-application-summary">Cerrar</button>
+    </div>
+  </dialog>
+
+  <script src="../js/trabajador-postulaciones.js"></script>
+</body>
+</html>
