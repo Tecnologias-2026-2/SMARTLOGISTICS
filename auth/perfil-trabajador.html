@@ -25,8 +25,8 @@
       <a href="perfil-trabajador.html" class="sidebar__profile">
         <span class="sidebar__avatar" aria-hidden="true">👤</span>
         <span class="sidebar__identity">
-          <strong>Carlos Rodríguez</strong>
-          <span>Auxiliar Logístico</span>
+          <strong id="sidebar-profile-name">Carlos Rodríguez</strong>
+          <span id="sidebar-profile-role">Auxiliar Logístico</span>
         </span>
       </a>
 
@@ -50,15 +50,15 @@
           <h1>Mi perfil</h1>
           <p>Información profesional y reputación</p>
         </div>
-        <button class="profile-edit-button" type="button">✏️ Editar perfil</button>
+        <button class="profile-edit-button" id="open-profile-editor" type="button">✏️ Editar perfil</button>
       </header>
 
       <section class="profile-hero" aria-label="Resumen del perfil">
         <div class="profile-avatar" aria-hidden="true">CR</div>
         <div class="profile-hero__body">
-          <h2>Carlos Rodríguez</h2>
-          <p class="profile-hero__role">Auxiliar Logístico</p>
-          <p class="profile-hero__location"><span aria-hidden="true">📍</span> Bogotá, Colombia</p>
+          <h2 id="profile-full-name">Carlos Rodríguez</h2>
+          <p class="profile-hero__role" id="profile-role">Auxiliar Logístico</p>
+          <p class="profile-hero__location"><span aria-hidden="true">📍</span> <span id="profile-location">Bogotá, Colombia</span></p>
           <div class="profile-hero__stats">
             <div><span>Calificación</span><strong><span class="profile-star" aria-hidden="true">★</span> 4.8</strong></div>
             <div><span>Puntualidad</span><strong>96%</strong></div>
@@ -74,19 +74,19 @@
           <dl class="contact-list">
             <div>
               <dt><span aria-hidden="true">✉️</span>Correo electrónico</dt>
-              <dd>carlos.rodriguez@gmail.com <span>(no editable)</span></dd>
+              <dd id="profile-email">carlos.rodriguez@gmail.com <span>(no editable)</span></dd>
             </div>
             <div>
               <dt><span aria-hidden="true">📱</span>Celular</dt>
-              <dd>+57 300 123 4567</dd>
+              <dd id="profile-phone">+57 300 123 4567</dd>
             </div>
             <div>
               <dt><span aria-hidden="true">📍</span>Ubicación</dt>
-              <dd>Bogotá, Colombia</dd>
+              <dd id="contact-location">Bogotá, Colombia</dd>
             </div>
             <div>
               <dt><span aria-hidden="true">💼</span>Cargo</dt>
-              <dd>Auxiliar Logístico</dd>
+              <dd id="contact-role">Auxiliar Logístico</dd>
             </div>
           </dl>
         </section>
@@ -108,15 +108,16 @@
             </div>
           </div>
           <div class="experience-years"><span>Años de experiencia</span><strong>3 años</strong></div>
+          <button class="reputation-details-button" id="open-reputation-details" type="button">Ver detalles</button>
         </section>
       </div>
 
       <section class="profile-panel skills-panel" aria-labelledby="skills-title">
         <div class="profile-panel__heading">
           <h2 id="skills-title">Habilidades</h2>
-          <button class="profile-inline-edit" type="button">✏️ Editar</button>
+          <button class="profile-inline-edit" id="open-skills-editor" type="button">✏️ Editar</button>
         </div>
-        <ul class="skill-list">
+        <ul class="skill-list" id="profile-skill-list">
           <li>Manejo de inventario</li>
           <li>Montaje de stands</li>
           <li>Carga y descarga</li>
@@ -153,5 +154,323 @@
       </section>
     </main>
   </div>
+
+  <dialog class="profile-editor-dialog" id="profile-editor-dialog" aria-labelledby="profile-editor-title">
+    <form class="profile-editor" id="profile-editor-form">
+      <header class="profile-editor__header">
+        <h2 id="profile-editor-title">Editar perfil</h2>
+        <button class="profile-editor__close" id="close-profile-editor" type="button" aria-label="Cerrar">×</button>
+      </header>
+      <div class="profile-editor__fields">
+        <label>
+          <span>Nombres</span>
+          <input id="edit-first-name" name="firstName" type="text" autocomplete="given-name" required maxlength="60">
+        </label>
+        <label>
+          <span>Apellidos</span>
+          <input id="edit-last-name" name="lastName" type="text" autocomplete="family-name" required maxlength="60">
+        </label>
+        <label class="profile-editor__field--full">
+          <span>Cargo profesional</span>
+          <input id="edit-role" name="role" type="text" required maxlength="80">
+        </label>
+        <label class="profile-editor__field--full">
+          <span>Ubicación</span>
+          <input id="edit-location" name="location" type="text" autocomplete="address-level2" required maxlength="100">
+        </label>
+        <label class="profile-editor__field--full">
+          <span>Número de celular</span>
+          <input id="edit-phone" name="phone" type="tel" autocomplete="tel" required maxlength="25">
+        </label>
+      </div>
+      <p class="profile-editor__security-note">✉️ El correo electrónico no es editable por seguridad.</p>
+      <p class="profile-editor__error" id="profile-editor-error" role="alert" hidden></p>
+      <footer class="profile-editor__actions">
+        <button class="profile-editor__button profile-editor__button--cancel" id="cancel-profile-edit" type="button">Cancelar</button>
+        <button class="profile-editor__button profile-editor__button--save" type="submit">Guardar cambios</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog class="skills-editor-dialog" id="skills-editor-dialog" aria-labelledby="skills-editor-title">
+    <section class="skills-editor">
+      <header class="skills-editor__header">
+        <h2 id="skills-editor-title">Editar habilidades</h2>
+        <button class="skills-editor__close" id="close-skills-editor" type="button" aria-label="Cerrar">×</button>
+      </header>
+      <ul class="skills-editor__list" id="skills-editor-list" aria-label="Habilidades actuales"></ul>
+      <form class="skills-editor__add-form" id="skills-add-form">
+        <label class="skills-editor__visually-hidden" for="new-skill">Nueva habilidad</label>
+        <input id="new-skill" type="text" placeholder="Nueva habilidad..." maxlength="60" autocomplete="off">
+        <button class="skills-editor__add-button" type="submit">Agregar</button>
+      </form>
+      <p class="skills-editor__error" id="skills-editor-error" role="alert" hidden></p>
+      <footer class="skills-editor__actions">
+        <button class="skills-editor__button skills-editor__button--cancel" id="cancel-skills-edit" type="button">Cancelar</button>
+        <button class="skills-editor__button skills-editor__button--save" id="save-skills" type="button">Guardar habilidades</button>
+      </footer>
+    </section>
+  </dialog>
+
+  <dialog class="reputation-details-dialog" id="reputation-details-dialog" aria-labelledby="reputation-details-title">
+    <section class="reputation-details">
+      <header class="reputation-details__header">
+        <div>
+          <h2 id="reputation-details-title">Mi reputación</h2>
+          <p>Calificaciones acumuladas de trabajos realizados</p>
+        </div>
+        <button class="reputation-details__close" id="close-reputation-details" type="button" aria-label="Cerrar">×</button>
+      </header>
+
+      <section class="reputation-global-card" aria-label="Calificación global">
+        <div>
+          <span class="reputation-details__eyebrow">Calificación global</span>
+          <div class="reputation-global-card__score">
+            <strong>4.8</strong>
+            <span class="reputation-details__stars" aria-label="5 estrellas">★★★★★</span>
+          </div>
+          <p>Basada en 47 trabajos completados</p>
+        </div>
+        <div class="reputation-score-badge" aria-label="4.8 de 5">
+          <strong>4.8</strong>
+          <span>/ 5.0</span>
+        </div>
+      </section>
+
+      <div class="reputation-category-grid">
+        <section class="reputation-category-card">
+          <h3>Calificación logística</h3>
+          <strong class="reputation-category-card__score">4.9 <span aria-hidden="true">★</span></strong>
+          <span class="reputation-details__stars" aria-label="5 estrellas">★★★★★</span>
+          <p>Operaciones de almacén, montaje y reparto</p>
+        </section>
+        <section class="reputation-category-card">
+          <h3>Calificación coordinador</h3>
+          <strong class="reputation-category-card__score">4.6 <span aria-hidden="true">★</span></strong>
+          <span class="reputation-details__stars" aria-label="5 estrellas">★★★★★</span>
+          <p>Coordinación y liderazgo de equipos</p>
+        </section>
+      </div>
+
+      <section class="reputation-activity-card" aria-labelledby="reputation-activity-title">
+        <h3 id="reputation-activity-title">Indicadores de actividad</h3>
+        <div class="reputation-activity-grid">
+          <div class="reputation-indicator">
+            <div><span>Puntualidad</span><strong>96%</strong></div>
+            <span class="reputation-indicator__track"><span class="reputation-indicator__fill reputation-indicator__fill--green" style="width: 96%"></span></span>
+          </div>
+          <div class="reputation-indicator">
+            <div><span>Trabajos realizados</span><strong>47</strong></div>
+            <span class="reputation-indicator__track"><span class="reputation-indicator__fill reputation-indicator__fill--blue" style="width: 48%"></span></span>
+          </div>
+          <div class="reputation-indicator">
+            <div><span>Empresas colaboradoras</span><strong>12</strong></div>
+            <span class="reputation-indicator__track"><span class="reputation-indicator__fill reputation-indicator__fill--blue reputation-indicator__fill--short" style="width: 40%"></span></span>
+          </div>
+          <div class="reputation-indicator">
+            <div><span>Años de experiencia</span><strong>3 años</strong></div>
+            <span class="reputation-indicator__track"><span class="reputation-indicator__fill reputation-indicator__fill--orange" style="width: 30%"></span></span>
+          </div>
+        </div>
+      </section>
+
+      <p class="reputation-info-note"><strong>Sobre las calificaciones:</strong> Todas las calificaciones provienen de empresas verificadas que han trabajado contigo. Se actualizan automáticamente después de cada servicio completado.</p>
+    </section>
+  </dialog>
+
+  <script>
+    const PROFILE_STORAGE_KEY = "smart-logistics:worker-profile";
+    const SKILLS_STORAGE_KEY = "smart-logistics:worker-skills";
+    const profileEditorDialog = document.querySelector("#profile-editor-dialog");
+    const profileEditorForm = document.querySelector("#profile-editor-form");
+    const profileEditorError = document.querySelector("#profile-editor-error");
+    const profileFields = {
+      firstName: document.querySelector("#edit-first-name"),
+      lastName: document.querySelector("#edit-last-name"),
+      role: document.querySelector("#edit-role"),
+      location: document.querySelector("#edit-location"),
+      phone: document.querySelector("#edit-phone")
+    };
+    const skillsEditorDialog = document.querySelector("#skills-editor-dialog");
+    const skillsEditorList = document.querySelector("#skills-editor-list");
+    const skillsEditorError = document.querySelector("#skills-editor-error");
+    const newSkillInput = document.querySelector("#new-skill");
+    const profileSkillList = document.querySelector("#profile-skill-list");
+    const reputationDetailsDialog = document.querySelector("#reputation-details-dialog");
+    let savedSkills = Array.from(profileSkillList.querySelectorAll("li"), (item) => item.textContent.trim());
+    let editedSkills = [];
+    let currentProfile = {
+      firstName: "Carlos",
+      lastName: "Rodríguez",
+      role: "Auxiliar Logístico",
+      location: "Bogotá, Colombia",
+      phone: "+57 300 123 4567"
+    };
+
+    function getProfileValues() {
+      return { ...currentProfile };
+    }
+
+    function applyProfileValues(profile) {
+      currentProfile = { ...profile };
+      const fullName = `${profile.firstName} ${profile.lastName}`.trim();
+      document.querySelector("#profile-full-name").textContent = fullName;
+      document.querySelector("#sidebar-profile-name").textContent = fullName;
+      document.querySelector("#profile-role").textContent = profile.role;
+      document.querySelector("#sidebar-profile-role").textContent = profile.role;
+      document.querySelector("#profile-location").textContent = profile.location;
+      document.querySelector("#profile-phone").textContent = profile.phone;
+      document.querySelector("#contact-location").textContent = profile.location;
+      document.querySelector("#contact-role").textContent = profile.role;
+      document.querySelector(".profile-avatar").textContent = `${profile.firstName.charAt(0)}${profile.lastName.charAt(0)}`.toLocaleUpperCase("es");
+    }
+
+    function loadSavedProfile() {
+      const storedProfile = localStorage.getItem(PROFILE_STORAGE_KEY);
+      if (!storedProfile) return;
+      const profile = JSON.parse(storedProfile);
+      if (!profile || Object.keys(profileFields).some((key) => typeof profile[key] !== "string")) {
+        throw new Error("El perfil guardado no tiene un formato válido.");
+      }
+      currentProfile = profile;
+      applyProfileValues(profile);
+    }
+
+    function renderSkills(list, skills, removable) {
+      list.replaceChildren();
+      skills.forEach((skill, index) => {
+        const item = document.createElement("li");
+        item.textContent = skill;
+        if (removable) {
+          const removeButton = document.createElement("button");
+          removeButton.className = "skills-editor__remove";
+          removeButton.type = "button";
+          removeButton.setAttribute("aria-label", `Quitar ${skill}`);
+          removeButton.textContent = "×";
+          removeButton.addEventListener("click", () => {
+            editedSkills.splice(index, 1);
+            renderSkills(skillsEditorList, editedSkills, true);
+          });
+          item.append(removeButton);
+        }
+        list.append(item);
+      });
+    }
+
+    function loadSavedSkills() {
+      const storedSkills = localStorage.getItem(SKILLS_STORAGE_KEY);
+      if (!storedSkills) return;
+      const skills = JSON.parse(storedSkills);
+      if (!Array.isArray(skills) || skills.some((skill) => typeof skill !== "string" || !skill.trim())) {
+        throw new Error("La lista de habilidades guardada no tiene un formato válido.");
+      }
+      savedSkills = skills.map((skill) => skill.trim());
+      renderSkills(profileSkillList, savedSkills, false);
+    }
+
+    document.querySelector("#open-skills-editor").addEventListener("click", () => {
+      editedSkills = [...savedSkills];
+      renderSkills(skillsEditorList, editedSkills, true);
+      skillsEditorError.hidden = true;
+      newSkillInput.value = "";
+      skillsEditorDialog.showModal();
+      newSkillInput.focus();
+    });
+
+    document.querySelector("#skills-add-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const skill = newSkillInput.value.trim();
+      if (!skill) {
+        newSkillInput.focus();
+        return;
+      }
+      if (editedSkills.some((existingSkill) => existingSkill.toLocaleLowerCase("es") === skill.toLocaleLowerCase("es"))) {
+        skillsEditorError.textContent = "Esa habilidad ya está en la lista.";
+        skillsEditorError.hidden = false;
+        newSkillInput.focus();
+        return;
+      }
+      editedSkills.push(skill);
+      renderSkills(skillsEditorList, editedSkills, true);
+      skillsEditorError.hidden = true;
+      newSkillInput.value = "";
+      newSkillInput.focus();
+    });
+
+    [document.querySelector("#close-skills-editor"), document.querySelector("#cancel-skills-edit")].forEach((button) => {
+      button.addEventListener("click", () => skillsEditorDialog.close());
+    });
+
+    document.querySelector("#open-reputation-details").addEventListener("click", () => {
+      reputationDetailsDialog.showModal();
+    });
+    document.querySelector("#close-reputation-details").addEventListener("click", () => {
+      reputationDetailsDialog.close();
+    });
+
+    document.querySelector("#save-skills").addEventListener("click", () => {
+      try {
+        localStorage.setItem(SKILLS_STORAGE_KEY, JSON.stringify(editedSkills));
+        savedSkills = [...editedSkills];
+        renderSkills(profileSkillList, savedSkills, false);
+        skillsEditorDialog.close();
+      } catch (error) {
+        skillsEditorError.textContent = "No se pudieron guardar las habilidades. Verifica el almacenamiento del navegador e inténtalo de nuevo.";
+        skillsEditorError.hidden = false;
+        console.error("No fue posible guardar las habilidades.", error);
+      }
+    });
+
+    document.querySelector("#open-profile-editor").addEventListener("click", () => {
+      try {
+        const currentProfile = getProfileValues();
+        Object.entries(profileFields).forEach(([key, input]) => {
+          input.value = currentProfile[key];
+        });
+        profileEditorError.hidden = true;
+        profileEditorDialog.showModal();
+        profileFields.firstName.focus();
+      } catch (error) {
+        profileEditorError.textContent = "No se pudo abrir el editor de perfil.";
+        profileEditorError.hidden = false;
+        console.error("No fue posible preparar la edición del perfil.", error);
+      }
+    });
+
+    [document.querySelector("#close-profile-editor"), document.querySelector("#cancel-profile-edit")].forEach((button) => {
+      button.addEventListener("click", () => profileEditorDialog.close());
+    });
+
+    profileEditorForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!profileEditorForm.reportValidity()) return;
+
+      const updatedProfile = Object.fromEntries(
+        Object.entries(profileFields).map(([key, input]) => [key, input.value.trim()])
+      );
+      if (Object.values(updatedProfile).some((value) => !value)) return;
+
+      try {
+        localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(updatedProfile));
+        applyProfileValues(updatedProfile);
+        profileEditorDialog.close();
+      } catch (error) {
+        profileEditorError.textContent = "No se pudieron guardar los cambios. Verifica el almacenamiento del navegador e inténtalo de nuevo.";
+        profileEditorError.hidden = false;
+        console.error("No fue posible guardar los cambios del perfil.", error);
+      }
+    });
+
+    try {
+      loadSavedProfile();
+    } catch (error) {
+      console.error("No fue posible cargar el perfil guardado.", error);
+    }
+    try {
+      loadSavedSkills();
+    } catch (error) {
+      console.error("No fue posible cargar las habilidades guardadas.", error);
+    }
+  </script>
 </body>
 </html>

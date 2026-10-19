@@ -64,6 +64,7 @@
           <div class="assignment-card__actions" id="assignment-actions">
             <button type="button" class="assignment-button assignment-button--reject" id="reject-assignment">Rechazar</button>
             <button type="button" class="assignment-button assignment-button--accept" id="accept-assignment">Aceptar asignación</button>
+            <button type="button" class="assignment-button assignment-button--details" id="view-assignment-details">Ver detalles</button>
           </div>
         </div>
       </section>
@@ -120,6 +121,50 @@
     </div>
   </dialog>
 
+  <dialog class="assignment-details-dialog" id="assignment-details-dialog" aria-labelledby="assignment-details-title">
+    <div class="assignment-details-dialog__content">
+      <button class="assignment-details-dialog__close" type="button" id="close-assignment-details" aria-label="Cerrar detalles">×</button>
+      <span class="assignment-details-dialog__icon" aria-hidden="true">🎪</span>
+      <p class="assignment-details-dialog__eyebrow">Eventos Nova · Evento</p>
+      <h2 id="assignment-details-title">Auxiliares Logísticos – Concierto Internacional</h2>
+      <div class="assignment-details-dialog__facts">
+        <p><strong>Fecha</strong><span>30 Sep 2026</span></p>
+        <p><strong>Horario</strong><span>10:00 – 22:00</span></p>
+        <p><strong>Ubicación</strong><span>Bogotá, El Campín</span></p>
+        <p><strong>Remuneración</strong><span>$95.000 COP</span></p>
+        <p><strong>Plazas disponibles</strong><span>10 de 25</span></p>
+      </div>
+      <section>
+        <h3>Descripción del cargo</h3>
+        <p>Apoyo en la logística general del concierto, control de accesos, manejo de materiales escénicos y soporte a producción.</p>
+      </section>
+      <section>
+        <h3>Requisitos</h3>
+        <ul>
+          <li>Experiencia en eventos masivos.</li>
+          <li>Capacidad para trabajar bajo presión.</li>
+          <li>Disponibilidad de 10:00 a 22:00.</li>
+          <li>Curso de primeros auxilios deseable.</li>
+        </ul>
+      </section>
+      <button class="assignment-details-dialog__done" type="button" id="dismiss-assignment-details">Cerrar</button>
+    </div>
+  </dialog>
+
+  <dialog class="application-summary-dialog" id="application-summary-dialog" aria-labelledby="application-summary-title">
+    <div class="application-summary-dialog__content">
+      <button class="assignment-details-dialog__close" type="button" id="close-application-summary" aria-label="Cerrar resumen">×</button>
+      <span class="assignment-details-dialog__icon" aria-hidden="true">📋</span>
+      <p class="application-summary-dialog__eyebrow">Resumen de postulación</p>
+      <h2 id="application-summary-title"></h2>
+      <p class="application-summary-dialog__company" id="application-summary-company"></p>
+      <span class="application-summary-dialog__status" id="application-summary-status"></span>
+      <div class="application-summary-dialog__facts" id="application-summary-facts"></div>
+      <p class="application-summary-dialog__note" id="application-summary-note"></p>
+      <button class="assignment-details-dialog__done" type="button" id="dismiss-application-summary">Cerrar</button>
+    </div>
+  </dialog>
+
   <script>
     const filterButtons = [...document.querySelectorAll(".application-filter")];
     const APPLICATIONS_STORAGE_KEY = "smart-logistics:worker-applications";
@@ -129,11 +174,33 @@
     const assignmentTitle = document.querySelector("#assignment-title");
     const assignmentMessage = document.querySelector("#assignment-message");
     const assignmentActions = document.querySelector("#assignment-actions");
+    const assignmentCard = document.querySelector("#assignment-card");
+    const assignmentDetailsDialog = document.querySelector("#assignment-details-dialog");
+    const applicationSummaryDialog = document.querySelector("#application-summary-dialog");
+    const applicationSummaryTitle = document.querySelector("#application-summary-title");
+    const applicationSummaryCompany = document.querySelector("#application-summary-company");
+    const applicationSummaryStatus = document.querySelector("#application-summary-status");
+    const applicationSummaryFacts = document.querySelector("#application-summary-facts");
+    const applicationSummaryNote = document.querySelector("#application-summary-note");
     const cancelApplicationDialog = document.querySelector("#cancel-application-dialog");
     const cancelApplicationName = document.querySelector("#cancel-application-name");
     const confirmCancelApplicationButton = document.querySelector("#confirm-cancel-application");
     let applicationToCancel = null;
     let activeStatus = "all";
+
+    function getDirectAssignment() {
+      return {
+        id: "asignacion-directa-concierto",
+        title: "Auxiliares Logísticos – Concierto Internacional",
+        company: "Eventos Nova",
+        date: "🗓️ 30 Sep 2026",
+        location: "📍 Bogotá, El Campín",
+        hours: "◷ 10:00 – 22:00",
+        pay: "$95.000 COP",
+        status: "selected",
+        appliedAt: new Date().toISOString()
+      };
+    }
 
     function readApplications() {
       const storedApplications = localStorage.getItem(APPLICATIONS_STORAGE_KEY);
@@ -151,6 +218,46 @@
       element.className = className;
       element.textContent = text;
       return element;
+    }
+
+    function addApplicationDetailsButton(card) {
+      const status = card.querySelector(":scope > .application-status");
+      if (!status || card.querySelector(".application-details-button")) return;
+
+      const actions = document.createElement("div");
+      actions.className = "application-card__status-actions";
+      status.replaceWith(actions);
+      actions.append(status);
+
+      const detailsButton = createTextElement("button", "application-details-button", "Ver detalles de postulación");
+      detailsButton.type = "button";
+      actions.append(detailsButton);
+    }
+
+    function showApplicationSummary(card) {
+      applicationSummaryTitle.textContent = card.querySelector(".application-card__body h2").textContent.trim();
+      applicationSummaryCompany.textContent = card.querySelector(".application-card__company").textContent.trim();
+      applicationSummaryStatus.textContent = card.querySelector(".application-status").textContent.trim();
+      applicationSummaryStatus.className = `application-summary-dialog__status application-summary-dialog__status--${card.dataset.status}`;
+      applicationSummaryFacts.replaceChildren();
+      const meta = [...card.querySelectorAll(".application-card__meta span")].map((item) => item.textContent.trim());
+      const facts = [
+        ["Fecha", meta[0] || "No disponible"],
+        ["Ubicación", meta[1] || "No disponible"],
+        ["Horario", meta[2] || "No disponible"],
+        ["Remuneración", card.querySelector(".application-card__pay").textContent.trim()]
+      ];
+      facts.forEach(([label, value]) => {
+        const row = document.createElement("p");
+        row.append(
+          createTextElement("strong", "", label),
+          createTextElement("span", "", value)
+        );
+        applicationSummaryFacts.append(row);
+      });
+      const note = card.querySelector(".application-card__note");
+      applicationSummaryNote.textContent = note ? note.textContent.trim() : "";
+      applicationSummaryDialog.showModal();
     }
 
     function createApplicationCard(application) {
@@ -172,8 +279,10 @@
         },
         rejected: {
           icon: "✖",
-          label: "● No seleccionado",
-          note: "No fuiste seleccionado en esta oportunidad. ¡Sigue intentando!"
+          label: application.id === "asignacion-directa-concierto" ? "● Rechazado" : "● No seleccionado",
+          note: application.id === "asignacion-directa-concierto"
+            ? "Rechazaste esta asignación directa."
+            : "No fuiste seleccionado en esta oportunidad. ¡Sigue intentando!"
         }
       }[application.status];
       if (!statusDetails) throw new Error("La postulación tiene un estado no válido.");
@@ -202,6 +311,7 @@
         createTextElement("span", `application-status application-status--${application.status}`, statusDetails.label),
         createTextElement("p", "application-card__note", statusDetails.note)
       );
+      addApplicationDetailsButton(card);
       if (application.status === "review") {
         const cancelButton = createTextElement("button", "application-cancel-button", "Cancelar postulación");
         cancelButton.type = "button";
@@ -227,7 +337,11 @@
         });
         applicationList.append(createApplicationCard(application));
       });
+      if (applications.some((application) => application.id === "asignacion-directa-concierto")) {
+        assignmentCard.hidden = true;
+      }
       applicationCards = [...applicationList.querySelectorAll(".application-card")];
+      applicationCards.forEach(addApplicationDetailsButton);
       applicationCount.textContent = `${applicationCards.length} ${applicationCards.length === 1 ? "postulación" : "postulaciones"} en total`;
     }
 
@@ -268,9 +382,29 @@
       });
     });
 
+    applicationList.addEventListener("click", (event) => {
+      if (!(event.target instanceof Element)) return;
+      const detailsButton = event.target.closest(".application-details-button");
+      if (!detailsButton) return;
+      const card = detailsButton.closest(".application-card");
+      if (card) showApplicationSummary(card);
+    });
+
     document.querySelector("#keep-application").addEventListener("click", () => {
       applicationToCancel = null;
       cancelApplicationDialog.close();
+    });
+
+    document.querySelector("#view-assignment-details").addEventListener("click", () => {
+      assignmentDetailsDialog.showModal();
+    });
+
+    [document.querySelector("#close-assignment-details"), document.querySelector("#dismiss-assignment-details")].forEach((button) => {
+      button.addEventListener("click", () => assignmentDetailsDialog.close());
+    });
+
+    [document.querySelector("#close-application-summary"), document.querySelector("#dismiss-application-summary")].forEach((button) => {
+      button.addEventListener("click", () => applicationSummaryDialog.close());
     });
 
     confirmCancelApplicationButton.addEventListener("click", () => {
@@ -294,31 +428,43 @@
     });
 
     document.querySelector("#accept-assignment").addEventListener("click", () => {
-      assignmentTitle.textContent = "Asignación directa aceptada";
-      assignmentMessage.textContent = "Has aceptado la asignación directa de Eventos Nova.";
-      assignmentActions.hidden = true;
-      if (!applicationList.querySelector('[data-offer-id="asignacion-directa-concierto"]')) {
-        applicationList.append(createApplicationCard({
-          id: "asignacion-directa-concierto",
-          title: "Auxiliares Logísticos – Concierto Internacional",
-          company: "Eventos Nova",
-          date: "🗓️ 30 Sep 2026",
-          location: "📍 Bogotá, El Campín",
-          hours: "◷ 10:00 – 22:00",
-          pay: "$95.000 COP",
-          status: "selected"
-        }));
-        applicationCards = [...applicationList.querySelectorAll(".application-card")];
-        applicationCount.textContent = `${applicationCards.length} ${applicationCards.length === 1 ? "postulación" : "postulaciones"} en total`;
-        updateFilterCounts();
-        updateVisibleApplications();
+      try {
+        const applications = readApplications();
+        if (!applications.some((application) => application.id === "asignacion-directa-concierto")) {
+          applications.push(getDirectAssignment());
+          localStorage.setItem(APPLICATIONS_STORAGE_KEY, JSON.stringify(applications));
+          applicationList.append(createApplicationCard(applications[applications.length - 1]));
+          applicationCards = [...applicationList.querySelectorAll(".application-card")];
+          applicationCount.textContent = `${applicationCards.length} ${applicationCards.length === 1 ? "postulación" : "postulaciones"} en total`;
+          updateFilterCounts();
+          updateVisibleApplications();
+        }
+        assignmentCard.hidden = true;
+      } catch (error) {
+        assignmentMessage.textContent = "No se pudo aceptar la asignación. Inténtalo de nuevo.";
+        console.error("No fue posible aceptar la asignación directa.", error);
       }
     });
 
     document.querySelector("#reject-assignment").addEventListener("click", () => {
-      assignmentTitle.textContent = "Asignación directa rechazada";
-      assignmentMessage.textContent = "Has rechazado la asignación directa de Eventos Nova.";
-      assignmentActions.hidden = true;
+      try {
+        const applications = readApplications();
+        if (!applications.some((application) => application.id === "asignacion-directa-concierto")) {
+          const rejectedAssignment = getDirectAssignment();
+          rejectedAssignment.status = "rejected";
+          applications.push(rejectedAssignment);
+          localStorage.setItem(APPLICATIONS_STORAGE_KEY, JSON.stringify(applications));
+          applicationList.append(createApplicationCard(rejectedAssignment));
+          applicationCards = [...applicationList.querySelectorAll(".application-card")];
+          applicationCount.textContent = `${applicationCards.length} ${applicationCards.length === 1 ? "postulación" : "postulaciones"} en total`;
+          updateFilterCounts();
+          updateVisibleApplications();
+        }
+        assignmentCard.hidden = true;
+      } catch (error) {
+        assignmentMessage.textContent = "No se pudo rechazar la asignación. Inténtalo de nuevo.";
+        console.error("No fue posible rechazar la asignación directa.", error);
+      }
     });
 
     try {
