@@ -77,6 +77,23 @@ select {
   color: inherit;
 }
 
+/* El atributo hidden siempre oculta, aunque el componente defina display */
+[hidden] {
+  display: none !important;
+}
+
+/* Oculta visualmente pero mantiene el texto para lectores de pantalla */
+.visually-hidden {
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
 :focus-visible {
   outline: 2px solid var(--blue-400);
   outline-offset: 2px;
@@ -231,4 +248,247 @@ select {
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+/* =========================================================
+   Accesibilidad
+   ========================================================= */
+
+/* Enlace "Saltar al contenido": invisible hasta recibir el foco con Tab */
+.skip-link {
+  display: block;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link:focus {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 12px 16px;
+  clip-path: none;
+  background: var(--blue-600);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* El contenido principal recibe el foco del enlace de salto sin mostrar contorno */
+main[tabindex="-1"]:focus {
+  outline: none;
+}
+
+/* Widget flotante: los elementos popover viven en la capa superior del navegador,
+   así que basta con ubicarlos con margin (sin position). */
+.a11y-launcher {
+  margin: auto 20px 20px auto;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+}
+
+.a11y-launcher__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  background: var(--blue-600);
+  box-shadow: 0 6px 16px rgba(13, 27, 53, 0.35);
+  color: var(--white);
+  font-size: 26px;
+  cursor: pointer;
+  transition: transform 0.15s, background-color 0.15s;
+}
+
+.a11y-launcher__button:hover {
+  background: var(--blue-700);
+  transform: scale(1.05);
+}
+
+.a11y-panel {
+  width: min(320px, calc(100vw - 40px));
+  margin: auto 20px 84px auto;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: 0 25px 50px rgba(15, 23, 43, 0.3);
+  color: #0f172b;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.a11y-panel:popover-open,
+.a11y-panel:not([popover]):not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.a11y-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.a11y-panel__header h2 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.a11y-panel__close {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: #62748e;
+  cursor: pointer;
+}
+
+.a11y-panel__close:hover {
+  background: #f1f5f9;
+}
+
+.a11y-panel__text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #314158;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.a11y-panel__stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.a11y-panel__stepper button {
+  min-width: 44px;
+  height: 36px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #0f172b;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.a11y-panel__stepper button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.a11y-panel__stepper output {
+  min-width: 44px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.a11y-panel__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.a11y-panel__toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-height: 64px;
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #314158;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.a11y-panel__toggle span {
+  font-size: 18px;
+}
+
+.a11y-panel__toggle[aria-pressed="true"] {
+  border-color: var(--blue-600);
+  background: #dbeafe;
+  color: var(--blue-700);
+}
+
+.a11y-panel__reset {
+  min-height: 40px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: var(--white);
+  color: #314158;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.a11y-panel__reset:hover,
+.a11y-panel__toggle:hover {
+  border-color: var(--blue-400);
+}
+
+/* Preferencias aplicadas por el widget */
+html.a11y-contrast body {
+  filter: contrast(1.35) saturate(1.15);
+}
+
+html.a11y-gray body {
+  filter: grayscale(1);
+}
+
+html.a11y-contrast.a11y-gray body {
+  filter: contrast(1.35) grayscale(1);
+}
+
+html.a11y-links a {
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 3px !important;
+}
+
+html.a11y-spacing body {
+  letter-spacing: 0.06em;
+  word-spacing: 0.16em;
+}
+
+html.a11y-spacing p,
+html.a11y-spacing li {
+  line-height: 1.6 !important;
+}
+
+html.a11y-motion *,
+html.a11y-motion *::before,
+html.a11y-motion *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
