@@ -16,6 +16,11 @@
 }
 
 /* ---------- Header ---------- */
+/* En escritorio el contenedor del menú no altera el layout de la cabecera */
+.header__menu {
+  display: contents;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -552,8 +557,44 @@
    Responsive
    ========================================================= */
 @media (max-width: 1024px) {
-  .nav {
+  /* Cabecera: logo + botón hamburguesa; navegación y accesos se despliegan debajo */
+  .header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .header__toggle {
+    display: flex;
+  }
+
+  .header__menu {
     display: none;
+    grid-column: 1 / -1;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 0 8px;
+  }
+
+  .header__menu.is-open {
+    display: flex;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+  }
+
+  .nav__link {
+    padding: 12px 16px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .header__actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
   }
 
   .hero__grid {
@@ -590,13 +631,6 @@
     padding-right: 16px;
   }
 
-  .header__actions {
-    gap: 4px;
-  }
-
-  .header__actions .btn {
-    padding: 8px 10px;
-  }
 
   .hero {
     padding-top: 48px;
