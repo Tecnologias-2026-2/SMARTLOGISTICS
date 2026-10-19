@@ -8,13 +8,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/trabajador.css">
+  <link rel="stylesheet" href="../css/app.css">
   <link rel="stylesheet" href="../css/empresa-inicio.css">
+  <script src="../js/accesibilidad.js" defer></script>
 </head>
 <body class="worker-dashboard">
+  <a class="skip-link" href="#inicio">Saltar al contenido principal</a>
   <div class="dashboard">
     <aside class="sidebar">
-      <a href="inicio-empresa.html" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
+      <a href="inicio.html" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
         <span class="logo__mark" aria-hidden="true">SL</span>
         <span class="logo__text" aria-hidden="true">
           <span class="logo__title">SMART</span>
@@ -22,7 +24,7 @@
         </span>
       </a>
 
-      <a href="perfil-empresa.html" class="sidebar__profile">
+      <a href="perfil.html" class="sidebar__profile">
         <span class="sidebar__avatar" aria-hidden="true">🏢</span>
         <span class="sidebar__identity">
           <strong>Eventos Nova</strong>
@@ -31,20 +33,20 @@
       </a>
 
       <nav class="sidebar__nav" aria-label="Navegación de la empresa">
-        <a class="sidebar__link sidebar__link--active" href="inicio-empresa.html" aria-current="page"><span aria-hidden="true">🏠</span>Inicio</a>
-        <a class="sidebar__link" href="convocatorias-empresa.html"><span aria-hidden="true">📣</span>Convocatorias</a>
-        <a class="sidebar__link" href="crear-convocatoria-empresa.html"><span aria-hidden="true">➕</span>Crear</a>
-        <a class="sidebar__link" href="candidatos-empresa.html"><span aria-hidden="true">👥</span>Candidatos</a>
-        <a class="sidebar__link" href="perfil-empresa.html"><span aria-hidden="true">🏢</span>Empresa</a>
+        <a class="sidebar__link sidebar__link--active" href="inicio.html" aria-current="page"><span aria-hidden="true">🏠</span>Inicio</a>
+        <a class="sidebar__link" href="convocatorias.html"><span aria-hidden="true">📣</span>Convocatorias</a>
+        <a class="sidebar__link" href="crear-convocatoria.html"><span aria-hidden="true">➕</span>Crear</a>
+        <a class="sidebar__link" href="candidatos.html"><span aria-hidden="true">👥</span>Candidatos</a>
+        <a class="sidebar__link" href="perfil.html"><span aria-hidden="true">🏢</span>Empresa</a>
       </nav>
 
       <div class="sidebar__footer">
-        <span class="session-pill"><span aria-hidden="true">•</span> Sesión de empresa</span>
-        <a class="sidebar__link sidebar__logout" href="login-empresa.html"><span aria-hidden="true">📜</span>Cerrar sesión</a>
+        <span class="session-pill session-pill--empresa"><span aria-hidden="true">•</span> Sesión de empresa</span>
+        <a class="sidebar__link sidebar__logout" href="../auth/login-empresa.html"><span aria-hidden="true">🚪</span>Cerrar sesión</a>
       </div>
     </aside>
 
-    <main class="dashboard__main company-dashboard" id="inicio">
+    <main class="dashboard__main company-dashboard" id="inicio" tabindex="-1">
       <header class="business-welcome">
         <div>
           <div class="business-welcome__eyebrow">
@@ -54,8 +56,8 @@
           <h1>Eventos Nova</h1>
           <p class="business-welcome__meta">Empresa de eventos · Bogotá, Colombia</p>
           <div class="business-welcome__actions">
-            <a class="business-primary-action" href="crear-convocatoria-empresa.html"><span aria-hidden="true">＋</span> Nueva convocatoria</a>
-            <a class="business-secondary-action" href="#candidatos">Ver candidatos</a>
+            <a class="business-primary-action" href="crear-convocatoria.html"><span aria-hidden="true">＋</span> Nueva convocatoria</a>
+            <a class="business-secondary-action" href="candidatos.html">Ver candidatos</a>
           </div>
         </div>
         <div class="business-rating" aria-label="Valoración de empresa: 4.7 de 5">
@@ -87,7 +89,7 @@
         <section class="business-section" id="convocatorias" aria-labelledby="recent-jobs-heading">
           <div class="business-section__heading">
             <h2 id="recent-jobs-heading">Convocatorias recientes</h2>
-            <a href="convocatorias-empresa.html">Ver todas <span aria-hidden="true">→</span></a>
+            <a href="convocatorias.html">Ver todas <span aria-hidden="true">→</span></a>
           </div>
           <ul class="business-job-list">
             <li class="business-job-card" id="crear">
@@ -129,7 +131,7 @@
         <section class="business-section" id="candidatos" aria-labelledby="recent-candidates-heading">
           <div class="business-section__heading">
             <h2 id="recent-candidates-heading">Candidatos recientes</h2>
-            <a href="candidatos-empresa.html">Ver todos <span aria-hidden="true">→</span></a>
+            <a href="candidatos.html">Ver todos <span aria-hidden="true">→</span></a>
           </div>
           <ul class="business-candidate-list">
             <li class="business-candidate">

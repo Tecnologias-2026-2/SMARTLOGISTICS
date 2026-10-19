@@ -1,48 +1,48 @@
 .company-main {
-  gap: 13px;
-  padding: 22px;
+  gap: 20px;
+  padding: 34px;
 }
 
 .company-page-header h1 {
   color: #17233b;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 700;
-  line-height: 19px;
+  line-height: 28px;
 }
 
 .company-page-header p {
   margin-top: 2px;
   color: #8293ad;
-  font-size: 10px;
-  line-height: 14px;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .company-hero,
 .company-panel {
   border: 1px solid #e1e7ef;
-  border-radius: 10px;
+  border-radius: 16px;
   background: #fff;
   box-shadow: 0 1px 1px rgba(15, 23, 43, 0.08);
 }
 
 .company-hero {
   display: flex;
-  min-height: 113px;
+  min-height: 174px;
   align-items: flex-start;
-  gap: 14px;
-  padding: 14px;
+  gap: 22px;
+  padding: 22px;
 }
 
 .company-logo {
   display: grid;
-  flex: 0 0 57px;
-  width: 57px;
-  height: 57px;
+  flex: 0 0 88px;
+  width: 88px;
+  height: 88px;
   place-items: center;
-  border-radius: 11px;
+  border-radius: 16px;
   background: #155dfc;
-  box-shadow: 0 4px 7px rgba(15, 23, 43, 0.2);
-  font-size: 22px;
+  box-shadow: 0 6px 10px rgba(15, 23, 43, 0.2);
+  font-size: 36px;
 }
 
 .company-hero__body {
@@ -52,41 +52,41 @@
 
 .company-hero__body h2 {
   color: #17233b;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 700;
-  line-height: 19px;
+  line-height: 28px;
 }
 
 .company-hero__type,
 .company-hero__location {
   color: #8293ad;
-  font-size: 10px;
-  line-height: 14px;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .company-hero__location {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 7px;
-  margin-top: 5px;
+  gap: 10px;
+  margin-top: 8px;
 }
 
 .company-verified {
-  padding: 2px 7px;
+  padding: 2px 10px;
   border: 1px solid #c9ddff;
-  border-radius: 99px;
+  border-radius: 152px;
   background: #f0f6ff;
   color: #155dfc;
-  font-size: 8px;
-  line-height: 11px;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .company-hero__description {
-  margin-top: 9px;
+  margin-top: 14px;
   color: #7588a3;
-  font-size: 9px;
-  line-height: 13px;
+  font-size: 14px;
+  line-height: 22.8px;
 }
 
 .company-rating {
@@ -99,8 +99,8 @@
 
 .company-rating strong {
   color: #17233b;
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 20px;
+  line-height: 28px;
 }
 
 .company-rating strong span {
@@ -109,24 +109,24 @@
 
 .company-rating > span {
   color: #91a1b9;
-  font-size: 8px;
+  font-size: 12px;
 }
 
 .company-metrics {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 11px;
+  gap: 16px;
 }
 
 .company-metric {
   display: flex;
-  min-height: 80px;
+  min-height: 124px;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 8px;
-  padding: 13px 14px;
-  border-radius: 10px;
-  box-shadow: 0 4px 7px rgba(15, 23, 43, 0.2);
+  gap: 12px;
+  padding: 20px 22px;
+  border-radius: 16px;
+  box-shadow: 0 6px 10px rgba(15, 23, 43, 0.2);
   color: #fff;
 }
 
@@ -147,100 +147,100 @@
 }
 
 .company-metric p {
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   color: rgba(255, 255, 255, 0.82);
-  font-size: 9px;
-  line-height: 12px;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .company-metric strong {
-  font-size: 21px;
+  font-size: 30px;
   font-weight: 700;
-  line-height: 25px;
+  line-height: 36px;
 }
 
 .company-metric > span {
   display: grid;
-  flex: 0 0 28px;
-  width: 28px;
-  height: 28px;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
   place-items: center;
-  border-radius: 6px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.2);
-  font-size: 13px;
+  font-size: 20px;
 }
 
 .company-panel {
-  padding: 14px;
+  padding: 22px;
 }
 
 .company-panel h2 {
   color: #17233b;
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 700;
-  line-height: 15px;
+  line-height: 24px;
 }
 
 .company-contact {
-  min-height: 186px;
+  min-height: 286px;
 }
 
 .company-contact__list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 12px;
+  margin-top: 16px;
 }
 
 .company-contact__list > div {
   display: grid;
-  grid-template-columns: 17px minmax(0, 1fr);
-  column-gap: 8px;
+  grid-template-columns: 26px minmax(0, 1fr);
+  column-gap: 12px;
 }
 
 .company-contact__list dt {
   display: contents;
   color: #91a1b9;
-  font-size: 8px;
-  line-height: 11px;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .company-contact__list dt > span {
   grid-row: span 2;
   padding-top: 2px;
-  font-size: 9px;
+  font-size: 16px;
 }
 
 .company-contact__list dd {
   grid-column: 2;
   color: #17233b;
-  font-size: 9px;
-  line-height: 13px;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .company-panel__heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 18px;
 }
 
 .company-panel__heading a {
   color: #155dfc;
-  font-size: 9px;
+  font-size: 14px;
 }
 
 .company-opportunity-list {
-  margin-top: 8px;
+  margin-top: 12px;
   list-style: none;
 }
 
 .company-opportunity-list li {
   display: flex;
-  min-height: 45px;
+  min-height: 70px;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 18px;
   border-bottom: 1px solid #edf1f6;
 }
 
@@ -258,57 +258,57 @@
 .company-opportunity-list strong {
   overflow: hidden;
   color: #17233b;
-  font-size: 9px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 12px;
+  line-height: 20px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .company-opportunity-list li > div > span {
   color: #91a1b9;
-  font-size: 8px;
-  line-height: 11px;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .company-status {
   flex: 0 0 auto;
-  padding: 2px 7px;
-  border-radius: 99px;
+  padding: 2px 10px;
+  border-radius: 152px;
   background: #dbeafe;
   color: #155dfc;
-  font-size: 8px;
-  line-height: 12px;
+  font-size: 12px;
+  line-height: 18px;
 }
 
 .company-status span {
-  font-size: 10px;
+  font-size: 15px;
 }
 
 .company-verification {
-  padding: 11px 13px;
+  padding: 16px 20px;
   border: 1px solid #c9ddff;
-  border-radius: 9px;
+  border-radius: 14px;
   background: #eff6ff;
   color: #155dfc;
 }
 
 .company-verification strong {
-  font-size: 9px;
-  line-height: 12px;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .company-verification strong span {
-  margin-right: 6px;
+  margin-right: 10px;
 }
 
 .company-verification p {
-  margin: 3px 0 0 19px;
-  font-size: 8px;
-  line-height: 12px;
+  margin: 5px 0 0 30px;
+  font-size: 12px;
+  line-height: 19.5px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1230px) {
   .company-metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -319,29 +319,29 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 984px) {
   .company-main {
-    gap: 12px;
-    padding: 14px;
+    gap: 18px;
+    padding: 22px;
   }
 
   .company-hero {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
-    padding: 12px;
+    gap: 16px;
+    padding: 18px;
   }
 
   .company-logo {
-    flex-basis: 46px;
-    width: 46px;
-    height: 46px;
-    font-size: 18px;
+    flex-basis: 70px;
+    width: 70px;
+    height: 70px;
+    font-size: 28px;
   }
 
   .company-hero__description {
-    margin-top: 7px;
+    margin-top: 10px;
   }
 
   .company-rating {
@@ -351,22 +351,22 @@
 
   .company-metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 9px;
+    gap: 14px;
   }
 
   .company-metric {
-    min-height: 78px;
-    padding: 10px 11px;
+    min-height: 120px;
+    padding: 16px 16px;
   }
 
   .company-contact__list > div {
-    column-gap: 6px;
+    column-gap: 10px;
   }
 
   .company-opportunity-list li {
     flex-direction: column;
     align-items: flex-start;
-    padding: 10px 0;
+    padding: 16px 0;
   }
 
   .company-opportunity-list li > div {
@@ -378,17 +378,17 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 646px) {
   .company-main {
-    padding: 10px;
+    padding: 16px;
   }
 
   .company-page-header h1 {
-    font-size: 16px;
+    font-size: 24px;
   }
 
   .company-page-header p {
-    font-size: 9px;
+    font-size: 14px;
   }
 
   .company-metrics {
@@ -396,19 +396,19 @@
   }
 
   .company-metric strong {
-    font-size: 18px;
+    font-size: 28px;
   }
 
   .company-panel {
-    padding: 12px;
+    padding: 18px;
   }
 
   .company-panel__heading h2 {
-    font-size: 12px;
+    font-size: 18px;
   }
 
   .company-panel__heading a {
-    font-size: 8px;
+    font-size: 12px;
   }
 
   .company-opportunity-list strong {
@@ -416,18 +416,22 @@
   }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 584px) {
   .company-metric {
-    min-height: 72px;
-    padding: 10px;
+    min-height: 110px;
+    padding: 16px;
   }
 
   .company-opportunity-list li {
     align-items: flex-start;
-    padding: 9px 0;
+    padding: 14px 0;
   }
 
   .company-opportunity-list strong {
     white-space: normal;
   }
+}
+
+.company-hero__location {
+  font-size: 14px;
 }

@@ -1,0 +1,293 @@
+/* =========================================================
+   Empresa · Crear y editar convocatoria
+   (Figma: "Crear Convocatoria" 58:1166 y "Editar Convocatoria" 58:294)
+   Requiere base.css y app.css. Layout: Flexbox y Grid
+   ========================================================= */
+
+.posting-main {
+  gap: 0;
+}
+
+.posting {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 672px;
+}
+
+.posting-back {
+  align-self: flex-start;
+  color: #62748e;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.posting-back:hover {
+  color: #155dfc;
+}
+
+.posting-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.posting-header h1 {
+  color: #0f172b;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.posting-header p {
+  margin-top: 2px;
+  color: #62748e;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.posting-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.posting-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.posting-card h2 {
+  color: #0f172b;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.posting-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.posting-field label {
+  color: #314158;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.posting-field .req {
+  color: #fb2c36;
+}
+
+.posting-field .optional {
+  color: #90a1b9;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.posting-field input,
+.posting-field select,
+.posting-field textarea {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  color: #0f172b;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.posting-field select {
+  padding-right: 32px;
+  background: #fff url("../assets/chevron-down-dark.svg") no-repeat right 12px center / 10px 6px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.posting-field textarea {
+  min-height: 102px;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.posting-field textarea#requirements {
+  min-height: 82px;
+}
+
+.posting-field input::placeholder,
+.posting-field textarea::placeholder {
+  color: #90a1b9;
+}
+
+.posting-field input:focus,
+.posting-field select:focus,
+.posting-field textarea:focus {
+  border-color: #155dfc;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(21, 93, 252, 0.12);
+}
+
+.posting-field [aria-invalid="true"] {
+  border-color: #fb2c36;
+}
+
+.posting-field__error {
+  color: #c10007;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.posting-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.posting-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.posting-actions__cancel {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #314158;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.posting-actions__cancel:hover {
+  background: #e2e8f0;
+}
+
+.posting-actions__submit {
+  flex: 1;
+}
+
+/* ---------- Vista de edición (filas con botón Editar) ---------- */
+.detail-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 4px 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.detail-row:first-child {
+  padding-top: 0;
+}
+
+.detail-row:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.detail-row__label {
+  color: #90a1b9;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.detail-row__value {
+  grid-column: 1;
+  color: #0f172b;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.detail-row__value--pay {
+  color: #155dfc;
+  font-weight: 700;
+}
+
+.detail-row__value ul {
+  padding-left: 18px;
+}
+
+.detail-row__edit {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  align-self: center;
+  padding: 4px 6px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: #155dfc;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.detail-row__edit:hover {
+  background: #eff6ff;
+}
+
+.detail-row .posting-field {
+  grid-column: 1 / -1;
+}
+
+.tag {
+  display: inline-flex;
+  padding: 2px 8px;
+  border: 1px solid #bedbff;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1447e6;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 640px) {
+  .posting-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .posting-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .posting-actions__cancel {
+    justify-content: center;
+  }
+}
+
+.posting-field__hint {
+  color: #62748e;
+  font-size: 12px;
+  line-height: 16px;
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear convocatoria · Smart Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/app.css">
+  <link rel="stylesheet" href="../css/empresa-crear-convocatoria.css">
+  <script src="../js/accesibilidad.js" defer></script>
+</head>
+<body class="worker-dashboard">
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <a href="inicio.html" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
+        <span class="logo__mark" aria-hidden="true">SL</span>
+        <span class="logo__text" aria-hidden="true">
+          <span class="logo__title">SMART</span>
+          <span class="logo__subtitle">LOGISTICS</span>
+        </span>
+      </a>
+
+      <a href="perfil.html" class="sidebar__profile">
+        <span class="sidebar__avatar" aria-hidden="true">🏢</span>
+        <span class="sidebar__identity">
+          <strong>Eventos Nova</strong>
+          <span>Coordinador de empresa</span>
+        </span>
+      </a>
+
+      <nav class="sidebar__nav" aria-label="Navegación de la empresa">
+        <a class="sidebar__link" href="inicio.html"><span aria-hidden="true">🏠</span>Inicio</a>
+        <a class="sidebar__link" href="convocatorias.html"><span aria-hidden="true">📣</span>Convocatorias</a>
+        <a class="sidebar__link sidebar__link--active" href="crear-convocatoria.html" aria-current="page"><span aria-hidden="true">➕</span>Crear</a>
+        <a class="sidebar__link" href="candidatos.html"><span aria-hidden="true">👥</span>Candidatos</a>
+        <a class="sidebar__link" href="perfil.html"><span aria-hidden="true">🏢</span>Empresa</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <span class="session-pill session-pill--empresa"><span aria-hidden="true">•</span> Sesión de empresa</span>
+        <a class="sidebar__link sidebar__logout" href="../auth/login-empresa.html"><span aria-hidden="true">🚪</span>Cerrar sesión</a>
+      </div>
+    </aside>
+
+    <main class="dashboard__main posting-main" id="contenido" tabindex="-1">
+      <div class="posting">
+        <header class="posting-header">
+          <div>
+            <h1>Crear convocatoria</h1>
+            <p>Publica una nueva necesidad de personal logístico</p>
+          </div>
+        </header>
+
+        <form class="posting-form" id="create-posting-form" novalidate>
+          <section class="posting-card" aria-labelledby="info-title">
+            <h2 id="info-title">Información del trabajo</h2>
+            <div class="posting-field">
+              <label for="job-title">Cargo / título <span class="req" aria-hidden="true">*</span></label>
+              <input id="job-title" name="job-title" type="text" placeholder="Ej: Auxiliares de Montaje – Feria Tecnológica" required aria-describedby="job-title-error">
+              <p class="posting-field__error" id="job-title-error" hidden></p>
+            </div>
+            <div class="posting-grid">
+            <div class="posting-field">
+              <label for="category">Categoría <span class="req" aria-hidden="true">*</span></label>
+              <select id="category" name="category" required aria-describedby="category-error">
+                <option value="" selected disabled>Selecciona una categoría</option>
+                <option>Evento</option>
+                <option>Almacén</option>
+                <option>Montaje</option>
+                <option>Reparto</option>
+              </select>
+              <p class="posting-field__error" id="category-error" hidden></p>
+            </div>
+            <div class="posting-field">
+              <label for="workers">N.° de trabajadores <span class="req" aria-hidden="true">*</span></label>
+              <input id="workers" name="workers" type="number" placeholder="Ej: 10" required aria-describedby="workers-error" min="1" max="500" step="1" inputmode="numeric">
+              <p class="posting-field__error" id="workers-error" hidden></p>
+            </div>
+            </div>
+            <div class="posting-field">
+              <label for="location">Ubicación <span class="req" aria-hidden="true">*</span></label>
+              <input id="location" name="location" type="text" placeholder="Ej: Bogotá, Corferias" required aria-describedby="location-error">
+              <p class="posting-field__error" id="location-error" hidden></p>
+            </div>
+          </section>
+
+          <section class="posting-card" aria-labelledby="schedule-title">
+            <h2 id="schedule-title">Fecha y horario</h2>
+            <div class="posting-field">
+              <label for="date">Fecha <span class="req" aria-hidden="true">*</span></label>
+              <input id="date" name="date" type="date" required aria-describedby="date-error">
+              <p class="posting-field__error" id="date-error" hidden></p>
+            </div>
+            <div class="posting-grid">
+            <div class="posting-field">
+              <label for="start-time">Hora inicio <span class="req" aria-hidden="true">*</span></label>
+              <input id="start-time" name="start-time" type="time" required aria-describedby="start-time-error">
+              <p class="posting-field__error" id="start-time-error" hidden></p>
+            </div>
+            <div class="posting-field">
+              <label for="end-time">Hora fin <span class="req" aria-hidden="true">*</span></label>
+              <input id="end-time" name="end-time" type="time" required aria-describedby="end-time-error">
+              <p class="posting-field__error" id="end-time-error" hidden></p>
+            </div>
+            </div>
+          </section>
+
+          <section class="posting-card" aria-labelledby="pay-title">
+            <h2 id="pay-title">Remuneración</h2>
+            <div class="posting-field">
+              <label for="salary">Pago por trabajador <span class="req" aria-hidden="true">*</span></label>
+              <input id="salary" name="salary" type="text" placeholder="Ej: $80.000 COP" required aria-describedby="salary-error" inputmode="numeric">
+              <p class="posting-field__error" id="salary-error" hidden></p>
+            </div>
+          </section>
+
+          <section class="posting-card" aria-labelledby="description-title">
+            <h2 id="description-title">Descripción y requisitos</h2>
+            <div class="posting-field">
+              <label for="description">Descripción del trabajo <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="description" name="description" required aria-describedby="description-error" placeholder="Describe las actividades y responsabilidades del puesto..."></textarea>
+              <p class="posting-field__error" id="description-error" hidden></p>
+            </div>
+            <div class="posting-field">
+              <label for="requirements">Requisitos <span class="optional">(opcional)</span></label>
+              <textarea id="requirements" name="requirements" aria-describedby="requirements-error" placeholder="Ej: Experiencia mínima de 1 año, disponibilidad completa..."></textarea>
+              <p class="posting-field__error" id="requirements-error" hidden></p>
+            </div>
+          </section>
+
+          <div class="posting-actions">
+            <a class="posting-actions__cancel" href="convocatorias.html">Cancelar</a>
+            <button class="sl-btn sl-btn--primary sl-btn--lg posting-actions__submit" type="submit">Publicar convocatoria</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="sl-dialog success-dialog" id="published-dialog" aria-labelledby="published-title">
+    <div class="sl-dialog__body">
+      <span class="success-dialog__icon" aria-hidden="true">✓</span>
+      <h2 id="published-title">¡Convocatoria publicada!</h2>
+      <p class="sl-dialog__text">Tu convocatoria está ahora activa y visible para los trabajadores.</p>
+      <div class="success-dialog__summary" id="published-summary"></div>
+      <a class="sl-btn sl-btn--primary" href="convocatorias.html">Ver mis convocatorias</a>
+    </div>
+  </dialog>
+
+  <script src="../js/empresa-crear-convocatoria.js"></script>
+</body>
+</html>
