@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel empresarial · Smart Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/trabajador.css">
+  <link rel="stylesheet" href="../css/empresa-inicio.css">
+</head>
+<body class="worker-dashboard">
+  <div class="dashboard">
+    <aside class="sidebar">
+      <a href="inicio-empresa.html" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
+        <span class="logo__mark" aria-hidden="true">SL</span>
+        <span class="logo__text" aria-hidden="true">
+          <span class="logo__title">SMART</span>
+          <span class="logo__subtitle">LOGISTICS</span>
+        </span>
+      </a>
+
+      <a href="perfil-empresa.html" class="sidebar__profile">
+        <span class="sidebar__avatar" aria-hidden="true">🏢</span>
+        <span class="sidebar__identity">
+          <strong>Eventos Nova</strong>
+          <span>Coordinador de empresa</span>
+        </span>
+      </a>
+
+      <nav class="sidebar__nav" aria-label="Navegación de la empresa">
+        <a class="sidebar__link sidebar__link--active" href="inicio-empresa.html" aria-current="page"><span aria-hidden="true">🏠</span>Inicio</a>
+        <a class="sidebar__link" href="convocatorias-empresa.html"><span aria-hidden="true">📣</span>Convocatorias</a>
+        <a class="sidebar__link" href="crear-convocatoria-empresa.html"><span aria-hidden="true">➕</span>Crear</a>
+        <a class="sidebar__link" href="candidatos-empresa.html"><span aria-hidden="true">👥</span>Candidatos</a>
+        <a class="sidebar__link" href="perfil-empresa.html"><span aria-hidden="true">🏢</span>Empresa</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <span class="session-pill"><span aria-hidden="true">•</span> Sesión de empresa</span>
+        <a class="sidebar__link sidebar__logout" href="login-empresa.html"><span aria-hidden="true">📜</span>Cerrar sesión</a>
+      </div>
+    </aside>
+
+    <main class="dashboard__main company-dashboard" id="inicio">
+      <header class="business-welcome">
+        <div>
+          <div class="business-welcome__eyebrow">
+            <span>Panel empresarial</span>
+            <span class="business-verified"><span aria-hidden="true">✓</span> Empresa verificada</span>
+          </div>
+          <h1>Eventos Nova</h1>
+          <p class="business-welcome__meta">Empresa de eventos · Bogotá, Colombia</p>
+          <div class="business-welcome__actions">
+            <a class="business-primary-action" href="crear-convocatoria-empresa.html"><span aria-hidden="true">＋</span> Nueva convocatoria</a>
+            <a class="business-secondary-action" href="#candidatos">Ver candidatos</a>
+          </div>
+        </div>
+        <div class="business-rating" aria-label="Valoración de empresa: 4.7 de 5">
+          <strong><span aria-hidden="true">★</span> 4.7</strong>
+          <span>Valoración empresa</span>
+        </div>
+      </header>
+
+      <section class="business-metrics" aria-label="Resumen de actividad">
+        <article class="business-metric business-metric--blue">
+          <div><p>Convocatorias activas</p><strong>4</strong></div>
+          <span aria-hidden="true">📣</span>
+        </article>
+        <article class="business-metric business-metric--purple">
+          <div><p>Plazas disponibles</p><strong>23</strong></div>
+          <span aria-hidden="true">🪑</span>
+        </article>
+        <article class="business-metric business-metric--green">
+          <div><p>Total candidatos</p><strong>87</strong></div>
+          <span aria-hidden="true">👥</span>
+        </article>
+        <article class="business-metric business-metric--orange">
+          <div><p>Trabajadores seleccionados</p><strong>31</strong></div>
+          <span aria-hidden="true">✅</span>
+        </article>
+      </section>
+
+      <div class="business-content-grid">
+        <section class="business-section" id="convocatorias" aria-labelledby="recent-jobs-heading">
+          <div class="business-section__heading">
+            <h2 id="recent-jobs-heading">Convocatorias recientes</h2>
+            <a href="convocatorias-empresa.html">Ver todas <span aria-hidden="true">→</span></a>
+          </div>
+          <ul class="business-job-list">
+            <li class="business-job-card" id="crear">
+              <span class="business-job-card__icon" aria-hidden="true">🔧</span>
+              <div class="business-job-card__details">
+                <strong>Auxiliares de Montaje – Feria Tecnológica</strong>
+                <span>15 Sep 2026 <span aria-hidden="true">·</span> 23 candidatos</span>
+              </div>
+              <div class="business-job-card__availability">
+                <span class="business-job-status"><span aria-hidden="true">•</span> Activa</span>
+                <span>4 plazas</span>
+              </div>
+            </li>
+            <li class="business-job-card">
+              <span class="business-job-card__icon" aria-hidden="true">📦</span>
+              <div class="business-job-card__details">
+                <strong>Operarios de Almacén – Temporada Alta</strong>
+                <span>20 Sep 2026 <span aria-hidden="true">·</span> 15 candidatos</span>
+              </div>
+              <div class="business-job-card__availability">
+                <span class="business-job-status"><span aria-hidden="true">•</span> Activa</span>
+                <span>3 plazas</span>
+              </div>
+            </li>
+            <li class="business-job-card">
+              <span class="business-job-card__icon" aria-hidden="true">🎪</span>
+              <div class="business-job-card__details">
+                <strong>Auxiliares Logísticos – Concierto Internacional</strong>
+                <span>30 Sep 2026 <span aria-hidden="true">·</span> 67 candidatos</span>
+              </div>
+              <div class="business-job-card__availability">
+                <span class="business-job-status"><span aria-hidden="true">•</span> Activa</span>
+                <span>10 plazas</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="business-section" id="candidatos" aria-labelledby="recent-candidates-heading">
+          <div class="business-section__heading">
+            <h2 id="recent-candidates-heading">Candidatos recientes</h2>
+            <a href="candidatos-empresa.html">Ver todos <span aria-hidden="true">→</span></a>
+          </div>
+          <ul class="business-candidate-list">
+            <li class="business-candidate">
+              <span class="business-candidate__avatar business-candidate__avatar--purple" aria-hidden="true">CR</span>
+              <div class="business-candidate__identity">
+                <strong>Carlos Rodríguez</strong>
+                <span class="business-candidate__rating" aria-label="Calificación 4.8 de 5"><span aria-hidden="true">★★★★★</span> 4.8</span>
+              </div>
+              <span class="business-candidate__status business-candidate__status--selected"><span aria-hidden="true">•</span> Seleccionado</span>
+            </li>
+            <li class="business-candidate">
+              <span class="business-candidate__avatar business-candidate__avatar--pink" aria-hidden="true">LM</span>
+              <div class="business-candidate__identity">
+                <strong>Luisa Martínez</strong>
+                <span class="business-candidate__rating" aria-label="Calificación 4.6 de 5"><span aria-hidden="true">★★★★★</span> 4.6</span>
+              </div>
+              <span class="business-candidate__status business-candidate__status--review"><span aria-hidden="true">•</span> En revisión</span>
+            </li>
+            <li class="business-candidate">
+              <span class="business-candidate__avatar business-candidate__avatar--indigo" aria-hidden="true">AG</span>
+              <div class="business-candidate__identity">
+                <strong>Andrés García</strong>
+                <span class="business-candidate__rating" aria-label="Calificación 4.3 de 5"><span aria-hidden="true">★★★★★</span> 4.3</span>
+              </div>
+              <span class="business-candidate__status business-candidate__status--review"><span aria-hidden="true">•</span> En revisión</span>
+            </li>
+            <li class="business-candidate">
+              <span class="business-candidate__avatar business-candidate__avatar--blue" aria-hidden="true">MT</span>
+              <div class="business-candidate__identity">
+                <strong>María Torres</strong>
+                <span class="business-candidate__rating" aria-label="Calificación 4.9 de 5"><span aria-hidden="true">★★★★★</span> 4.9</span>
+              </div>
+              <span class="business-candidate__status business-candidate__status--review"><span aria-hidden="true">•</span> En revisión</span>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

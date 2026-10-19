@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidatos · Smart Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/trabajador.css">
+  <link rel="stylesheet" href="../css/candidatos-empresa.css">
+</head>
+<body class="worker-dashboard">
+  <div class="dashboard">
+    <aside class="sidebar">
+      <a href="inicio-empresa.html" class="logo sidebar__logo" aria-label="Smart Logistics, ir al inicio">
+        <span class="logo__mark" aria-hidden="true">SL</span>
+        <span class="logo__text" aria-hidden="true">
+          <span class="logo__title">SMART</span>
+          <span class="logo__subtitle">LOGISTICS</span>
+        </span>
+      </a>
+
+      <a href="perfil-empresa.html" class="sidebar__profile">
+        <span class="sidebar__avatar" aria-hidden="true">🏢</span>
+        <span class="sidebar__identity">
+          <strong>Eventos Nova</strong>
+          <span>Coordinador de empresa</span>
+        </span>
+      </a>
+
+      <nav class="sidebar__nav" aria-label="Navegación de la empresa">
+        <a class="sidebar__link" href="inicio-empresa.html"><span aria-hidden="true">🏠</span>Inicio</a>
+        <a class="sidebar__link" href="convocatorias-empresa.html"><span aria-hidden="true">📣</span>Convocatorias</a>
+        <a class="sidebar__link" href="crear-convocatoria-empresa.html"><span aria-hidden="true">➕</span>Crear</a>
+        <a class="sidebar__link sidebar__link--active" href="candidatos-empresa.html" aria-current="page"><span aria-hidden="true">👥</span>Candidatos</a>
+        <a class="sidebar__link" href="perfil-empresa.html"><span aria-hidden="true">🏢</span>Empresa</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <span class="session-pill"><span aria-hidden="true">•</span> Sesión de empresa</span>
+        <a class="sidebar__link sidebar__logout" href="login-empresa.html"><span aria-hidden="true">📜</span>Cerrar sesión</a>
+      </div>
+    </aside>
+
+    <main class="dashboard__main candidates-main">
+      <header class="candidates-header">
+        <div>
+          <h1>Candidatos</h1>
+          <p>Feria Tecnológica · 1/12 plazas cubiertas</p>
+        </div>
+        <span class="candidates-header__badge"><span aria-hidden="true">●</span>11 plazas disponibles</span>
+      </header>
+
+      <section class="candidates-panel" aria-label="Búsqueda y filtros de candidatos">
+        <div class="candidates-toolbar">
+          <input type="search" class="search-input" placeholder="Buscar candidato..." aria-label="Buscar candidato">
+          <label class="filter-select">
+            <span>Calif. mínima:</span>
+            <select aria-label="Calificación mínima">
+              <option selected>Todas</option>
+              <option>4.0</option>
+              <option>4.5</option>
+              <option>4.8</option>
+            </select>
+          </label>
+        </div>
+        <div class="candidates-tabs" aria-label="Filtrar candidatos por estado">
+          <button class="tab is-active" type="button">Todos (6)</button>
+          <button class="tab" type="button">En revisión (1)</button>
+          <button class="tab" type="button">Seleccionado (1)</button>
+          <button class="tab" type="button">Descartado (0)</button>
+        </div>
+      </section>
+
+      <section class="candidates-results" aria-label="Listado de candidatos">
+        <div class="candidates-table-wrap">
+          <table class="candidates-table">
+            <thead>
+              <tr>
+                <th>CANDIDATO</th>
+                <th>CALIFICACIÓN</th>
+                <th>EXPERIENCIA</th>
+                <th>PUNTUALIDAD</th>
+                <th>ESTADO</th>
+                <th>ACCIONES</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="candidate-cell">
+                  <div class="candidate-cell__content">
+                    <span class="candidate-avatar candidate-avatar--purple" aria-hidden="true">CR</span>
+                    <div>
+                      <strong>Carlos Rodríguez</strong>
+                      <span>Auxiliar Logístico ·</span>
+                      <small>Bogotá, Colombia</small>
+                    </div>
+                  </div>
+                </td>
+                <td class="rating-cell">
+                  <div class="rating-cell__content">
+                    <span class="stars" aria-label="5 de 5">★★★★★</span>
+                    <strong>4.8</strong>
+                  </div>
+                </td>
+                <td>3 años · 47<br>trabajos</td>
+                <td><span class="percent">96%</span></td>
+                <td><span class="status-pill status-pill--selected"><span aria-hidden="true">●</span> Seleccionado</span></td>
+                <td class="action-cell">
+                  <div class="action-cell__content">
+                    <button class="candidate-action candidate-action--link" type="button">Ver perfil</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="candidate-cell">
+                  <div class="candidate-cell__content">
+                    <span class="candidate-avatar candidate-avatar--pink" aria-hidden="true">LM</span>
+                    <div>
+                      <strong>Luisa Martínez</strong>
+                      <span>Coordinadora de Eventos</span>
+                      <small>· Bogotá, Colombia</small>
+                    </div>
+                  </div>
+                </td>
+                <td class="rating-cell">
+                  <div class="rating-cell__content">
+                    <span class="stars" aria-label="5 de 5">★★★★★</span>
+                    <strong>4.6</strong>
+                  </div>
+                </td>
+                <td>5 años · 82<br>trabajos</td>
+                <td><span class="percent">98%</span></td>
+                <td><span class="status-pill status-pill--review"><span aria-hidden="true">●</span> En revisión</span></td>
+                <td class="action-cell action-cell--stacked">
+                  <div class="action-cell__content">
+                    <button class="candidate-action candidate-action--link" type="button">Ver perfil</button>
+                    <button class="candidate-action candidate-action--primary" type="button">Seleccionar</button>
+                    <button class="candidate-action candidate-action--muted" type="button">Descartar</button>
+                    <button class="candidate-action candidate-action--outline" type="button">Asignar<br>directamente</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
