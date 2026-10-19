@@ -1,0 +1,154 @@
+.create-form-main {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 22px 26px 18px;
+}
+
+.create-form-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.create-form-header h1 {
+  color: #17233b;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.create-form-header p {
+  color: #6f8098;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.create-form-panel {
+  width: min(100%, 760px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-bottom: 10px;
+}
+
+.form-block {
+  padding: 20px 20px 16px;
+  border: 1px solid #dfe5ef;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.form-block h2 {
+  margin-bottom: 18px;
+  color: #1b2a3d;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.field-group:last-child {
+  margin-bottom: 0;
+}
+
+.field-group label {
+  color: #1f2d3d;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.field-group label span {
+  color: #e14b4b;
+}
+
+.field-group input,
+.field-group select,
+.field-group textarea {
+  width: 100%;
+  min-height: 38px;
+  padding: 10px 12px;
+  border: 1px solid #d2d9e3;
+  border-radius: 7px;
+  background: #fff;
+  color: #1f2d3d;
+  font-size: 13px;
+  line-height: 18px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field-group textarea {
+  min-height: 76px;
+  resize: vertical;
+}
+
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus {
+  border-color: #155dfc;
+  box-shadow: 0 0 0 3px rgba(21, 93, 252, 0.08);
+  outline: none;
+}
+
+.field-row {
+  display: grid;
+  gap: 14px;
+}
+
+.two-columns {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.btn--cancel {
+  min-width: 112px;
+  height: 38px;
+  border-color: #cbd6e3;
+  background: #fff;
+  color: #1a3354;
+}
+
+.btn--submit {
+  min-width: 200px;
+  height: 38px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .create-form-main {
+    padding: 18px 16px 24px;
+  }
+
+  .create-form-panel {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .two-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .button-row {
+    flex-direction: column-reverse;
+  }
+
+  .btn--cancel,
+  .btn--submit {
+    width: 100%;
+  }
+}
