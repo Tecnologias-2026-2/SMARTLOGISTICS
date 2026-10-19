@@ -345,7 +345,7 @@ SMARTLOGISTICS/
 - **HTML5 semántico:** `header`, `nav`, `main`, `section`, `article`, `aside`, `footer`; tablas con `caption` y `th scope`; formularios con `label`, `fieldset` y `legend`; diálogos con el elemento nativo `<dialog>`.
 - **Maquetación solo con Flexbox y CSS Grid:** ningún archivo CSS usa `position` ni `float`. El menú lateral fijo es una columna de Grid con scroll independiente del contenido; las superposiciones (tarjeta flotante del inicio, botón dentro del campo de contraseña, icono de búsqueda) comparten una celda de Grid; los diálogos usan `<dialog>` y el widget de accesibilidad la API `popover`, que el navegador coloca en su capa superior.
 - **Coherencia con el prototipo:** los tamaños de texto, espaciados, colores y radios se tomaron de las medidas exactas de Figma. Cada vista se comparó con su frame a 1537 px de ancho.
-- **Diseño adaptable:** todas las vistas se verificaron a 375 px (celular), 768 px (tableta), 1280 px y 1537 px (escritorio) sin scroll horizontal. Por debajo de 900 px el menú lateral pasa a una barra superior desplazable y las tablas se desplazan dentro de su tarjeta.
+- **Diseño adaptable:** todas las vistas se verificaron a 375 px (celular), 768 px (tableta), 1280 px y 1537 px (escritorio) sin scroll horizontal. En celular la navegación se agrupa en un **menú hamburguesa** (☰): por debajo de 900 px en las zonas con sesión y de 1024 px en la página pública. Las tablas se desplazan dentro de su tarjeta.
 - **Accesibilidad:**
   - Navegación completa con teclado (`Tab`, `Enter`, `Escape` en diálogos) y foco siempre visible.
   - Enlace **«Saltar al contenido principal»** al inicio de cada página.

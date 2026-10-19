@@ -19,6 +19,14 @@
   color: #d5dfed;
 }
 
+/* Bloque desplegable del menú: en escritorio siempre visible */
+.sidebar__menu {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
 .sidebar__logo {
   min-height: 84px;
   padding: 0 20px;
@@ -498,30 +506,35 @@
     overflow: visible;
   }
 
-  .sidebar__logo {
-    min-height: 78px;
+  /* Barra superior: logo + botón hamburguesa; el menú se despliega debajo */
+  .sidebar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
   }
 
-  .sidebar__profile,
-  .session-pill {
+  .sidebar__logo {
+    min-height: 72px;
+    border-bottom: 0;
+  }
+
+  .sidebar__toggle {
+    display: flex;
+    margin-right: 20px;
+  }
+
+  .sidebar__menu {
     display: none;
+    grid-column: 1 / -1;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .sidebar__menu.is-open {
+    display: flex;
   }
 
   .sidebar__footer {
-    flex-direction: row;
     margin-top: 0;
-    padding: 0 10px 10px;
-    border-top: 0;
-  }
-
-  .sidebar__nav {
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 10px;
-  }
-
-  .sidebar__link {
-    flex: 0 0 auto;
   }
 
   .dashboard__main {
