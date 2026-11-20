@@ -644,3 +644,19 @@
   line-height: 18px;
   text-align: center;
 }
+
+/* Mensaje general del formulario (errores del servidor y confirmaciones) */
+.form__status {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 100, 103, 0.12);
+  color: #ff8a8a;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.form__status--ok {
+  background: rgba(0, 201, 80, 0.12);
+  color: #7bf1a8;
+}

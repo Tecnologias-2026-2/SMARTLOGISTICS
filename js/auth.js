@@ -1,9 +1,11 @@
-// Zona de acceso: mostrar contraseña, validación de formularios (RF-02, RF-04,
-// RF-05), cuenta regresiva de reenvío y carga de fotografía (RF-03).
-// No hay servidor: al validar, el formulario navega a la siguiente vista.
+// Zona de acceso conectada a Supabase Auth: inicio de sesión (RF-04),
+// registro (RF-02), recuperación de contraseña (RF-05), fotografía de
+// perfil (RF-03) y validación de formularios.
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const PHOTO_KEY = "smart-logistics:foto-perfil";
+const RECOVERY_EMAIL_KEY = "smart-logistics:correo-recuperacion";
+const MODO = /-empresa\.html$/.test(window.location.pathname) ? "EMPRESA" : "TRABAJADOR";
+const LOGIN_PAGE = MODO === "EMPRESA" ? "login-empresa.html" : "login-trabajador.html";
 
 // ---------- Mostrar / ocultar contraseña ----------
 document.querySelectorAll(".input-group__btn").forEach((button) => {
@@ -40,6 +42,20 @@ function setError(input, message) {
   input.setAttribute("aria-invalid", message ? "true" : "false");
 }
 
+// Mensaje general del formulario (errores del servidor o confirmaciones)
+function setFormStatus(form, message, ok = false) {
+  let status = form.querySelector(".form__status");
+  if (!status) {
+    status = document.createElement("p");
+    status.className = "form__status";
+    status.setAttribute("role", "alert");
+    form.querySelector('[type="submit"]').before(status);
+  }
+  status.textContent = message || "";
+  status.classList.toggle("form__status--ok", ok);
+  status.hidden = !message;
+}
+
 function validateForm(form) {
   const kind = form.dataset.authForm;
   const errors = new Map();
@@ -51,7 +67,7 @@ function validateForm(form) {
       errors.set(input, "Ingresa un correo válido, por ejemplo nombre@correo.com.");
     }
   });
-  if (kind === "register") {
+  if (kind === "register" || kind === "new-password") {
     const password = form.querySelector("#password");
     const confirm = form.querySelector("#password2");
     if (!errors.has(password) && password.value.length < 8) {
@@ -72,20 +88,142 @@ function validateForm(form) {
   return [...errors.keys()];
 }
 
+// ---------- Acciones de cada formulario ----------
+const ACTIONS = {
+  // RF-04 · Inicio de sesión con acceso diferenciado por modo
+  async login(form) {
+    const email = form.querySelector("#email").value.trim();
+    const password = form.querySelector("#password").value;
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+
+    const table = MODO === "EMPRESA" ? "coordinador" : "trabajador";
+    const { data: row, error: rowError } = await sb.from(table).select("id").eq("id", data.user.id).maybeSingle();
+    if (rowError) throw rowError;
+    if (!row) {
+      await sb.auth.signOut();
+      throw new Error(MODO === "EMPRESA"
+        ? "Esta cuenta no es de empresa. Inicia sesión como trabajador."
+        : "Esta cuenta es de empresa. Inicia sesión como empresa.");
+    }
+    window.location.href = form.dataset.next;
+  },
+
+  // RF-02 · Registro de trabajador o de empresa
+  async register(form) {
+    const values = Object.fromEntries(new FormData(form));
+    const { email, password, password2, ...profile } = values;
+    Object.keys(profile).forEach((key) => { profile[key] = String(profile[key]).trim(); });
+    profile.tipo = MODO;
+
+    const { data, error } = await sb.auth.signUp({
+      email: email.trim(),
+      password,
+      options: {
+        data: profile,
+        emailRedirectTo: new URL(LOGIN_PAGE, window.location.href).href
+      }
+    });
+    if (error) throw error;
+    if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+      throw new Error("Ya existe una cuenta con este correo. Inicia sesión.");
+    }
+    if (!data.session) {
+      setFormStatus(form, "¡Cuenta creada! Te enviamos un correo para confirmarla. Ábrelo y luego inicia sesión.", true);
+      return { keepDisabled: true };
+    }
+    window.location.href = form.dataset.next;
+  },
+
+  // RF-05 · Enlace de recuperación de contraseña
+  async recover(form) {
+    const email = form.querySelector("#email").value.trim();
+    await sendRecoveryEmail(email);
+    try {
+      sessionStorage.setItem(RECOVERY_EMAIL_KEY, email);
+    } catch (error) {
+      console.warn("No se pudo recordar el correo de recuperación.", error);
+    }
+    window.location.href = form.dataset.next;
+  },
+
+  // RF-05 · Nueva contraseña desde el enlace del correo
+  async "new-password"(form) {
+    const password = form.querySelector("#password").value;
+    const { error } = await sb.auth.updateUser({ password });
+    if (error) throw error;
+    await sb.auth.signOut();
+    const mode = new URLSearchParams(window.location.search).get("modo") === "empresa" ? "empresa" : "trabajador";
+    setFormStatus(form, "Tu contraseña se actualizó. Te llevamos al inicio de sesión…", true);
+    setTimeout(() => { window.location.href = `login-${mode}.html`; }, 1800);
+    return { keepDisabled: true };
+  }
+};
+
+function sendRecoveryEmail(email) {
+  const mode = MODO === "EMPRESA" ? "empresa" : "trabajador";
+  const redirectTo = new URL(`nueva-contrasena.html?modo=${mode}`, window.location.href).href;
+  return sb.auth.resetPasswordForEmail(email, { redirectTo }).then(({ error }) => {
+    if (error) throw error;
+  });
+}
+
 document.querySelectorAll("form[data-auth-form]").forEach((form) => {
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const invalid = validateForm(form);
     if (invalid.length) {
       invalid[0].focus();
       return;
     }
-    window.location.href = form.dataset.next;
+    const submit = form.querySelector('[type="submit"]');
+    setFormStatus(form, "");
+    submit.disabled = true;
+    try {
+      const result = await ACTIONS[form.dataset.authForm](form);
+      if (!result || !result.keepDisabled) submit.disabled = false;
+    } catch (error) {
+      console.error(error);
+      setFormStatus(form, SL.mensajeError(error));
+      submit.disabled = false;
+    }
   });
   form.addEventListener("input", (event) => {
     if (event.target.getAttribute("aria-invalid") === "true") setError(event.target, "");
   });
 });
+
+// La página de nueva contraseña solo sirve si se llegó desde el enlace del correo
+const newPasswordForm = document.querySelector('form[data-auth-form="new-password"]');
+if (newPasswordForm) {
+  sb.auth.getSession().then(({ data: { session } }) => {
+    if (!session) {
+      setFormStatus(newPasswordForm, "El enlace no es válido o ya expiró. Solicita uno nuevo desde «¿Olvidaste tu contraseña?».");
+      newPasswordForm.querySelector('[type="submit"]').disabled = true;
+    }
+  });
+}
+
+// ---------- Correo enviado: muestra el correo enmascarado ----------
+function readRecoveryEmail() {
+  try {
+    return sessionStorage.getItem(RECOVERY_EMAIL_KEY) || "";
+  } catch (error) {
+    return "";
+  }
+}
+
+function maskEmail(email) {
+  const [user, domain] = email.split("@");
+  if (!domain) return email;
+  return `${user.slice(0, 3)}*****@${domain}`;
+}
+
+const sentEmail = document.querySelector(".auth-head__text strong");
+if (sentEmail && document.querySelector(".info-box")) {
+  const email = readRecoveryEmail();
+  sentEmail.textContent = email ? maskEmail(email) : "tu correo";
+}
 
 // ---------- Reenviar correo con cuenta regresiva ----------
 const resendButton = document.querySelector("#resend-button");
@@ -106,10 +244,22 @@ if (resendButton) {
       resendButton.textContent = `Reenviar en ${remaining}s`;
     }, 1000);
   };
-  resendButton.addEventListener("click", () => {
-    status.textContent = "Te enviamos un nuevo enlace de recuperación.";
+  resendButton.addEventListener("click", async () => {
+    const email = readRecoveryEmail();
     status.hidden = false;
-    startCountdown(60);
+    if (!email) {
+      status.textContent = "Vuelve a «¿Olvidaste tu contraseña?» e ingresa tu correo de nuevo.";
+      return;
+    }
+    resendButton.disabled = true;
+    try {
+      await sendRecoveryEmail(email);
+      status.textContent = "Te enviamos un nuevo enlace de recuperación.";
+      startCountdown(60);
+    } catch (error) {
+      status.textContent = SL.mensajeError(error);
+      resendButton.disabled = false;
+    }
   });
   startCountdown(Number(resendButton.dataset.countdown) || 41);
 }
@@ -119,13 +269,40 @@ const photoInput = document.querySelector("#photo-input");
 if (photoInput) {
   const photoError = document.querySelector("#photo-error");
   const dropzone = document.querySelector("#photo-dropzone");
+  const pickButton = document.querySelector("#pick-photo");
 
   const showPhotoError = (message) => {
     photoError.textContent = message;
     photoError.hidden = false;
   };
 
-  const handleFile = (file) => {
+  const readImage = (file) => new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const image = new Image();
+    image.addEventListener("load", () => {
+      resolve({ width: image.naturalWidth, height: image.naturalHeight });
+      URL.revokeObjectURL(url);
+    });
+    image.addEventListener("error", () => {
+      reject(new Error("No se pudo leer la imagen. Intenta con otro archivo."));
+      URL.revokeObjectURL(url);
+    });
+    image.src = url;
+  });
+
+  const uploadPhoto = async (file) => {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) throw new Error("Tu sesión expiró. Inicia sesión para cargar tu fotografía.");
+    const extension = file.type === "image/png" ? "png" : "jpg";
+    const path = `${session.user.id}/avatar.${extension}`;
+    const { error } = await sb.storage.from("avatars").upload(path, file, { upsert: true, contentType: file.type });
+    if (error) throw error;
+    const { data: { publicUrl } } = sb.storage.from("avatars").getPublicUrl(path);
+    const { error: rpcError } = await sb.rpc("actualizar_avatar", { p_url: `${publicUrl}?v=${Date.now()}` });
+    if (rpcError) throw rpcError;
+  };
+
+  const handleFile = async (file) => {
     photoError.hidden = true;
     if (!file) return;
     if (!["image/jpeg", "image/png"].includes(file.type)) {
@@ -136,28 +313,25 @@ if (photoInput) {
       showPhotoError("La fotografía supera el tamaño máximo de 5 MB.");
       return;
     }
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-      const image = new Image();
-      image.addEventListener("load", () => {
-        if (image.naturalWidth < 400 || image.naturalHeight < 400) {
-          showPhotoError(`Resolución insuficiente (${image.naturalWidth}×${image.naturalHeight} px): el mínimo es 400×400 px.`);
-          return;
-        }
-        try {
-          sessionStorage.setItem(PHOTO_KEY, reader.result);
-        } catch (error) {
-          console.warn("No se pudo conservar la vista previa de la foto.", error);
-        }
-        window.location.href = "foto-cargada-trabajador.html";
-      });
-      image.addEventListener("error", () => showPhotoError("No se pudo leer la imagen. Intenta con otro archivo."));
-      image.src = reader.result;
-    });
-    reader.readAsDataURL(file);
+    try {
+      const { width, height } = await readImage(file);
+      if (width < 400 || height < 400) {
+        showPhotoError(`Resolución insuficiente (${width}×${height} px): el mínimo es 400×400 px.`);
+        return;
+      }
+      pickButton.disabled = true;
+      pickButton.textContent = "Subiendo fotografía…";
+      await uploadPhoto(file);
+      window.location.href = "foto-cargada-trabajador.html";
+    } catch (error) {
+      console.error(error);
+      showPhotoError(SL.mensajeError(error));
+      pickButton.disabled = false;
+      pickButton.textContent = "Cargar desde galería";
+    }
   };
 
-  document.querySelector("#pick-photo").addEventListener("click", () => photoInput.click());
+  pickButton.addEventListener("click", () => photoInput.click());
   photoInput.addEventListener("change", () => handleFile(photoInput.files[0]));
 
   ["dragenter", "dragover"].forEach((type) => dropzone.addEventListener(type, (event) => {
@@ -174,15 +348,9 @@ if (photoInput) {
 // Vista previa en "Fotografía cargada"
 const photoPreview = document.querySelector("#photo-preview");
 if (photoPreview) {
-  try {
-    const dataUrl = sessionStorage.getItem(PHOTO_KEY);
-    if (dataUrl) {
-      const img = document.createElement("img");
-      img.src = dataUrl;
-      img.alt = "";
-      photoPreview.replaceChildren(img);
-    }
-  } catch (error) {
-    console.warn("No se pudo cargar la vista previa de la foto.", error);
-  }
+  sb.auth.getSession().then(async ({ data: { session } }) => {
+    if (!session) return;
+    const { data } = await sb.from("perfil").select("avatar_url, nombres, apellidos").eq("id", session.user.id).single();
+    if (data && data.avatar_url) SL.pintarAvatar(photoPreview, data);
+  });
 }
