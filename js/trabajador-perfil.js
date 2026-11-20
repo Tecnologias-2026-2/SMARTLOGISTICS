@@ -1,5 +1,6 @@
-const PROFILE_STORAGE_KEY = "smart-logistics:worker-profile";
-const SKILLS_STORAGE_KEY = "smart-logistics:worker-skills";
+// Trabajador · Mi perfil: consulta (RF-08), edición de datos y habilidades
+// (RF-09), reputación por rol (RF-24) y experiencia reciente.
+
 const profileEditorDialog = document.querySelector("#profile-editor-dialog");
 const profileEditorForm = document.querySelector("#profile-editor-form");
 const profileEditorError = document.querySelector("#profile-editor-error");
@@ -16,47 +17,54 @@ const skillsEditorError = document.querySelector("#skills-editor-error");
 const newSkillInput = document.querySelector("#new-skill");
 const profileSkillList = document.querySelector("#profile-skill-list");
 const reputationDetailsDialog = document.querySelector("#reputation-details-dialog");
-let savedSkills = Array.from(profileSkillList.querySelectorAll("li"), (item) => item.textContent.trim());
+
+let ctx = null;
+let contact = {};
+let savedSkills = [];
 let editedSkills = [];
-let currentProfile = {
-  firstName: "Carlos",
-  lastName: "Rodríguez",
-  role: "Auxiliar Logístico",
-  location: "Bogotá, Colombia",
-  phone: "+57 300 123 4567"
-};
 
-function getProfileValues() {
-  return { ...currentProfile };
-}
+// ---------- Pintar el perfil ----------
+function renderProfile() {
+  const { perfil, trabajador } = ctx;
+  const values = SL.indicadores(trabajador);
+  document.querySelector("#profile-full-name").textContent = SL.nombreCompleto(perfil);
+  SL.pintarAvatar(document.querySelector("#profile-avatar"), perfil);
+  SL.llenarCampos({
+    ...values,
+    cargo: trabajador.cargo,
+    ubicacion: trabajador.ubicacion || "Sin ubicación",
+    email: contact.email || ctx.user.email,
+    celular: contact.celular || "Sin número"
+  });
+  document.querySelector("#reputation-score-badge").setAttribute("aria-label", `${values.global} de 5`);
 
-function applyProfileValues(profile) {
-  currentProfile = { ...profile };
-  const fullName = `${profile.firstName} ${profile.lastName}`.trim();
-  document.querySelector("#profile-full-name").textContent = fullName;
-  document.querySelector("#sidebar-profile-name").textContent = fullName;
-  document.querySelector("#profile-role").textContent = profile.role;
-  document.querySelector("#sidebar-profile-role").textContent = profile.role;
-  document.querySelector("#profile-location").textContent = profile.location;
-  document.querySelector("#profile-phone").textContent = profile.phone;
-  document.querySelector("#contact-location").textContent = profile.location;
-  document.querySelector("#contact-role").textContent = profile.role;
-  document.querySelector(".profile-avatar").textContent = `${profile.firstName.charAt(0)}${profile.lastName.charAt(0)}`.toLocaleUpperCase("es");
-}
+  // Barras de indicadores (escala relativa para el diseño)
+  const bars = {
+    puntualidad: Number(trabajador.puntualidad_pct) || 0,
+    trabajos: Math.min(100, (trabajador.trabajos_realizados || 0)),
+    empresas: Math.min(100, (trabajador.empresas_colaboradoras || 0) * 3),
+    anios: Math.min(100, (trabajador.anios_experiencia || 0) * 10)
+  };
+  document.querySelectorAll("[data-barra]").forEach((bar) => {
+    bar.style.width = `${bars[bar.dataset.barra]}%`;
+  });
 
-function loadSavedProfile() {
-  const storedProfile = localStorage.getItem(PROFILE_STORAGE_KEY);
-  if (!storedProfile) return;
-  const profile = JSON.parse(storedProfile);
-  if (!profile || Object.keys(profileFields).some((key) => typeof profile[key] !== "string")) {
-    throw new Error("El perfil guardado no tiene un formato válido.");
+  // Nombre y cargo también en el menú lateral
+  const identity = document.querySelector(".sidebar__identity");
+  if (identity) {
+    identity.children[0].textContent = SL.nombreCompleto(perfil);
+    identity.children[1].textContent = trabajador.cargo;
   }
-  currentProfile = profile;
-  applyProfileValues(profile);
 }
 
 function renderSkills(list, skills, removable) {
   list.replaceChildren();
+  if (!skills.length && !removable) {
+    const empty = document.createElement("li");
+    empty.textContent = "Aún no agregas habilidades.";
+    list.append(empty);
+    return;
+  }
   skills.forEach((skill, index) => {
     const item = document.createElement("li");
     item.textContent = skill;
@@ -76,17 +84,25 @@ function renderSkills(list, skills, removable) {
   });
 }
 
-function loadSavedSkills() {
-  const storedSkills = localStorage.getItem(SKILLS_STORAGE_KEY);
-  if (!storedSkills) return;
-  const skills = JSON.parse(storedSkills);
-  if (!Array.isArray(skills) || skills.some((skill) => typeof skill !== "string" || !skill.trim())) {
-    throw new Error("La lista de habilidades guardada no tiene un formato válido.");
+function renderRecentJobs(jobs) {
+  const list = document.querySelector("#recent-job-list");
+  if (!jobs.length) {
+    list.innerHTML = '<li class="sl-empty">Tu experiencia aparecerá aquí cuando una empresa califique tu servicio.</li>';
+    return;
   }
-  savedSkills = skills.map((skill) => skill.trim());
-  renderSkills(profileSkillList, savedSkills, false);
+  list.innerHTML = jobs.map((job) => {
+    const cat = SL.categoria(job.categoria);
+    const rating = job.calificacion == null ? "—" : SL.calificacion(job.calificacion);
+    return `
+      <li>
+        <span class="recent-job__icon" aria-hidden="true">${cat.icon}</span>
+        <div><strong>${SL.escapeHTML(job.evento)}</strong><span>${SL.escapeHTML(job.empresa)} · ${SL.fecha(job.fecha)}</span></div>
+        <span class="recent-job__rating" aria-label="Calificación ${rating} de 5"><span aria-hidden="true">★★★★★</span> <span class="recent-job__rating-value">${rating}</span></span>
+      </li>`;
+  }).join("");
 }
 
+// ---------- Editar habilidades ----------
 document.querySelector("#open-skills-editor").addEventListener("click", () => {
   editedSkills = [...savedSkills];
   renderSkills(skillsEditorList, editedSkills, true);
@@ -103,7 +119,7 @@ document.querySelector("#skills-add-form").addEventListener("submit", (event) =>
     newSkillInput.focus();
     return;
   }
-  if (editedSkills.some((existingSkill) => existingSkill.toLocaleLowerCase("es") === skill.toLocaleLowerCase("es"))) {
+  if (editedSkills.some((existing) => existing.toLocaleLowerCase("es") === skill.toLocaleLowerCase("es"))) {
     skillsEditorError.textContent = "Esa habilidad ya está en la lista.";
     skillsEditorError.hidden = false;
     newSkillInput.focus();
@@ -120,73 +136,88 @@ document.querySelector("#skills-add-form").addEventListener("submit", (event) =>
   button.addEventListener("click", () => skillsEditorDialog.close());
 });
 
-document.querySelector("#open-reputation-details").addEventListener("click", () => {
-  reputationDetailsDialog.showModal();
-});
-document.querySelector("#close-reputation-details").addEventListener("click", () => {
-  reputationDetailsDialog.close();
-});
-
-document.querySelector("#save-skills").addEventListener("click", () => {
-  try {
-    localStorage.setItem(SKILLS_STORAGE_KEY, JSON.stringify(editedSkills));
-    savedSkills = [...editedSkills];
-    renderSkills(profileSkillList, savedSkills, false);
-    skillsEditorDialog.close();
-  } catch (error) {
-    skillsEditorError.textContent = "No se pudieron guardar las habilidades. Verifica el almacenamiento del navegador e inténtalo de nuevo.";
+document.querySelector("#save-skills").addEventListener("click", async (event) => {
+  const button = event.currentTarget;
+  button.disabled = true;
+  const { error } = await sb.rpc("guardar_habilidades", { p_habilidades: editedSkills });
+  button.disabled = false;
+  if (error) {
+    skillsEditorError.textContent = SL.mensajeError(error);
     skillsEditorError.hidden = false;
-    console.error("No fue posible guardar las habilidades.", error);
+    return;
   }
+  savedSkills = [...editedSkills];
+  renderSkills(profileSkillList, savedSkills, false);
+  skillsEditorDialog.close();
 });
 
+// ---------- Detalle de reputación ----------
+document.querySelector("#open-reputation-details").addEventListener("click", () => reputationDetailsDialog.showModal());
+document.querySelector("#close-reputation-details").addEventListener("click", () => reputationDetailsDialog.close());
+
+// ---------- Editar perfil ----------
 document.querySelector("#open-profile-editor").addEventListener("click", () => {
-  try {
-    const currentProfile = getProfileValues();
-    Object.entries(profileFields).forEach(([key, input]) => {
-      input.value = currentProfile[key];
-    });
-    profileEditorError.hidden = true;
-    profileEditorDialog.showModal();
-    profileFields.firstName.focus();
-  } catch (error) {
-    profileEditorError.textContent = "No se pudo abrir el editor de perfil.";
-    profileEditorError.hidden = false;
-    console.error("No fue posible preparar la edición del perfil.", error);
-  }
+  profileFields.firstName.value = ctx.perfil.nombres;
+  profileFields.lastName.value = ctx.perfil.apellidos;
+  profileFields.role.value = ctx.trabajador.cargo;
+  profileFields.location.value = ctx.trabajador.ubicacion || "";
+  profileFields.phone.value = contact.celular || "";
+  profileEditorError.hidden = true;
+  profileEditorDialog.showModal();
+  profileFields.firstName.focus();
 });
 
 [document.querySelector("#close-profile-editor"), document.querySelector("#cancel-profile-edit")].forEach((button) => {
   button.addEventListener("click", () => profileEditorDialog.close());
 });
 
-profileEditorForm.addEventListener("submit", (event) => {
+profileEditorForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   if (!profileEditorForm.reportValidity()) return;
+  const values = Object.fromEntries(Object.entries(profileFields).map(([key, input]) => [key, input.value.trim()]));
+  if (Object.values(values).some((value) => !value)) return;
 
-  const updatedProfile = Object.fromEntries(
-    Object.entries(profileFields).map(([key, input]) => [key, input.value.trim()])
-  );
-  if (Object.values(updatedProfile).some((value) => !value)) return;
-
-  try {
-    localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(updatedProfile));
-    applyProfileValues(updatedProfile);
-    profileEditorDialog.close();
-  } catch (error) {
-    profileEditorError.textContent = "No se pudieron guardar los cambios. Verifica el almacenamiento del navegador e inténtalo de nuevo.";
+  const submit = profileEditorForm.querySelector('[type="submit"]');
+  submit.disabled = true;
+  const { error } = await sb.rpc("actualizar_perfil_trabajador", {
+    p_nombres: values.firstName,
+    p_apellidos: values.lastName,
+    p_cargo: values.role,
+    p_ubicacion: values.location,
+    p_celular: values.phone
+  });
+  submit.disabled = false;
+  if (error) {
+    profileEditorError.textContent = SL.mensajeError(error);
     profileEditorError.hidden = false;
-    console.error("No fue posible guardar los cambios del perfil.", error);
+    return;
   }
+  ctx.perfil.nombres = values.firstName;
+  ctx.perfil.apellidos = values.lastName;
+  ctx.trabajador.cargo = values.role;
+  ctx.trabajador.ubicacion = values.location;
+  contact.celular = values.phone;
+  renderProfile();
+  profileEditorDialog.close();
 });
 
-try {
-  loadSavedProfile();
-} catch (error) {
-  console.error("No fue posible cargar el perfil guardado.", error);
-}
-try {
-  loadSavedSkills();
-} catch (error) {
-  console.error("No fue posible cargar las habilidades guardadas.", error);
-}
+// ---------- Carga inicial ----------
+(async () => {
+  ctx = await SL.iniciarPanel("TRABAJADOR");
+  try {
+    const [contactRow, skills, jobs] = await Promise.all([
+      sb.from("contacto").select("*").eq("id", ctx.uid).maybeSingle().then(SL.datos),
+      sb.from("trabajador_habilidad").select("orden, habilidad(nombre)").eq("id_trabajador", ctx.uid).then(SL.datos),
+      sb.from("historial_laboral").select("*").eq("id_trabajador", ctx.uid)
+        .order("fecha", { ascending: false }).limit(3).then(SL.datos)
+    ]);
+    contact = contactRow || {};
+    savedSkills = SL.ordenar(skills).map((row) => row.habilidad.nombre);
+    renderProfile();
+    renderSkills(profileSkillList, savedSkills, false);
+    renderRecentJobs(jobs);
+  } catch (error) {
+    console.error("No fue posible cargar el perfil.", error);
+    SL.mostrarErrorGlobal(SL.mensajeError(error));
+  }
+})();

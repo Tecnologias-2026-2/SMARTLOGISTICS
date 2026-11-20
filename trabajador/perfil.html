@@ -36,8 +36,8 @@
         <a href="perfil.html" class="sidebar__profile">
           <span class="sidebar__avatar" aria-hidden="true">👤</span>
           <span class="sidebar__identity">
-            <strong id="sidebar-profile-name">Carlos Rodríguez</strong>
-            <span id="sidebar-profile-role">Auxiliar Logístico</span>
+            <strong id="sidebar-profile-name">…</strong>
+            <span id="sidebar-profile-role"></span>
           </span>
         </a>
 
@@ -66,16 +66,16 @@
       </header>
 
       <section class="profile-hero" aria-label="Resumen del perfil">
-        <div class="profile-avatar" aria-hidden="true">CR</div>
+        <a class="profile-avatar" id="profile-avatar" href="../auth/foto-trabajador.html" aria-label="Cambiar fotografía de perfil" title="Cambiar fotografía"></a>
         <div class="profile-hero__body">
-          <h2 id="profile-full-name">Carlos Rodríguez</h2>
-          <p class="profile-hero__role" id="profile-role">Auxiliar Logístico</p>
-          <p class="profile-hero__location"><span aria-hidden="true">📍</span> <span id="profile-location">Bogotá, Colombia</span></p>
+          <h2 id="profile-full-name"></h2>
+          <p class="profile-hero__role" data-campo="cargo"></p>
+          <p class="profile-hero__location"><span aria-hidden="true">📍</span> <b class="sl-valor" data-campo="ubicacion"></b></p>
           <div class="profile-hero__stats">
-            <div><span>Calificación</span><strong><span class="profile-star" aria-hidden="true">★</span> 4.8</strong></div>
-            <div><span>Puntualidad</span><strong>96%</strong></div>
-            <div><span>Trabajos</span><strong>47</strong></div>
-            <div><span>Empresas</span><strong>12</strong></div>
+            <div><span>Calificación</span><strong><span class="profile-star" aria-hidden="true">★</span> <b class="sl-valor" data-campo="global">—</b></strong></div>
+            <div><span>Puntualidad</span><strong data-campo="puntualidad">—</strong></div>
+            <div><span>Trabajos</span><strong data-campo="trabajos">0</strong></div>
+            <div><span>Empresas</span><strong data-campo="empresas">0</strong></div>
           </div>
         </div>
       </section>
@@ -86,19 +86,19 @@
           <dl class="contact-list">
             <div>
               <dt><span aria-hidden="true">✉️</span>Correo electrónico</dt>
-              <dd id="profile-email">carlos.rodriguez@gmail.com <span>(no editable)</span></dd>
+              <dd><b class="sl-valor" data-campo="email"></b> <span>(no editable)</span></dd>
             </div>
             <div>
               <dt><span aria-hidden="true">📱</span>Celular</dt>
-              <dd id="profile-phone">+57 300 123 4567</dd>
+              <dd data-campo="celular"></dd>
             </div>
             <div>
               <dt><span aria-hidden="true">📍</span>Ubicación</dt>
-              <dd id="contact-location">Bogotá, Colombia</dd>
+              <dd data-campo="ubicacion"></dd>
             </div>
             <div>
               <dt><span aria-hidden="true">💼</span>Cargo</dt>
-              <dd id="contact-role">Auxiliar Logístico</dd>
+              <dd data-campo="cargo"></dd>
             </div>
           </dl>
         </section>
@@ -108,18 +108,18 @@
           <div class="reputation-list">
             <div>
               <span>Calificación global</span>
-              <strong><span class="rating-stars" aria-label="5 estrellas">★★★★★</span> 4.8</strong>
+              <strong><span class="rating-stars" aria-hidden="true">★★★★★</span> <b class="sl-valor" data-campo="global">—</b></strong>
             </div>
             <div>
               <span>Calificación logística</span>
-              <strong><span class="rating-stars" aria-label="5 estrellas">★★★★★</span> 4.9</strong>
+              <strong><span class="rating-stars" aria-hidden="true">★★★★★</span> <b class="sl-valor" data-campo="logistica">—</b></strong>
             </div>
             <div>
               <span>Calificación coordinador</span>
-              <strong><span class="rating-stars" aria-label="5 estrellas">★★★★★</span> 4.6</strong>
+              <strong><span class="rating-stars" aria-hidden="true">★★★★★</span> <b class="sl-valor" data-campo="coordinador">—</b></strong>
             </div>
           </div>
-          <div class="experience-years"><span>Años de experiencia</span><strong>3 años</strong></div>
+          <div class="experience-years"><span>Años de experiencia</span><strong><b class="sl-valor" data-campo="anios">0</b> años</strong></div>
           <button class="reputation-details-button" id="open-reputation-details" type="button">Ver detalles</button>
         </section>
       </div>
@@ -129,16 +129,7 @@
           <h2 id="skills-title">Habilidades</h2>
           <button class="profile-inline-edit" id="open-skills-editor" type="button">✏️ Editar</button>
         </div>
-        <ul class="skill-list" id="profile-skill-list">
-          <li>Manejo de inventario</li>
-          <li>Montaje de stands</li>
-          <li>Carga y descarga</li>
-          <li>Atención al cliente</li>
-          <li>Logística de eventos</li>
-          <li>Excel básico</li>
-          <li>Coordinación de equipos</li>
-          <li>Seguridad industrial</li>
-        </ul>
+        <ul class="skill-list" id="profile-skill-list"></ul>
       </section>
 
       <section class="profile-panel recent-experience" aria-labelledby="recent-experience-title">
@@ -146,23 +137,7 @@
           <h2 id="recent-experience-title">Experiencia reciente</h2>
           <a href="historial.html">Ver historial <span aria-hidden="true">→</span></a>
         </div>
-        <ul class="recent-job-list">
-          <li>
-            <span class="recent-job__icon" aria-hidden="true">🔧</span>
-            <div><strong>Auxiliar de Montaje – Expo Construcción</strong><span>Eventos Nova · 10 Ago 2026</span></div>
-            <span class="recent-job__rating"><span aria-hidden="true">★★★★★</span> <span class="recent-job__rating-value">4.9</span></span>
-          </li>
-          <li>
-            <span class="recent-job__icon" aria-hidden="true">📦</span>
-            <div><strong>Operario de Almacén – Despachos</strong><span>LogiMax S.A.S. · 25 Jul 2026</span></div>
-            <span class="recent-job__rating"><span aria-hidden="true">★★★★★</span> <span class="recent-job__rating-value">4.8</span></span>
-          </li>
-          <li>
-            <span class="recent-job__icon" aria-hidden="true">🎪</span>
-            <div><strong>Personal Logístico – Feria del Hogar</strong><span>Eventos Nova · 12 Jul 2026</span></div>
-            <span class="recent-job__rating"><span aria-hidden="true">★★★★★</span> <span class="recent-job__rating-value">5.0</span></span>
-          </li>
-        </ul>
+        <ul class="recent-job-list" id="recent-job-list"></ul>
       </section>
     </main>
   </div>
@@ -238,13 +213,13 @@
         <div>
           <span class="reputation-details__eyebrow">Calificación global</span>
           <div class="reputation-global-card__score">
-            <strong>4.8</strong>
-            <span class="reputation-details__stars" aria-label="5 estrellas">★★★★★</span>
+            <strong data-campo="global">—</strong>
+            <span class="reputation-details__stars" aria-hidden="true">★★★★★</span>
           </div>
-          <p>Basada en 47 trabajos completados</p>
+          <p>Basada en <b class="sl-valor" data-campo="trabajos">0</b> trabajos completados</p>
         </div>
-        <div class="reputation-score-badge" aria-label="4.8 de 5">
-          <strong>4.8</strong>
+        <div class="reputation-score-badge" id="reputation-score-badge">
+          <strong data-campo="global">—</strong>
           <span>/ 5.0</span>
         </div>
       </section>
@@ -252,14 +227,14 @@
       <div class="reputation-category-grid">
         <section class="reputation-category-card">
           <h3>Calificación logística</h3>
-          <strong class="reputation-category-card__score">4.9 <span aria-hidden="true">★</span></strong>
-          <span class="reputation-details__stars" aria-label="5 estrellas">★★★★★</span>
+          <strong class="reputation-category-card__score"><b class="sl-valor" data-campo="logistica">—</b> <span aria-hidden="true">★</span></strong>
+          <span class="reputation-details__stars" aria-hidden="true">★★★★★</span>
           <p>Operaciones de almacén, montaje y reparto</p>
         </section>
         <section class="reputation-category-card">
           <h3>Calificación coordinador</h3>
-          <strong class="reputation-category-card__score">4.6 <span aria-hidden="true">★</span></strong>
-          <span class="reputation-details__stars" aria-label="5 estrellas">★★★★★</span>
+          <strong class="reputation-category-card__score"><b class="sl-valor" data-campo="coordinador">—</b> <span aria-hidden="true">★</span></strong>
+          <span class="reputation-details__stars" aria-hidden="true">★★★★★</span>
           <p>Coordinación y liderazgo de equipos</p>
         </section>
       </div>
@@ -268,20 +243,20 @@
         <h3 id="reputation-activity-title">Indicadores de actividad</h3>
         <div class="reputation-activity-grid">
           <div class="reputation-indicator">
-            <div><span>Puntualidad</span><strong>96%</strong></div>
-            <span class="reputation-indicator__track"><span class="reputation-indicator__fill reputation-indicator__fill--green" style="width: 96%"></span></span>
+            <div><span>Puntualidad</span><strong data-campo="puntualidad">—</strong></div>
+            <span class="reputation-indicator__track"><span class="reputation-indicator__fill reputation-indicator__fill--green" data-barra="puntualidad"></span></span>
           </div>
           <div class="reputation-indicator">
-            <div><span>Trabajos realizados</span><strong>47</strong></div>
-            <span class="reputation-indicator__track"><span class="reputation-indicator__fill reputation-indicator__fill--blue" style="width: 48%"></span></span>
+            <div><span>Trabajos realizados</span><strong data-campo="trabajos">0</strong></div>
+            <span class="reputation-indicator__track"><span class="reputation-indicator__fill reputation-indicator__fill--blue" data-barra="trabajos"></span></span>
           </div>
           <div class="reputation-indicator">
-            <div><span>Empresas colaboradoras</span><strong>12</strong></div>
-            <span class="reputation-indicator__track"><span class="reputation-indicator__fill reputation-indicator__fill--blue reputation-indicator__fill--short" style="width: 40%"></span></span>
+            <div><span>Empresas colaboradoras</span><strong data-campo="empresas">0</strong></div>
+            <span class="reputation-indicator__track"><span class="reputation-indicator__fill reputation-indicator__fill--blue reputation-indicator__fill--short" data-barra="empresas"></span></span>
           </div>
           <div class="reputation-indicator">
-            <div><span>Años de experiencia</span><strong>3 años</strong></div>
-            <span class="reputation-indicator__track"><span class="reputation-indicator__fill reputation-indicator__fill--orange" style="width: 30%"></span></span>
+            <div><span>Años de experiencia</span><strong><b class="sl-valor" data-campo="anios">0</b> años</strong></div>
+            <span class="reputation-indicator__track"><span class="reputation-indicator__fill reputation-indicator__fill--orange" data-barra="anios"></span></span>
           </div>
         </div>
       </section>
@@ -290,6 +265,9 @@
     </section>
   </dialog>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/app.js"></script>
   <script src="../js/trabajador-perfil.js"></script>
 </body>
 </html>

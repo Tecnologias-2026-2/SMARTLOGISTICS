@@ -703,3 +703,27 @@
   justify-content: space-between;
   gap: 16px;
 }
+
+/* Motivo al rechazar una asignación directa (RF-22) */
+.reject-reason {
+  width: 100%;
+  min-height: 96px;
+  padding: 10px 12px;
+  border: 1px solid #cad5e2;
+  border-radius: 10px;
+  color: #0f172b;
+  font: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.reject-reason:focus-visible {
+  border-color: #155dfc;
+  outline: 2px solid #155dfc;
+  outline-offset: 1px;
+}
+
+.cancel-application-dialog__content > .sl-inline-error {
+  color: #b42318;
+  font-weight: 600;
+}

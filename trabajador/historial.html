@@ -36,8 +36,8 @@
         <a href="perfil.html" class="sidebar__profile">
           <span class="sidebar__avatar" aria-hidden="true">👤</span>
           <span class="sidebar__identity">
-            <strong>Carlos Rodríguez</strong>
-            <span>Auxiliar Logístico</span>
+            <strong>…</strong>
+            <span></span>
           </span>
         </a>
 
@@ -64,19 +64,19 @@
 
       <section class="history-metrics" aria-label="Resumen de experiencia laboral">
         <article class="history-metric history-metric--blue">
-          <div><p>Trabajos realizados</p><strong>47</strong></div>
+          <div><p>Trabajos realizados</p><strong data-campo="trabajos">0</strong></div>
           <span class="history-metric__icon" aria-hidden="true">💼</span>
         </article>
         <article class="history-metric history-metric--purple">
-          <div><p>Años de experiencia</p><strong>3</strong></div>
+          <div><p>Años de experiencia</p><strong data-campo="anios">0</strong></div>
           <span class="history-metric__icon" aria-hidden="true">📅</span>
         </article>
         <article class="history-metric history-metric--green">
-          <div><p>Empresas colaboradoras</p><strong>12</strong></div>
+          <div><p>Empresas colaboradoras</p><strong data-campo="empresas">0</strong></div>
           <span class="history-metric__icon" aria-hidden="true">🏢</span>
         </article>
         <article class="history-metric history-metric--orange">
-          <div><p>Calificación promedio</p><strong>4.8 <span aria-hidden="true">★</span></strong></div>
+          <div><p>Calificación promedio</p><strong><b class="sl-valor" data-campo="global">—</b> <span aria-hidden="true">★</span></strong></div>
           <span class="history-metric__icon" aria-hidden="true">⭐</span>
         </article>
       </section>
@@ -95,60 +95,17 @@
                 <th scope="col">Calificación</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><span class="history-job"><span class="history-job__icon" aria-hidden="true">🔧</span>Auxiliar de Montaje – Expo Construcción</span></td>
-                <td>Eventos Nova</td>
-                <td>10 Ago 2026</td>
-                <td><span class="history-category history-category--blue">Montaje</span></td>
-                <td class="history-pay">$80.000</td>
-                <td><span class="history-rating" aria-label="4.9 de 5 estrellas">★★★★★ <span>4.9</span></span></td>
-              </tr>
-              <tr>
-                <td><span class="history-job"><span class="history-job__icon" aria-hidden="true">📦</span>Operario de Almacén – Despachos</span></td>
-                <td>LogiMax S.A.S.</td>
-                <td>25 Jul 2026</td>
-                <td><span class="history-category history-category--green">Almacén</span></td>
-                <td class="history-pay">$65.000</td>
-                <td><span class="history-rating" aria-label="4.8 de 5 estrellas">★★★★★ <span>4.8</span></span></td>
-              </tr>
-              <tr>
-                <td><span class="history-job"><span class="history-job__icon" aria-hidden="true">🎪</span>Personal Logístico – Feria del Hogar</span></td>
-                <td>Eventos Nova</td>
-                <td>12 Jul 2026</td>
-                <td><span class="history-category history-category--purple">Evento</span></td>
-                <td class="history-pay">$85.000</td>
-                <td><span class="history-rating" aria-label="5.0 de 5 estrellas">★★★★★ <span>5.0</span></span></td>
-              </tr>
-              <tr>
-                <td><span class="history-job"><span class="history-job__icon" aria-hidden="true">🚚</span>Auxiliar de Reparto – Campaña Navidad</span></td>
-                <td>DeliverCo Colombia</td>
-                <td>20 Jun 2026</td>
-                <td><span class="history-category history-category--orange">Reparto</span></td>
-                <td class="history-pay">$70.000</td>
-                <td><span class="history-rating" aria-label="4.7 de 5 estrellas">★★★★★ <span>4.7</span></span></td>
-              </tr>
-              <tr>
-                <td><span class="history-job"><span class="history-job__icon" aria-hidden="true">🔧</span>Auxiliar de Montaje – Congreso Médico</span></td>
-                <td>Corporate Events &amp; Co.</td>
-                <td>5 Jun 2026</td>
-                <td><span class="history-category history-category--blue">Montaje</span></td>
-                <td class="history-pay">$90.000</td>
-                <td><span class="history-rating" aria-label="4.9 de 5 estrellas">★★★★★ <span>4.9</span></span></td>
-              </tr>
-              <tr>
-                <td><span class="history-job"><span class="history-job__icon" aria-hidden="true">📦</span>Operario de Almacén – Inventario Semestral</span></td>
-                <td>Almacenes Express</td>
-                <td>18 May 2026</td>
-                <td><span class="history-category history-category--green">Almacén</span></td>
-                <td class="history-pay">$65.000</td>
-                <td><span class="history-rating" aria-label="4.6 de 5 estrellas">★★★★★ <span>4.6</span></span></td>
-              </tr>
+            <tbody id="history-body">
+              <tr><td colspan="6" class="sl-empty">Cargando historial…</td></tr>
             </tbody>
           </table>
         </div>
       </section>
     </main>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/trabajador-historial.js"></script>
 </body>
 </html>
