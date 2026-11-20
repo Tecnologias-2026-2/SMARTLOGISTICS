@@ -36,7 +36,7 @@
         <a href="perfil.html" class="sidebar__profile">
           <span class="sidebar__avatar" aria-hidden="true">🏢</span>
           <span class="sidebar__identity">
-            <strong>Eventos Nova</strong>
+            <strong>…</strong>
             <span>Coordinador de empresa</span>
           </span>
         </a>
@@ -64,7 +64,7 @@
             <h1>Editar convocatoria</h1>
             <p>Modifica los datos de la convocatoria activa</p>
           </div>
-          <span class="status-pill status-pill--active"><span aria-hidden="true">●</span> Activa</span>
+          <span class="status-pill status-pill--active" id="posting-status"><span aria-hidden="true">●</span> Activa</span>
         </header>
 
         <form class="posting-form" id="edit-posting-form" novalidate>
@@ -97,12 +97,12 @@
           <section class="posting-card" aria-labelledby="schedule-title">
             <h2 id="schedule-title">Fecha y horario</h2>
             <div class="detail-list">
-            <div class="detail-row" data-field="date" data-kind="text">
+            <div class="detail-row" data-field="date" data-kind="date">
               <span class="detail-row__label" id="label-date">Fecha</span>
               <div class="detail-row__value" data-value></div>
               <button class="detail-row__edit" type="button" aria-describedby="label-date">✏️ Editar</button>
             </div>
-            <div class="detail-row" data-field="hours" data-kind="text">
+            <div class="detail-row" data-field="hours" data-kind="hours">
               <span class="detail-row__label" id="label-hours">Horario</span>
               <div class="detail-row__value" data-value></div>
               <button class="detail-row__edit" type="button" aria-describedby="label-hours">✏️ Editar</button>
@@ -156,6 +156,10 @@
     </div>
   </dialog>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/empresa-comun.js"></script>
   <script src="../js/empresa-editar-convocatoria.js"></script>
 </body>
 </html>

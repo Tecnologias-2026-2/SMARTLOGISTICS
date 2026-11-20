@@ -1,9 +1,9 @@
-// Empresa · Crear convocatoria (RF-13): validación y publicación.
-// La convocatoria publicada se guarda en el navegador para que aparezca
-// en el listado de convocatorias (empresa/convocatorias.html).
+// Empresa · Crear convocatoria (RF-13): validación y publicación en la base
+// de datos mediante la función guardar_convocatoria.
 
-const POSTINGS_KEY = "smart-logistics:convocatorias-nuevas";
+const CATEGORY_VALUES = { "Evento": "EVENTO", "Almacén": "ALMACEN", "Montaje": "MONTAJE", "Reparto": "REPARTO" };
 const form = document.querySelector("#create-posting-form");
+const panelReady = SL.iniciarPanel("EMPRESA");
 const publishedDialog = document.querySelector("#published-dialog");
 
 const field = (id) => document.querySelector(`#${id}`);
@@ -62,18 +62,21 @@ function formatDate(iso) {
     .replace(/^(\d+) (\w)/, (_, d, m) => `${d} ${m.toUpperCase()}`);
 }
 
-function savePosting(posting) {
-  try {
-    const stored = JSON.parse(localStorage.getItem(POSTINGS_KEY)) || [];
-    stored.push(posting);
-    localStorage.setItem(POSTINGS_KEY, JSON.stringify(stored));
-  } catch (error) {
-    console.warn("No se pudo guardar la convocatoria en el navegador.", error);
+function showSubmitError(message) {
+  let error = form.querySelector(".posting-form__error");
+  if (!error) {
+    error = document.createElement("p");
+    error.className = "posting-field__error posting-form__error";
+    error.setAttribute("role", "alert");
+    form.querySelector(".posting-actions").before(error);
   }
+  error.textContent = message || "";
+  error.hidden = !message;
 }
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
+  showSubmitError("");
   const errors = validate();
   const firstInvalid = Object.keys(errors)[0];
   if (firstInvalid) {
@@ -82,7 +85,6 @@ form.addEventListener("submit", (event) => {
   }
 
   const posting = {
-    id: `nueva-${Date.now()}`,
     title: field("job-title").value.trim(),
     category: field("category").value,
     location: field("location").value.trim(),
@@ -93,9 +95,30 @@ form.addEventListener("submit", (event) => {
     workers: Number(field("workers").value),
     pay: formatPay(field("salary").value),
     description: field("description").value.trim(),
-    requirements: field("requirements").value.trim()
+    requirements: field("requirements").value.split(/\r?\n|;/).map((line) => line.replace(/^[-•*]\s*/, "").trim()).filter(Boolean)
   };
-  savePosting(posting);
+
+  const submit = form.querySelector('[type="submit"]');
+  submit.disabled = true;
+  await panelReady;
+  const { error } = await sb.rpc("guardar_convocatoria", {
+    p_id: null,
+    p_titulo: posting.title,
+    p_categoria: CATEGORY_VALUES[posting.category],
+    p_ubicacion: posting.location,
+    p_fecha: posting.date,
+    p_hora_inicio: posting.start,
+    p_hora_fin: posting.end,
+    p_plazas: posting.workers,
+    p_remuneracion: Number(field("salary").value.replace(/\D/g, "")),
+    p_descripcion: posting.description,
+    p_requisitos: posting.requirements
+  });
+  submit.disabled = false;
+  if (error) {
+    showSubmitError(SL.mensajeError(error));
+    return;
+  }
 
   const summary = document.querySelector("#published-summary");
   summary.innerHTML = "";

@@ -1,157 +1,136 @@
-// Empresa · Candidatos: búsqueda, filtros, selección, descarte,
-// asignación directa (RF-19 a RF-21) y perfil del candidato.
-
-const STORAGE_KEY = "smart-logistics:candidatos-feria";
-const TOTAL_PLACES = 12;
-
-const CANDIDATES = {
-  carlos: {
-    initials: "CR", color: "purple", name: "Carlos Rodríguez", role: "Auxiliar Logístico",
-    rating: 4.8, logistics: 4.9, coordination: 4.6, years: 3, jobs: 47, companies: 12, punctuality: "96%",
-    skills: ["Montaje de stands", "Carga y descarga", "Logística de eventos"],
-    history: [
-      ["🔧", "Auxiliar de Montaje – Expo Construcción", "Eventos Nova · 10 Ago 2026", "4.9"],
-      ["📦", "Operario de Almacén – Despachos", "LogiMax S.A.S. · 25 Jul 2026", "4.8"],
-      ["🎪", "Personal Logístico – Feria del Hogar", "Eventos Nova · 12 Jul 2026", "5.0"],
-      ["🚚", "Auxiliar de Reparto – Campaña Navidad", "DeliverCo Colombia · 20 Jun 2026", "4.7"]
-    ]
-  },
-  luisa: {
-    initials: "LM", color: "pink", name: "Luisa Martínez", role: "Coordinadora de Eventos",
-    rating: 4.6, logistics: 4.7, coordination: 4.8, years: 5, jobs: 82, companies: 18, punctuality: "98%",
-    skills: ["Coordinación de equipos", "Manejo de personal", "Excel avanzado"],
-    history: [
-      ["🔧", "Auxiliar de Montaje – Expo Construcción", "Eventos Nova · 10 Ago 2026", "4.9"],
-      ["📦", "Operario de Almacén – Despachos", "LogiMax S.A.S. · 25 Jul 2026", "4.8"],
-      ["🎪", "Personal Logístico – Feria del Hogar", "Eventos Nova · 12 Jul 2026", "5.0"],
-      ["🚚", "Auxiliar de Reparto – Campaña Navidad", "DeliverCo Colombia · 20 Jun 2026", "4.7"]
-    ]
-  },
-  andres: {
-    initials: "AG", color: "indigo", name: "Andrés García", role: "Auxiliar de Almacén",
-    rating: 4.3, logistics: 4.4, coordination: 4.1, years: 2, jobs: 28, companies: 7, punctuality: "91%",
-    skills: ["Manejo de inventario", "Montacargas", "Carga y descarga"],
-    history: [
-      ["📦", "Operario de Almacén – Despachos", "LogiMax S.A.S. · 25 Jul 2026", "4.4"],
-      ["🚚", "Auxiliar de Reparto – Campaña Navidad", "DeliverCo Colombia · 20 Jun 2026", "4.3"],
-      ["📦", "Auxiliar de Bodega – Inventario Semestral", "Almacenes Express · 18 May 2026", "4.2"]
-    ]
-  },
-  maria: {
-    initials: "MT", color: "violet", name: "María Torres", role: "Auxiliar Logística",
-    rating: 4.9, logistics: 5.0, coordination: 4.8, years: 6, jobs: 103, companies: 21, punctuality: "99%",
-    skills: ["Logística de eventos", "Control de accesos", "Atención al cliente"],
-    history: [
-      ["🎪", "Personal Logístico – Feria del Hogar", "Eventos Nova · 12 Jul 2026", "5.0"],
-      ["🔧", "Auxiliar de Montaje – Congreso Médico", "Corporate Events & Co. · 5 Jun 2026", "4.9"],
-      ["🎪", "Auxiliar Logística – Festival de Verano", "Eventos Nova · 20 May 2026", "4.8"]
-    ]
-  },
-  diego: {
-    initials: "DV", color: "green", name: "Diego Vargas", role: "Auxiliar Logístico",
-    rating: 4.1, logistics: 4.2, coordination: 3.9, years: 1, jobs: 14, companies: 4, punctuality: "88%",
-    skills: ["Carga y descarga", "Montaje de stands"],
-    history: [
-      ["🔧", "Auxiliar de Montaje – Expo Construcción", "Eventos Nova · 10 Ago 2026", "4.0"],
-      ["🚚", "Auxiliar de Reparto – Última Milla", "DeliverCo Colombia · 2 Jul 2026", "4.2"]
-    ]
-  },
-  sandra: {
-    initials: "SP", color: "blue", name: "Sandra Pérez", role: "Operaria de Almacén",
-    rating: 4.5, logistics: 4.6, coordination: 4.3, years: 4, jobs: 61, companies: 9, punctuality: "94%",
-    skills: ["Manejo de inventario", "Picking y packing", "Excel básico"],
-    history: [
-      ["📦", "Operario de Almacén – Despachos", "LogiMax S.A.S. · 25 Jul 2026", "4.5"],
-      ["📦", "Operaria de Almacén – Inventario Semestral", "Almacenes Express · 18 May 2026", "4.6"]
-    ]
-  }
-};
-
-const STATUS_LABELS = { review: "En revisión", selected: "Seleccionado", discarded: "Descartado" };
+// Empresa · Candidatos: búsqueda y filtros (RF-19), selección o descarte
+// (RF-20), asignación directa con aviso de cruce de horario (RF-21) y perfil
+// del candidato. Se abre como candidatos.html?id=<convocatoria>.
 
 const listView = document.querySelector("#candidates-list-view");
 const profileView = document.querySelector("#candidate-profile");
-const rows = [...document.querySelectorAll("#candidates-body tr")];
+const tableBody = document.querySelector("#candidates-body");
 const searchInput = document.querySelector("#candidate-search");
 const minRatingSelect = document.querySelector("#candidate-min-rating");
+const postingSelect = document.querySelector("#posting-select");
 const tabs = [...document.querySelectorAll(".candidates-tab")];
 const emptyMessage = document.querySelector("#candidates-empty");
 const notice = document.querySelector("#candidates-notice");
 const dialog = document.querySelector("#candidate-dialog");
 const confirmButton = document.querySelector("#dialog-confirm");
+const dialogWarning = document.querySelector("#dialog-warning");
+const assignDialog = document.querySelector("#assign-dialog");
+const assignForm = document.querySelector("#assign-form");
+const assignSelect = document.querySelector("#assign-worker");
+const assignWarning = document.querySelector("#assign-warning");
+const assignError = document.querySelector("#assign-error");
+const openAssignButton = document.querySelector("#open-assign");
 
+let ctx = null;
+let postings = [];
+let posting = null;
+let candidates = [];
 let activeFilter = "all";
 let pendingAction = null;
+const profileCache = new Map();
 
-// ---------- Estado (se guarda en el navegador para conservarlo al navegar) ----------
-function defaultState() {
-  return Object.fromEntries(rows.map((row) => [row.dataset.id, { status: row.dataset.status, assigned: false }]));
+const isOpen = () => posting && SL.estadoConvocatoria(posting).clave === "active";
+const findCandidate = (workerId) => candidates.find((candidate) => candidate.id_trabajador === workerId);
+
+// ---------- Avisos ----------
+function showNotice(title, text, isError = false) {
+  document.querySelector("#candidates-notice-title").textContent = title;
+  document.querySelector("#candidates-notice-text").textContent = text;
+  document.querySelector("#candidates-notice .notice-banner__icon").textContent = isError ? "!" : "✓";
+  notice.hidden = false;
 }
 
-function loadState() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if (saved && typeof saved === "object") return { ...defaultState(), ...saved };
-  } catch (error) {
-    console.warn("No se pudo leer el estado guardado de candidatos.", error);
-  }
-  return defaultState();
-}
-
-function saveState() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch (error) {
-    console.warn("No se pudo guardar el estado de candidatos.", error);
-  }
-}
-
-const state = loadState();
-
-// ---------- Render de la tabla ----------
-function renderActions(id) {
-  const { status, assigned } = state[id];
-  const container = document.querySelector(`tr[data-id="${id}"] [data-actions]`);
-  const parts = [`<a class="candidate-action candidate-action--link" href="#candidato-${id}">Ver perfil</a>`];
-  if (status === "review") {
-    parts.push(
-      `<button class="candidate-action candidate-action--primary" type="button" data-action="select" data-id="${id}">Seleccionar</button>`,
-      `<button class="candidate-action candidate-action--muted" type="button" data-action="discard" data-id="${id}">Descartar</button>`,
-      assigned
-        ? `<button class="candidate-action candidate-action--outline" type="button" disabled>Asignación enviada</button>`
-        : `<button class="candidate-action candidate-action--outline" type="button" data-action="assign" data-id="${id}">Asignar directamente</button>`
-    );
-  }
-  container.innerHTML = parts.join("");
-}
-
-function renderRow(row) {
-  const { status } = state[row.dataset.id];
-  row.dataset.status = status;
-  const pill = row.querySelector("[data-status-label]");
-  pill.className = `status-pill status-pill--${status}`;
-  pill.innerHTML = `<span aria-hidden="true">●</span> ${STATUS_LABELS[status]}`;
-  renderActions(row.dataset.id);
-}
-
-function updateCounts() {
-  const counts = { all: rows.length, review: 0, selected: 0, discarded: 0 };
-  Object.values(state).forEach(({ status }) => { counts[status] += 1; });
-  document.querySelectorAll("[data-count]").forEach((node) => {
-    node.textContent = counts[node.dataset.count];
+// ---------- Datos ----------
+async function loadPostings() {
+  postings = await Empresa.convocatorias(ctx.empresa.id);
+  postings.sort((a, b) => {
+    const aOpen = a.fecha >= SL.hoyISO();
+    const bOpen = b.fecha >= SL.hoyISO();
+    if (aOpen !== bOpen) return aOpen ? -1 : 1;
+    return aOpen ? a.fecha.localeCompare(b.fecha) : b.fecha.localeCompare(a.fecha);
   });
-  const covered = counts.selected;
-  document.querySelector("#covered-places").textContent = `${covered}/${TOTAL_PLACES}`;
-  const available = TOTAL_PLACES - covered;
-  document.querySelector("#available-places").textContent =
-    `${available} ${available === 1 ? "plaza disponible" : "plazas disponibles"}`;
+  postingSelect.replaceChildren(...postings.map((item) =>
+    new Option(`${item.titulo} · ${SL.fecha(item.fecha)}`, item.id)));
+}
+
+async function loadCandidates() {
+  candidates = await sb.from("postulacion")
+    .select("*, trabajador(*, perfil(nombres, apellidos, avatar_url))")
+    .eq("id_convocatoria", posting.id)
+    .order("created_at")
+    .then(SL.datos);
+  // Recarga las plazas por si cambiaron
+  posting = await sb.from("convocatoria").select("*").eq("id", posting.id).single().then(SL.datos);
+}
+
+// ---------- Tabla ----------
+function renderHeader() {
+  const covered = posting.plazas_totales - posting.plazas_disponibles;
+  document.querySelector("#posting-name").textContent = posting.titulo;
+  document.querySelector("#covered-places").textContent = `${covered}/${posting.plazas_totales}`;
+  const state = SL.estadoConvocatoria(posting);
+  document.querySelector("#available-places").textContent = state.clave === "active"
+    ? `${posting.plazas_disponibles} ${posting.plazas_disponibles === 1 ? "plaza disponible" : "plazas disponibles"}`
+    : `Convocatoria ${state.label.toLocaleLowerCase("es")}`;
+  document.querySelector("#candidates-table-caption").textContent = `Candidatos postulados a ${posting.titulo}`;
+  openAssignButton.disabled = !isOpen();
+}
+
+function renderActions(candidate) {
+  const state = Empresa.estadoCandidato(candidate);
+  const id = candidate.id_trabajador;
+  const parts = [`<a class="candidate-action candidate-action--link" href="#candidato-${id}">Ver perfil</a>`];
+  if (candidate.estado === "EN_REVISION" && isOpen()) {
+    if (candidate.respuesta_trabajador === "PENDIENTE") {
+      parts.push('<button class="candidate-action candidate-action--outline" type="button" disabled>Asignación enviada</button>');
+    } else {
+      parts.push(
+        `<button class="candidate-action candidate-action--primary" type="button" data-action="select" data-id="${id}">Seleccionar</button>`,
+        `<button class="candidate-action candidate-action--muted" type="button" data-action="discard" data-id="${id}">Descartar</button>`,
+        `<button class="candidate-action candidate-action--outline" type="button" data-action="assign" data-id="${id}">Asignar directamente</button>`
+      );
+    }
+  }
+  return { state, html: parts.join("") };
+}
+
+function renderTable() {
+  tableBody.innerHTML = candidates.map((candidate) => {
+    const worker = candidate.trabajador;
+    const person = worker.perfil;
+    const values = SL.indicadores(worker);
+    const { state, html } = renderActions(candidate);
+    const rating = worker.trabajos_realizados ? Number(worker.calificacion_global) : 0;
+    return `
+      <tr data-id="${candidate.id_trabajador}" data-status="${state.clave}" data-rating="${rating}">
+        <th scope="row">
+          <div class="candidate-cell">
+            <span class="candidate-avatar candidate-avatar--${SL.colorAvatar(candidate.id_trabajador)}" aria-hidden="true">${SL.escapeHTML(SL.iniciales(person))}</span>
+            <span class="candidate-cell__text">
+              <strong>${SL.escapeHTML(SL.nombreCompleto(person))}</strong>
+              <span>${SL.escapeHTML([worker.cargo, worker.ubicacion].filter(Boolean).join(" · "))}</span>
+            </span>
+          </div>
+        </th>
+        <td><span class="rating" aria-label="Calificación ${values.global} de 5"><span class="rating__stars" aria-hidden="true">★★★★★</span> <strong>${values.global}</strong></span></td>
+        <td class="candidate-exp">${values.anios} ${values.anios === "1" ? "año" : "años"} · ${values.trabajos} trabajos</td>
+        <td><span class="candidate-punctuality">${values.puntualidad}</span></td>
+        <td><span class="status-pill status-pill--${state.clave}"><span aria-hidden="true">●</span> ${state.label}</span></td>
+        <td><div class="candidate-actions">${html}</div></td>
+      </tr>`;
+  }).join("");
+
+  const counts = { all: candidates.length, review: 0, selected: 0, discarded: 0 };
+  candidates.forEach((candidate) => { counts[Empresa.estadoCandidato(candidate).clave] += 1; });
+  document.querySelectorAll("[data-count]").forEach((node) => { node.textContent = counts[node.dataset.count]; });
+  applyFilters();
 }
 
 function applyFilters() {
   const term = searchInput.value.trim().toLocaleLowerCase("es");
   const minRating = Number(minRatingSelect.value);
   let visible = 0;
-  rows.forEach((row) => {
+  tableBody.querySelectorAll("tr").forEach((row) => {
     const matches =
       (activeFilter === "all" || row.dataset.status === activeFilter) &&
       Number(row.dataset.rating) >= minRating &&
@@ -160,93 +139,176 @@ function applyFilters() {
     if (matches) visible += 1;
   });
   emptyMessage.hidden = visible > 0;
+  emptyMessage.textContent = candidates.length
+    ? "No hay candidatos que coincidan con la búsqueda o los filtros."
+    : "Aún no hay candidatos para esta convocatoria.";
 }
 
-function renderAll() {
-  rows.forEach(renderRow);
-  updateCounts();
-  applyFilters();
-}
-
-// ---------- Avisos ----------
-function showNotice(title, text) {
-  document.querySelector("#candidates-notice-title").textContent = title;
-  document.querySelector("#candidates-notice-text").textContent = text;
-  notice.hidden = false;
+async function refresh() {
+  await loadCandidates();
+  renderHeader();
+  renderTable();
 }
 
 // ---------- Diálogo de confirmación ----------
 const DIALOG_COPY = {
   select: {
-    title: "Confirmar selección",
-    confirm: "Confirmar selección",
-    tone: "sl-btn--primary",
+    title: "Confirmar selección", confirm: "Confirmar selección", tone: "sl-btn--primary",
     text: (name) => `¿Confirmas la selección de ${name}? Se reducirá una plaza disponible y el trabajador recibirá una notificación.`
   },
   discard: {
-    title: "Confirmar descarte",
-    confirm: "Confirmar descarte",
-    tone: "sl-btn--danger",
+    title: "Confirmar descarte", confirm: "Confirmar descarte", tone: "sl-btn--danger",
     text: (name) => `¿Confirmas el descarte de ${name}? El trabajador recibirá una notificación de no selección.`
   },
   assign: {
-    title: "Asignación directa",
-    confirm: "Confirmar asignación",
-    tone: "sl-btn--primary",
-    text: () => "La asignación quedará como \"Pendiente de respuesta\" hasta que el trabajador la acepte o rechace."
+    title: "Asignación directa", confirm: "Confirmar asignación", tone: "sl-btn--primary",
+    text: () => "La asignación quedará como «Pendiente de respuesta» hasta que el trabajador la acepte o la rechace."
   }
 };
 
-function openDialog(action, id) {
-  const candidate = CANDIDATES[id];
-  const copy = DIALOG_COPY[action];
-  pendingAction = { action, id };
-  document.querySelector("#candidate-dialog-title").textContent = copy.title;
-  const avatar = document.querySelector("#dialog-avatar");
-  avatar.textContent = candidate.initials;
-  avatar.className = `candidate-avatar candidate-avatar--lg candidate-avatar--${candidate.color}`;
-  document.querySelector("#dialog-name").textContent = candidate.name;
-  document.querySelector("#dialog-role").textContent = candidate.role;
-  document.querySelector("#dialog-rating").textContent = candidate.rating.toFixed(1);
-  document.querySelector("#dialog-job").hidden = action !== "assign";
-  document.querySelector("#dialog-text").textContent = copy.text(candidate.name);
-  confirmButton.textContent = copy.confirm;
-  confirmButton.className = `sl-btn ${copy.tone}`;
-  dialog.returnValue = "";
-  dialog.showModal();
+function fillDialogJob() {
+  const job = document.querySelector("#dialog-job");
+  job.replaceChildren();
+  const title = document.createElement("strong");
+  title.textContent = posting.titulo;
+  job.append(title);
+  [`📅 ${SL.fecha(posting.fecha)}`, `⏱️ ${SL.horario(posting)}`, `📍 ${posting.ubicacion}`, `💰 ${SL.dinero(posting.remuneracion)} COP`]
+    .forEach((text) => {
+      const line = document.createElement("span");
+      line.textContent = text;
+      job.append(line);
+    });
 }
 
-function confirmAction({ action, id }) {
-  const name = CANDIDATES[id].name;
-  if (action === "select") {
-    const selected = Object.values(state).filter(({ status }) => status === "selected").length;
-    if (selected >= TOTAL_PLACES) {
-      showNotice("No quedan plazas disponibles", "Libera una plaza antes de seleccionar a otro candidato.");
-      return;
-    }
-    state[id].status = "selected";
-    showNotice("Candidato seleccionado", `${name} fue seleccionado y recibirá una notificación.`);
-  } else if (action === "discard") {
-    state[id].status = "discarded";
-    showNotice("Candidato descartado", `${name} recibirá una notificación de no selección.`);
-  } else if (action === "assign") {
-    state[id].assigned = true;
-    showNotice("Asignación directa enviada", "La asignación fue enviada al trabajador. Está pendiente de su respuesta.");
+async function scheduleClash(workerId) {
+  const { data, error } = await sb.rpc("cruce_horario", { p_convocatoria: posting.id, p_trabajador: workerId });
+  if (error) {
+    console.warn("No se pudo revisar el cruce de horario.", error);
+    return false;
   }
-  saveState();
-  renderAll();
+  return data;
+}
+
+async function openDialog(action, workerId) {
+  const candidate = findCandidate(workerId);
+  const person = candidate.trabajador.perfil;
+  const copy = DIALOG_COPY[action];
+  pendingAction = { action, candidate };
+  document.querySelector("#candidate-dialog-title").textContent = copy.title;
+  const avatar = document.querySelector("#dialog-avatar");
+  avatar.textContent = SL.iniciales(person);
+  avatar.className = `candidate-avatar candidate-avatar--lg candidate-avatar--${SL.colorAvatar(workerId)}`;
+  document.querySelector("#dialog-name").textContent = SL.nombreCompleto(person);
+  document.querySelector("#dialog-role").textContent = candidate.trabajador.cargo;
+  document.querySelector("#dialog-rating").textContent = SL.indicadores(candidate.trabajador).global;
+  document.querySelector("#dialog-job").hidden = action !== "assign";
+  if (action === "assign") fillDialogJob();
+  document.querySelector("#dialog-text").textContent = copy.text(SL.nombreCompleto(person));
+  confirmButton.textContent = copy.confirm;
+  confirmButton.className = `sl-btn ${copy.tone}`;
+  dialogWarning.hidden = true;
+  dialog.returnValue = "";
+  dialog.showModal();
+
+  if (action === "assign" || action === "select") {
+    if (await scheduleClash(workerId)) {
+      dialogWarning.textContent = "⚠️ Este trabajador ya está seleccionado en otra convocatoria que se cruza con este horario.";
+      dialogWarning.hidden = false;
+    }
+  }
+}
+
+async function confirmAction({ action, candidate }) {
+  const name = SL.nombreCompleto(candidate.trabajador.perfil);
+  let response;
+  if (action === "assign") {
+    response = await sb.rpc("asignar_directamente", { p_convocatoria: posting.id, p_trabajador: candidate.id_trabajador });
+  } else {
+    response = await sb.rpc("decidir_postulacion", { p_postulacion: candidate.id, p_seleccionar: action === "select" });
+  }
+  if (response.error) {
+    showNotice("No se pudo completar la acción", SL.mensajeError(response.error), true);
+    return;
+  }
+  if (action === "select") showNotice("Candidato seleccionado", `${name} fue seleccionado y recibirá una notificación.`);
+  if (action === "discard") showNotice("Candidato descartado", `${name} recibirá una notificación de no selección.`);
+  if (action === "assign") showNotice("Asignación directa enviada", `La asignación fue enviada a ${name}. Está pendiente de su respuesta.`);
+  await refresh();
 }
 
 dialog.addEventListener("close", () => {
-  if (dialog.returnValue === "confirm" && pendingAction) confirmAction(pendingAction);
-  const trigger = pendingAction && document.querySelector(`tr[data-id="${pendingAction.id}"] .candidate-action--link`);
+  const action = pendingAction;
   pendingAction = null;
+  if (dialog.returnValue === "confirm" && action) {
+    confirmAction(action).catch((error) => showNotice("No se pudo completar la acción", SL.mensajeError(error), true));
+  }
+  const trigger = action && tableBody.querySelector(`tr[data-id="${action.candidate.id_trabajador}"] .candidate-action--link`);
   if (trigger) trigger.focus();
 });
 
-document.querySelector("#candidates-body").addEventListener("click", (event) => {
+tableBody.addEventListener("click", (event) => {
   const button = event.target.closest("button[data-action]");
   if (button) openDialog(button.dataset.action, button.dataset.id);
+});
+
+// ---------- Asignar a un trabajador que no se postuló (RF-21) ----------
+openAssignButton.addEventListener("click", async () => {
+  assignError.hidden = true;
+  assignWarning.hidden = true;
+  assignSelect.replaceChildren(new Option("Cargando trabajadores…", ""));
+  assignDialog.showModal();
+  try {
+    const workers = await sb.from("trabajador")
+      .select("id, cargo, calificacion_global, trabajos_realizados, perfil(nombres, apellidos)")
+      .order("calificacion_global", { ascending: false })
+      .then(SL.datos);
+    const taken = new Set(candidates.map((candidate) => candidate.id_trabajador));
+    const available = workers.filter((worker) => !taken.has(worker.id));
+    assignSelect.replaceChildren(new Option(available.length ? "Selecciona un trabajador" : "No hay más trabajadores disponibles", ""));
+    assignSelect.options[0].disabled = true;
+    assignSelect.options[0].selected = true;
+    available.forEach((worker) => {
+      const rating = worker.trabajos_realizados ? ` · ★ ${SL.calificacion(worker.calificacion_global)}` : "";
+      assignSelect.append(new Option(`${SL.nombreCompleto(worker.perfil)} · ${worker.cargo}${rating}`, worker.id));
+    });
+  } catch (error) {
+    assignError.textContent = SL.mensajeError(error);
+    assignError.hidden = false;
+  }
+});
+
+assignSelect.addEventListener("change", async () => {
+  assignWarning.hidden = true;
+  if (assignSelect.value && await scheduleClash(assignSelect.value)) {
+    assignWarning.textContent = "⚠️ Este trabajador ya está seleccionado en otra convocatoria que se cruza con este horario.";
+    assignWarning.hidden = false;
+  }
+});
+
+document.querySelectorAll("[data-close-assign]").forEach((button) => {
+  button.addEventListener("click", () => assignDialog.close());
+});
+
+assignForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (!assignSelect.value) {
+    assignError.textContent = "Selecciona el trabajador que quieres asignar.";
+    assignError.hidden = false;
+    return;
+  }
+  const submit = assignForm.querySelector('[type="submit"]');
+  const name = assignSelect.selectedOptions[0].textContent.split(" · ")[0];
+  submit.disabled = true;
+  const { error } = await sb.rpc("asignar_directamente", { p_convocatoria: posting.id, p_trabajador: assignSelect.value });
+  submit.disabled = false;
+  if (error) {
+    assignError.textContent = SL.mensajeError(error);
+    assignError.hidden = false;
+    return;
+  }
+  assignDialog.close();
+  showNotice("Asignación directa enviada", `La asignación fue enviada a ${name}. Está pendiente de su respuesta.`);
+  await refresh();
 });
 
 // ---------- Filtros ----------
@@ -264,67 +326,116 @@ tabs.forEach((tab) => {
   });
 });
 
+postingSelect.addEventListener("change", async () => {
+  posting = postings.find((item) => String(item.id) === postingSelect.value);
+  history.replaceState("", document.title, `${window.location.pathname}?id=${posting.id}`);
+  notice.hidden = true;
+  await refresh();
+});
+
 // ---------- Perfil del candidato (#candidato-<id>) ----------
-function fillProfile(id) {
-  const c = CANDIDATES[id];
-  const { status } = state[id];
+async function fillProfile(candidate) {
+  const worker = candidate.trabajador;
+  const person = worker.perfil;
+  const values = SL.indicadores(worker);
+  const state = Empresa.estadoCandidato(candidate);
   const avatar = document.querySelector("#profile-avatar");
-  avatar.textContent = c.initials;
-  avatar.className = `profile-card__avatar candidate-avatar--${c.color}`;
-  document.querySelector("#profile-name").textContent = c.name;
-  document.querySelector("#profile-role").textContent = c.role;
+  avatar.className = `profile-card__avatar candidate-avatar--${SL.colorAvatar(candidate.id_trabajador)}`;
+  SL.pintarAvatar(avatar, person);
+  document.querySelector("#profile-name").textContent = SL.nombreCompleto(person);
+  document.querySelector("#profile-role").textContent = worker.cargo;
+  document.querySelector("#profile-location").textContent = worker.ubicacion || "Sin ubicación";
   const pill = document.querySelector("#profile-status");
-  pill.className = `status-pill status-pill--${status}`;
-  pill.innerHTML = `<span aria-hidden="true">●</span> ${STATUS_LABELS[status]}`;
+  pill.className = `status-pill status-pill--${state.clave}`;
+  pill.innerHTML = `<span aria-hidden="true">●</span> ${state.label}`;
 
   const stars = '<span class="rating__stars" aria-hidden="true">★★★★★</span>';
   document.querySelector("#profile-ratings").innerHTML = [
-    ["Global", c.rating], ["Logística", c.logistics], ["Coordinación", c.coordination]
-  ].map(([label, value]) => `<div><dd class="rating">${stars} <strong>${value.toFixed(1)}</strong></dd><dt>${label}</dt></div>`).join("");
-
+    ["Global", values.global], ["Logística", values.logistica], ["Coordinación", values.coordinador]
+  ].map(([label, value]) => `<div><dd class="rating">${stars} <strong>${value}</strong></dd><dt>${label}</dt></div>`).join("");
   document.querySelector("#profile-stats").innerHTML = [
-    ["Años exp.", c.years], ["Trabajos", c.jobs], ["Empresas", c.companies], ["Puntualidad", c.punctuality]
+    ["Años exp.", values.anios], ["Trabajos", values.trabajos], ["Empresas", values.empresas], ["Puntualidad", values.puntualidad]
   ].map(([label, value]) => `<div><dd>${value}</dd><dt>${label}</dt></div>`).join("");
 
-  document.querySelector("#profile-skills").innerHTML = c.skills.map((skill) => `<li>${skill}</li>`).join("");
-  document.querySelector("#profile-history").innerHTML = c.history.map(([icon, title, meta, score]) => `
-    <li>
-      <span class="profile-history__icon" aria-hidden="true">${icon}</span>
-      <span class="profile-history__text"><strong>${title}</strong><span>${meta}</span></span>
-      <span class="rating" aria-label="Calificación ${score} de 5">${stars} <strong>${score}</strong></span>
-    </li>`).join("");
-
   const outcome = document.querySelector("#profile-outcome");
-  outcome.hidden = status === "review";
-  outcome.classList.toggle("profile-outcome--discarded", status === "discarded");
-  document.querySelector("#profile-outcome .profile-outcome__icon").textContent = status === "discarded" ? "✕" : "✓";
-  document.querySelector("#profile-outcome-title").textContent =
-    status === "discarded" ? "Candidato descartado" : "Candidato seleccionado";
-  document.querySelector("#profile-outcome-text").textContent = status === "discarded"
-    ? `${c.name} no fue seleccionado para este trabajo.`
-    : `${c.name} ya está confirmado para este trabajo.`;
+  outcome.hidden = state.clave === "review";
+  outcome.classList.toggle("profile-outcome--discarded", state.clave === "discarded");
+  document.querySelector("#profile-outcome .profile-outcome__icon").textContent = state.clave === "discarded" ? "✕" : "✓";
+  document.querySelector("#profile-outcome-title").textContent = state.clave === "discarded" ? `Candidato: ${state.label.toLocaleLowerCase("es")}` : "Candidato seleccionado";
+  document.querySelector("#profile-outcome-text").textContent = state.clave === "discarded"
+    ? `${SL.nombreCompleto(person)} no fue seleccionado para este trabajo.`
+    : `${SL.nombreCompleto(person)} ya está confirmado para este trabajo.`;
+
+  const skillsList = document.querySelector("#profile-skills");
+  const historyList = document.querySelector("#profile-history");
+  if (!profileCache.has(candidate.id_trabajador)) {
+    skillsList.innerHTML = "<li>Cargando…</li>";
+    historyList.innerHTML = "";
+    const [skills, jobs] = await Promise.all([
+      sb.from("trabajador_habilidad").select("orden, habilidad(nombre)").eq("id_trabajador", candidate.id_trabajador).then(SL.datos),
+      sb.from("historial_laboral").select("*").eq("id_trabajador", candidate.id_trabajador)
+        .order("fecha", { ascending: false }).limit(5).then(SL.datos)
+    ]);
+    profileCache.set(candidate.id_trabajador, { skills: SL.ordenar(skills).map((row) => row.habilidad.nombre), jobs });
+  }
+  const { skills, jobs } = profileCache.get(candidate.id_trabajador);
+  skillsList.innerHTML = skills.length
+    ? skills.map((skill) => `<li>${SL.escapeHTML(skill)}</li>`).join("")
+    : "<li>Sin habilidades registradas</li>";
+  historyList.innerHTML = jobs.length
+    ? jobs.map((job) => {
+      const cat = SL.categoria(job.categoria);
+      const score = job.calificacion == null ? "—" : SL.calificacion(job.calificacion);
+      return `
+        <li>
+          <span class="profile-history__icon" aria-hidden="true">${cat.icon}</span>
+          <span class="profile-history__text"><strong>${SL.escapeHTML(job.evento)}</strong><span>${SL.escapeHTML(job.empresa)} · ${SL.fecha(job.fecha)}</span></span>
+          <span class="rating" aria-label="Calificación ${score} de 5">${stars} <strong>${score}</strong></span>
+        </li>`;
+    }).join("")
+    : '<li class="sl-empty">Sin trabajos calificados todavía.</li>';
 }
 
 function route() {
-  const match = window.location.hash.match(/^#candidato-([a-z]+)$/);
-  const id = match && CANDIDATES[match[1]] ? match[1] : null;
-  listView.hidden = Boolean(id);
-  profileView.hidden = !id;
-  const scroller = document.querySelector(".dashboard__main");
-  scroller.scrollTo(0, 0);
+  const match = window.location.hash.match(/^#candidato-([0-9a-f-]{36})$/);
+  const candidate = match ? findCandidate(match[1]) : null;
+  listView.hidden = Boolean(candidate);
+  profileView.hidden = !candidate;
+  document.querySelector(".dashboard__main").scrollTo(0, 0);
   window.scrollTo(0, 0);
-  if (id) {
-    fillProfile(id);
+  if (candidate) {
+    fillProfile(candidate).catch((error) => console.error("No fue posible cargar el perfil del candidato.", error));
     document.querySelector("#profile-name").focus({ preventScroll: true });
   }
 }
 
 profileView.querySelector(".candidate-profile__back").addEventListener("click", (event) => {
   event.preventDefault();
-  history.pushState("", document.title, window.location.pathname);
+  history.pushState("", document.title, `${window.location.pathname}${window.location.search}`);
   route();
 });
-
 window.addEventListener("hashchange", route);
-renderAll();
-route();
+
+// ---------- Carga inicial ----------
+(async () => {
+  ctx = await SL.iniciarPanel("EMPRESA");
+  try {
+    await loadPostings();
+    if (!postings.length) {
+      document.querySelector("#posting-name").textContent = "Sin convocatorias";
+      document.querySelector("#covered-places").textContent = "0/0";
+      openAssignButton.disabled = true;
+      emptyMessage.hidden = false;
+      emptyMessage.innerHTML = 'Aún no publicas convocatorias. <a href="crear-convocatoria.html">Crea la primera</a>.';
+      return;
+    }
+    const requested = new URLSearchParams(window.location.search).get("id");
+    posting = postings.find((item) => String(item.id) === requested) || postings[0];
+    postingSelect.value = String(posting.id);
+    await refresh();
+    route();
+  } catch (error) {
+    console.error("No fue posible cargar los candidatos.", error);
+    SL.mostrarErrorGlobal(SL.mensajeError(error));
+  }
+})();

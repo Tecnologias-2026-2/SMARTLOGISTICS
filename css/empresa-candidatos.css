@@ -598,3 +598,43 @@
     justify-items: start;
   }
 }
+
+/* Selector de convocatoria y asignación directa de trabajadores (RF-21) */
+.candidates-posting {
+  flex: 1;
+  min-width: 0;
+}
+
+.candidates-posting select {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
+
+.candidates-assign {
+  height: 40px;
+  white-space: nowrap;
+}
+
+.dialog-warning {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fff7ed;
+  color: #9a3412;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.assign-select {
+  width: 100%;
+  height: 40px;
+  padding: 0 32px 0 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff url("../assets/chevron-down-dark.svg") no-repeat right 12px center / 10px 6px;
+  color: #314158;
+  font-size: 14px;
+  appearance: none;
+}
