@@ -1014,3 +1014,14 @@
   font-size: 14px;
   line-height: 20px;
 }
+
+/* La foto de perfil lleva a la carga de fotografía (RF-03) */
+a.profile-avatar {
+  overflow: hidden;
+  text-decoration: none;
+}
+
+a.profile-avatar:focus-visible {
+  outline: 3px solid #155dfc;
+  outline-offset: 3px;
+}

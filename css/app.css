@@ -897,3 +897,57 @@
 .rating strong {
   font-weight: 600;
 }
+
+/* Datos en vivo (Supabase): fotografía de perfil, avisos y estados vacíos */
+.sl-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+.sl-global-error {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border: 1px solid #ffc9c9;
+  border-radius: 10px;
+  background: #fff1f2;
+  color: #b42318;
+  font-weight: 600;
+}
+
+.sl-empty {
+  margin: 0;
+  padding: 24px 16px;
+  color: #62748e;
+  text-align: center;
+}
+
+.sl-inline-error {
+  margin: 8px 0 0;
+  color: #b42318;
+  font-size: 14px;
+}
+
+a.offer-card {
+  color: inherit;
+  text-decoration: none;
+}
+
+.business-job-card__details a,
+.business-candidate__identity a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.business-job-card__details a:hover,
+.business-candidate__identity a:hover {
+  text-decoration: underline;
+}
+
+/* Valor que llega de la base de datos dentro de un texto con estilo propio */
+.sl-valor {
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+}

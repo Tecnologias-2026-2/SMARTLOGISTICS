@@ -36,7 +36,7 @@
         <a href="perfil.html" class="sidebar__profile">
           <span class="sidebar__avatar" aria-hidden="true">🏢</span>
           <span class="sidebar__identity">
-            <strong>Eventos Nova</strong>
+            <strong>…</strong>
             <span>Coordinador de empresa</span>
           </span>
         </a>
@@ -61,36 +61,36 @@
         <div>
           <div class="business-welcome__eyebrow">
             <span>Panel empresarial</span>
-            <span class="business-verified"><span aria-hidden="true">✓</span> Empresa verificada</span>
+            <span class="business-verified" id="business-verified" hidden><span aria-hidden="true">✓</span> Empresa verificada</span>
           </div>
-          <h1>Eventos Nova</h1>
-          <p class="business-welcome__meta">Empresa de eventos · Bogotá, Colombia</p>
+          <h1 data-campo="razon_social">…</h1>
+          <p class="business-welcome__meta" data-campo="meta"></p>
           <div class="business-welcome__actions">
             <a class="business-primary-action" href="crear-convocatoria.html"><span aria-hidden="true">＋</span> Nueva convocatoria</a>
             <a class="business-secondary-action" href="candidatos.html">Ver candidatos</a>
           </div>
         </div>
-        <div class="business-rating" aria-label="Valoración de empresa: 4.7 de 5">
-          <strong><span aria-hidden="true">★</span> 4.7</strong>
+        <div class="business-rating" id="business-rating">
+          <strong><span aria-hidden="true">★</span> <b class="sl-valor" data-campo="valoracion">—</b></strong>
           <span>Valoración empresa</span>
         </div>
       </header>
 
       <section class="business-metrics" aria-label="Resumen de actividad">
         <article class="business-metric business-metric--blue">
-          <div><p>Convocatorias activas</p><strong>4</strong></div>
+          <div><p>Convocatorias activas</p><strong data-campo="activas">0</strong></div>
           <span aria-hidden="true">📣</span>
         </article>
         <article class="business-metric business-metric--purple">
-          <div><p>Plazas disponibles</p><strong>23</strong></div>
+          <div><p>Plazas disponibles</p><strong data-campo="plazas">0</strong></div>
           <span aria-hidden="true">🪑</span>
         </article>
         <article class="business-metric business-metric--green">
-          <div><p>Total candidatos</p><strong>87</strong></div>
+          <div><p>Total candidatos</p><strong data-campo="candidatos">0</strong></div>
           <span aria-hidden="true">👥</span>
         </article>
         <article class="business-metric business-metric--orange">
-          <div><p>Trabajadores seleccionados</p><strong>31</strong></div>
+          <div><p>Trabajadores seleccionados</p><strong data-campo="seleccionados">0</strong></div>
           <span aria-hidden="true">✅</span>
         </article>
       </section>
@@ -101,40 +101,8 @@
             <h2 id="recent-jobs-heading">Convocatorias recientes</h2>
             <a href="convocatorias.html">Ver todas <span aria-hidden="true">→</span></a>
           </div>
-          <ul class="business-job-list">
-            <li class="business-job-card" id="crear">
-              <span class="business-job-card__icon" aria-hidden="true">🔧</span>
-              <div class="business-job-card__details">
-                <strong>Auxiliares de Montaje – Feria Tecnológica</strong>
-                <span>15 Sep 2026 <span aria-hidden="true">·</span> 23 candidatos</span>
-              </div>
-              <div class="business-job-card__availability">
-                <span class="business-job-status"><span aria-hidden="true">•</span> Activa</span>
-                <span>4 plazas</span>
-              </div>
-            </li>
-            <li class="business-job-card">
-              <span class="business-job-card__icon" aria-hidden="true">📦</span>
-              <div class="business-job-card__details">
-                <strong>Operarios de Almacén – Temporada Alta</strong>
-                <span>20 Sep 2026 <span aria-hidden="true">·</span> 15 candidatos</span>
-              </div>
-              <div class="business-job-card__availability">
-                <span class="business-job-status"><span aria-hidden="true">•</span> Activa</span>
-                <span>3 plazas</span>
-              </div>
-            </li>
-            <li class="business-job-card">
-              <span class="business-job-card__icon" aria-hidden="true">🎪</span>
-              <div class="business-job-card__details">
-                <strong>Auxiliares Logísticos – Concierto Internacional</strong>
-                <span>30 Sep 2026 <span aria-hidden="true">·</span> 67 candidatos</span>
-              </div>
-              <div class="business-job-card__availability">
-                <span class="business-job-status"><span aria-hidden="true">•</span> Activa</span>
-                <span>10 plazas</span>
-              </div>
-            </li>
+          <ul class="business-job-list" id="recent-postings">
+            <li class="sl-empty">Cargando convocatorias…</li>
           </ul>
         </section>
 
@@ -143,43 +111,17 @@
             <h2 id="recent-candidates-heading">Candidatos recientes</h2>
             <a href="candidatos.html">Ver todos <span aria-hidden="true">→</span></a>
           </div>
-          <ul class="business-candidate-list">
-            <li class="business-candidate">
-              <span class="business-candidate__avatar business-candidate__avatar--purple" aria-hidden="true">CR</span>
-              <div class="business-candidate__identity">
-                <strong>Carlos Rodríguez</strong>
-                <span class="business-candidate__rating" aria-label="Calificación 4.8 de 5"><span aria-hidden="true">★★★★★</span> 4.8</span>
-              </div>
-              <span class="business-candidate__status business-candidate__status--selected"><span aria-hidden="true">•</span> Seleccionado</span>
-            </li>
-            <li class="business-candidate">
-              <span class="business-candidate__avatar business-candidate__avatar--pink" aria-hidden="true">LM</span>
-              <div class="business-candidate__identity">
-                <strong>Luisa Martínez</strong>
-                <span class="business-candidate__rating" aria-label="Calificación 4.6 de 5"><span aria-hidden="true">★★★★★</span> 4.6</span>
-              </div>
-              <span class="business-candidate__status business-candidate__status--review"><span aria-hidden="true">•</span> En revisión</span>
-            </li>
-            <li class="business-candidate">
-              <span class="business-candidate__avatar business-candidate__avatar--indigo" aria-hidden="true">AG</span>
-              <div class="business-candidate__identity">
-                <strong>Andrés García</strong>
-                <span class="business-candidate__rating" aria-label="Calificación 4.3 de 5"><span aria-hidden="true">★★★★★</span> 4.3</span>
-              </div>
-              <span class="business-candidate__status business-candidate__status--review"><span aria-hidden="true">•</span> En revisión</span>
-            </li>
-            <li class="business-candidate">
-              <span class="business-candidate__avatar business-candidate__avatar--blue" aria-hidden="true">MT</span>
-              <div class="business-candidate__identity">
-                <strong>María Torres</strong>
-                <span class="business-candidate__rating" aria-label="Calificación 4.9 de 5"><span aria-hidden="true">★★★★★</span> 4.9</span>
-              </div>
-              <span class="business-candidate__status business-candidate__status--review"><span aria-hidden="true">•</span> En revisión</span>
-            </li>
+          <ul class="business-candidate-list" id="recent-candidates">
+            <li class="sl-empty">Cargando candidatos…</li>
           </ul>
         </section>
       </div>
     </main>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/empresa-comun.js"></script>
+  <script src="../js/empresa-inicio.js"></script>
 </body>
 </html>

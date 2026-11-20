@@ -197,6 +197,17 @@ La solución se organiza en cuatro capas: **presentación** (clientes web y móv
 
 ![Estructura de la solución](docs/diagramas/arquitectura.png)
 
+En la implementación, el backend corre en **[Supabase](https://supabase.com)** (PostgreSQL administrado). Por eso el sitio estático de GitHub Pages funciona sin un servidor propio:
+
+| Capa | Implementación |
+|---|---|
+| Presentación | HTML, CSS y JavaScript publicados en GitHub Pages; usan la librería `supabase-js`. |
+| Aplicación (API REST) | API REST que Supabase genera sobre la base de datos (PostgREST), sobre HTTPS. Los casos de uso se exponen como funciones RPC (`/rest/v1/rpc/<función>`). |
+| Dominio | Funciones de PostgreSQL en [`supabase/migrations/…_reglas_negocio.sql`](supabase/migrations/20261120140100_reglas_negocio.sql). Cada una valida quién la invoca y aplica las reglas: una postulación por convocatoria, descuento de plazas, cruce de horarios, calificación única y recálculo de la reputación. |
+| Persistencia | PostgreSQL con políticas **RLS** (seguridad por fila) en todas las tablas. El navegador solo puede **leer** lo que le corresponde; toda escritura pasa por las funciones del dominio. |
+| Autenticación | Supabase Auth: contraseñas con **bcrypt** (RNF-09), sesiones con JWT (RF-07) y enlaces de recuperación de un solo uso (RF-05). |
+| Archivos | Supabase Storage, bucket `avatars`: JPG o PNG de hasta 5 MB por usuario (RF-03). |
+
 ---
 
 ## 🎨 5. URL del Prototipo
@@ -234,7 +245,7 @@ El modelo es relacional y único para toda la solución. Tiene **13 entidades** 
 
 | Tabla | Propósito | Campos clave |
 |---|---|---|
-| `USUARIO` | Cuenta de acceso, común a los dos modos. | `email` (único), `password_hash`, `modo_activo`, `avatar_url`, `estado` |
+| `USUARIO` | Cuenta de acceso, común a los dos modos. En Supabase: `auth.users` (correo y contraseña con bcrypt), `perfil` (datos públicos) y `contacto` (datos personales que solo ve su dueño). | `email` (único), `password_hash`, `modo_activo`, `avatar_url`, `estado` |
 | `TRABAJADOR` | Perfil logístico del usuario y sus indicadores. | `cargo`, `anios_experiencia`, `puntualidad_pct`, `calificacion_global`, `reputacion_coordinador`, `reputacion_logistica`, `perfil_completo` |
 | `COORDINADOR` | Vincula a un usuario con la empresa que representa. | `id_usuario` (único), `id_empresa`, `cargo` |
 | `EMPRESA` | Organización contratante. | `nit` (único), `razon_social`, `sector`, `verificada`, `valoracion` |
@@ -245,7 +256,7 @@ El modelo es relacional y único para toda la solución. Tiene **13 entidades** 
 | `HISTORIAL_LABORAL` | Experiencia verificable acumulada del trabajador. | `evento`, `empresa`, `funcion`, `fecha`, `calificacion` |
 | `HABILIDAD` / `TRABAJADOR_HABILIDAD` | Catálogo de habilidades y su relación N:M con los trabajadores. | `nombre` (único) |
 | `NOTIFICACION` | Avisos al usuario. | `tipo`, `mensaje`, `leida` |
-| `SESION` | Sesiones abiertas en cualquiera de los clientes. | `token`, `fecha_inicio`, `fecha_expiracion` |
+| `SESION` | Sesiones abiertas en cualquiera de los clientes. En Supabase la gestiona Auth (`auth.sessions` y tokens JWT). | `token`, `fecha_inicio`, `fecha_expiracion` |
 
 ### Relaciones y reglas
 
@@ -277,7 +288,8 @@ SMARTLOGISTICS/
 │   ├── login-trabajador.html · login-empresa.html
 │   ├── registro-trabajador.html · registro-empresa.html
 │   ├── foto-trabajador.html · foto-cargada-trabajador.html
-│   └── recuperar-*.html · correo-enviado-*.html · reenviar-*.html
+│   ├── recuperar-*.html · correo-enviado-*.html · reenviar-*.html
+│   └── nueva-contrasena.html    # Destino del enlace de recuperación (RF-05)
 ├── trabajador/                  # Zona del modo trabajador (V-10 a V-17)
 │   ├── inicio.html              # Panel de actividad
 │   ├── ofertas.html             # Ofertas, detalle y postulación
@@ -298,8 +310,14 @@ SMARTLOGISTICS/
 │   └── trabajador-*.css · empresa-*.css   # Una hoja por vista
 ├── js/
 │   ├── accesibilidad.js         # Widget de accesibilidad (todas las páginas)
-│   ├── auth.js                  # Validaciones y comportamiento de la zona de acceso
-│   └── trabajador-*.js · empresa-*.js     # Interacción de cada vista
+│   ├── supabase.js              # Conexión con el backend (URL y clave publicable)
+│   ├── app.js                   # Sesión, menú lateral, cierre de sesión y formatos
+│   ├── auth.js                  # Login, registro, recuperación y foto con Supabase Auth
+│   ├── empresa-comun.js         # Consultas compartidas del modo empresa
+│   └── trabajador-*.js · empresa-*.js     # Datos e interacción de cada vista
+├── supabase/
+│   ├── migrations/              # Esquema, RLS y reglas de negocio (SQL)
+│   └── seed.sql                 # Datos y cuentas de demostración
 ├── assets/                      # Íconos exportados de Figma
 └── docs/                        # Documento de ingeniería, diagramas y capturas del prototipo
 ```
@@ -311,7 +329,8 @@ SMARTLOGISTICS/
 | `/trabajador` | Las vistas del modo trabajador, que comparten el menú lateral. |
 | `/empresa` | Las vistas del modo empresa, que comparten el menú lateral. |
 | `/css` | `base.css` define las variables de diseño (colores, radios, sombras) y los componentes comunes; `app.css` el armazón de las zonas con sesión; cada vista tiene su propia hoja. |
-| `/js` | Un archivo por vista, sin frameworks, más el widget de accesibilidad que cargan todas las páginas. |
+| `/js` | Un archivo por vista, sin frameworks, más el cliente de Supabase, las utilidades de sesión y el widget de accesibilidad. |
+| `/supabase` | Migraciones SQL del backend (tablas, políticas RLS, funciones y triggers) y datos de demostración. |
 | `/assets` | Recursos gráficos exportados del diseño. |
 | `/docs` | Documento de ingeniería de software, diagramas UML, modelo de datos y capturas del prototipo. |
 
@@ -338,7 +357,9 @@ SMARTLOGISTICS/
 | V-23 | Perfil público de la empresa | [`empresa/perfil.html`](empresa/perfil.html) | RF-12 |
 | Transversal | Cierre de sesión desde el menú lateral | Todas las vistas con sesión | RF-07 |
 
-**Pendiente para la siguiente entrega:** la vista de notificaciones (V-15, RF-25) y el control de cambio de modo (RF-06), que aún no tienen diseño en el prototipo. La plataforma no tiene servidor en esta entrega: los datos son de demostración y las acciones (postularse, seleccionar, crear, editar o calificar) se guardan en el navegador con `localStorage` para simular el flujo completo.
+**Estado:** todas las vistas leen y escriben datos reales en Supabase. Postularse, cancelar, seleccionar, descartar, asignar directamente, responder una asignación, publicar, editar y calificar quedan guardados en la base de datos con su trazabilidad (RNF-14).
+
+**Pendiente:** la vista de notificaciones (V-15, RF-25) y el control de cambio de modo (RF-06), que aún no tienen diseño en el prototipo. La base de datos ya registra las notificaciones (tabla `notificacion`) en cada cambio de estado, calificación y nueva convocatoria.
 
 ### Decisiones técnicas
 
@@ -354,7 +375,8 @@ SMARTLOGISTICS/
   - **Widget de accesibilidad** (botón ♿ en la esquina inferior derecha de todas las páginas): tamaño del texto, alto contraste, escala de grises, resaltar enlaces, más espaciado y detener animaciones. Las preferencias se recuerdan al cambiar de página.
 - **Validaciones del documento:** registro (RF-02: correo válido, contraseña de 8 caracteres y confirmación), fotografía (RF-03: JPG/PNG, máximo 5 MB, mínimo 400×400 px), convocatoria (RF-13: campos obligatorios y fecha no anterior a hoy), plazas disponibles al seleccionar (RF-20) y calificación única por trabajador (RF-23).
 - **Variables de diseño:** los colores, radios y sombras de Figma están definidos como propiedades personalizadas de CSS en `css/base.css`.
-- **Sin dependencias:** HTML, CSS y JavaScript puros; la única fuente externa es la tipografía Inter de Google Fonts.
+- **Sin frameworks:** HTML, CSS y JavaScript puros. Las únicas fuentes externas son la tipografía Inter de Google Fonts y la librería `supabase-js` (versión fija 2.45.4, desde jsDelivr).
+- **Seguridad:** la clave publicable de Supabase está en `js/supabase.js` porque está pensada para el navegador. Los datos los protegen las políticas RLS: sin sesión no se lee nada; cada trabajador ve solo sus postulaciones; cada empresa, solo las de sus convocatorias; los comentarios de las calificaciones no son públicos (RNF-12).
 
 ### Tecnologías
 
@@ -362,7 +384,8 @@ SMARTLOGISTICS/
 |---|---|
 | HTML5 | Estructura semántica de las vistas |
 | CSS3 (Flexbox, Grid, variables) | Estilos y maquetación adaptable |
-| JavaScript (sin frameworks) | Filtros, diálogos, validaciones y estado de la demostración |
+| JavaScript (sin frameworks) | Filtros, diálogos, validaciones y consumo de la API |
+| Supabase (PostgreSQL, Auth, Storage) | Base de datos, API REST, autenticación y fotografías de perfil |
 | Figma | Diseño y prototipo interactivo |
 | Git y GitHub | Control de versiones y publicación (GitHub Pages) |
 
@@ -394,8 +417,7 @@ SMARTLOGISTICS/
 
 2. Abrir el sitio de alguna de estas formas:
 
-   - **Sin instalar nada:** abrir `index.html` con doble clic en el navegador.
-   - **Con un servidor local (Node.js):**
+   - **Con un servidor local (Node.js), recomendado porque el inicio de sesión necesita `http://`:**
 
      ```bash
      npx http-server -p 5173 -c-1
@@ -407,16 +429,39 @@ SMARTLOGISTICS/
      python -m http.server 5173
      ```
 
-3. Si se usó un servidor, entrar a **http://localhost:5173**.
+3. Entrar a **http://localhost:5173**.
+
+### Cuentas de demostración
+
+Todas usan la contraseña **`SmartDemo2026*`**. También se puede crear una cuenta nueva desde **Registrarme**.
+
+| Modo | Correo | Qué tiene para probar |
+|---|---|---|
+| Trabajador | `carlos@smartlogistics.test` | Una asignación directa pendiente, postulaciones en todos los estados, historial y habilidades |
+| Trabajador | `maria@` · `luisa@` · `andres@` · `diego@` · `sandra@smartlogistics.test` | Candidatos con reputación e historial |
+| Empresa | `eventosnova@smartlogistics.test` | Candidatos por revisar y un servicio terminado pendiente de calificar |
+| Empresa | `logimax@` · `deliverco@` · `corporate@smartlogistics.test` | Otras empresas con convocatorias activas |
 
 ### Recorrido sugerido
 
-1. Desde la página pública, entrar a **Iniciar sesión** como trabajador (cualquier correo válido y contraseña sirven en esta demostración).
-2. En **Ofertas**, filtrar por categoría, abrir un detalle y pulsar **Postularme**; la postulación aparece en **Postulaciones**.
-3. En **Postulaciones**, aceptar o rechazar la asignación directa pendiente.
-4. Cerrar sesión y entrar como empresa: en **Candidatos**, seleccionar, descartar o asignar directamente a un candidato y abrir su perfil.
-5. En **Crear**, publicar una convocatoria (la validación impide fechas pasadas) y verla en **Convocatorias**; desde allí, **Editar** o **Calificar**.
+1. Entrar como **Carlos** (trabajador). En **Ofertas**, filtrar por categoría, abrir *Auxiliares de Cargue* y pulsar **Postularme**; la postulación aparece en **Postulaciones**.
+2. En **Postulaciones**, aceptar la asignación directa del concierto o rechazarla indicando el motivo.
+3. Cerrar sesión y entrar como **Eventos Nova** (empresa). En **Candidatos**, seleccionar o descartar candidatos (se descuenta la plaza), asignar directamente a un trabajador (avisa si hay cruce de horario) y abrir su perfil.
+4. En **Convocatorias**, pulsar **Calificar** en *Feria Navideña* y evaluar a un trabajador. Su reputación y su historial se actualizan solos.
+5. En **Crear**, publicar una convocatoria (no se permiten fechas pasadas) y verla en **Convocatorias** y, como trabajador, en **Ofertas**.
 6. Probar el botón ♿ para activar las opciones de accesibilidad y recorrer cualquier vista solo con el teclado.
+
+### Backend en Supabase
+
+El proyecto ya está creado y configurado; estos pasos sirven para recrearlo desde cero:
+
+1. Crear un proyecto en [supabase.com](https://supabase.com) (región São Paulo).
+2. En **SQL Editor**, ejecutar en orden los archivos de [`supabase/migrations/`](supabase/migrations) y luego [`supabase/seed.sql`](supabase/seed.sql).
+3. En **Authentication → Sign In / Providers → Email**: desactivar **Confirm email** (para que el registro entre directo) y poner **Email OTP Expiration** en `1800` segundos (el enlace de recuperación dura 30 minutos, RF-05).
+4. En **Authentication → URL Configuration**: *Site URL* `https://tecnologias-2026-2.github.io/SMARTLOGISTICS/` y, en *Redirect URLs*, `https://tecnologias-2026-2.github.io/SMARTLOGISTICS/**` y `http://localhost:5173/**`.
+5. Copiar la URL del proyecto y la clave publicable (**Project Settings → API Keys**) en [`js/supabase.js`](js/supabase.js).
+
+> El servidor de correo incluido en Supabase envía pocos correos por hora y solo a los correos del equipo del proyecto. Para enviar recuperaciones a cualquier persona hay que configurar un SMTP propio en **Authentication → Emails → SMTP Settings**.
 
 ### Publicación
 

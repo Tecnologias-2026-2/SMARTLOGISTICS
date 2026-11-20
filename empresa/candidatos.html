@@ -36,7 +36,7 @@
         <a href="perfil.html" class="sidebar__profile">
           <span class="sidebar__avatar" aria-hidden="true">🏢</span>
           <span class="sidebar__identity">
-            <strong>Eventos Nova</strong>
+            <strong>…</strong>
             <span>Coordinador de empresa</span>
           </span>
         </a>
@@ -61,9 +61,9 @@
         <header class="candidates-header">
           <div>
             <h1>Candidatos</h1>
-            <p>Feria Tecnológica · <span id="covered-places">1/12</span> plazas cubiertas</p>
+            <p><span id="posting-name">Cargando…</span> · <span id="covered-places">0/0</span> plazas cubiertas</p>
           </div>
-          <p class="candidates-header__places"><span id="available-places">11 plazas disponibles</span> <span class="candidates-header__dot" aria-hidden="true"></span></p>
+          <p class="candidates-header__places"><span id="available-places"></span> <span class="candidates-header__dot" aria-hidden="true"></span></p>
         </header>
 
         <div class="notice-banner" id="candidates-notice" role="status" hidden>
@@ -75,6 +75,13 @@
         </div>
 
         <section class="candidates-toolbar" aria-label="Buscar y filtrar candidatos">
+          <div class="candidates-toolbar__row">
+            <label class="rating-filter candidates-posting">
+              <span>Convocatoria:</span>
+              <select id="posting-select"></select>
+            </label>
+            <button class="candidate-action candidate-action--outline candidates-assign" type="button" id="open-assign">＋ Asignar trabajador</button>
+          </div>
           <div class="candidates-toolbar__row">
             <label class="search-box">
               <span class="visually-hidden">Buscar candidato</span>
@@ -92,17 +99,17 @@
             </label>
           </div>
           <div class="candidates-tabs" role="group" aria-label="Filtrar candidatos por estado">
-            <button class="candidates-tab is-active" type="button" data-filter="all" aria-pressed="true">Todos (<span data-count="all">6</span>)</button>
-            <button class="candidates-tab" type="button" data-filter="review" aria-pressed="false">En revisión (<span data-count="review">4</span>)</button>
-            <button class="candidates-tab" type="button" data-filter="selected" aria-pressed="false">Seleccionado (<span data-count="selected">1</span>)</button>
-            <button class="candidates-tab" type="button" data-filter="discarded" aria-pressed="false">Descartado (<span data-count="discarded">1</span>)</button>
+            <button class="candidates-tab is-active" type="button" data-filter="all" aria-pressed="true">Todos (<span data-count="all">0</span>)</button>
+            <button class="candidates-tab" type="button" data-filter="review" aria-pressed="false">En revisión (<span data-count="review">0</span>)</button>
+            <button class="candidates-tab" type="button" data-filter="selected" aria-pressed="false">Seleccionado (<span data-count="selected">0</span>)</button>
+            <button class="candidates-tab" type="button" data-filter="discarded" aria-pressed="false">Descartado (<span data-count="discarded">0</span>)</button>
           </div>
         </section>
 
         <section class="candidates-card" aria-labelledby="candidates-table-caption">
           <div class="candidates-table-wrap">
             <table class="candidates-table">
-              <caption id="candidates-table-caption" class="visually-hidden">Candidatos postulados a Auxiliares de Montaje – Feria Tecnológica</caption>
+              <caption id="candidates-table-caption" class="visually-hidden">Candidatos postulados</caption>
               <thead>
                 <tr>
                   <th scope="col">Candidato</th>
@@ -113,152 +120,7 @@
                   <th scope="col">Acciones</th>
                 </tr>
               </thead>
-              <tbody id="candidates-body">
-              <tr data-id="carlos" data-status="selected" data-rating="4.8">
-                <th scope="row">
-                  <div class="candidate-cell">
-                    <span class="candidate-avatar candidate-avatar--purple" aria-hidden="true">CR</span>
-                    <span class="candidate-cell__text">
-                      <strong>Carlos Rodríguez</strong>
-                      <span>Auxiliar Logístico · Bogotá, Colombia</span>
-                    </span>
-                  </div>
-                </th>
-                <td>
-                  <span class="rating" aria-label="Calificación 4.8 de 5"><span class="rating__stars" aria-hidden="true">★★★★★</span> <strong>4.8</strong></span>
-                </td>
-                <td class="candidate-exp">3 años · 47 trabajos</td>
-                <td><span class="candidate-punctuality">96%</span></td>
-                <td><span class="status-pill status-pill--selected" data-status-label><span aria-hidden="true">●</span> Seleccionado</span></td>
-                <td>
-                  <div class="candidate-actions" data-actions>
-                    <a class="candidate-action candidate-action--link" href="#candidato-carlos">Ver perfil</a>
-                  </div>
-                </td>
-              </tr>
-              <tr data-id="luisa" data-status="review" data-rating="4.6">
-                <th scope="row">
-                  <div class="candidate-cell">
-                    <span class="candidate-avatar candidate-avatar--pink" aria-hidden="true">LM</span>
-                    <span class="candidate-cell__text">
-                      <strong>Luisa Martínez</strong>
-                      <span>Coordinadora de Eventos · Bogotá, Colombia</span>
-                    </span>
-                  </div>
-                </th>
-                <td>
-                  <span class="rating" aria-label="Calificación 4.6 de 5"><span class="rating__stars" aria-hidden="true">★★★★★</span> <strong>4.6</strong></span>
-                </td>
-                <td class="candidate-exp">5 años · 82 trabajos</td>
-                <td><span class="candidate-punctuality">98%</span></td>
-                <td><span class="status-pill status-pill--review" data-status-label><span aria-hidden="true">●</span> En revisión</span></td>
-                <td>
-                  <div class="candidate-actions" data-actions>
-                    <a class="candidate-action candidate-action--link" href="#candidato-luisa">Ver perfil</a>
-                    <button class="candidate-action candidate-action--primary" type="button" data-action="select" data-id="luisa">Seleccionar</button>
-                    <button class="candidate-action candidate-action--muted" type="button" data-action="discard" data-id="luisa">Descartar</button>
-                    <button class="candidate-action candidate-action--outline" type="button" data-action="assign" data-id="luisa">Asignar directamente</button>
-                  </div>
-                </td>
-              </tr>
-              <tr data-id="andres" data-status="review" data-rating="4.3">
-                <th scope="row">
-                  <div class="candidate-cell">
-                    <span class="candidate-avatar candidate-avatar--indigo" aria-hidden="true">AG</span>
-                    <span class="candidate-cell__text">
-                      <strong>Andrés García</strong>
-                      <span>Auxiliar de Almacén · Bogotá, Colombia</span>
-                    </span>
-                  </div>
-                </th>
-                <td>
-                  <span class="rating" aria-label="Calificación 4.3 de 5"><span class="rating__stars" aria-hidden="true">★★★★★</span> <strong>4.3</strong></span>
-                </td>
-                <td class="candidate-exp">2 años · 28 trabajos</td>
-                <td><span class="candidate-punctuality">91%</span></td>
-                <td><span class="status-pill status-pill--review" data-status-label><span aria-hidden="true">●</span> En revisión</span></td>
-                <td>
-                  <div class="candidate-actions" data-actions>
-                    <a class="candidate-action candidate-action--link" href="#candidato-andres">Ver perfil</a>
-                    <button class="candidate-action candidate-action--primary" type="button" data-action="select" data-id="andres">Seleccionar</button>
-                    <button class="candidate-action candidate-action--muted" type="button" data-action="discard" data-id="andres">Descartar</button>
-                    <button class="candidate-action candidate-action--outline" type="button" data-action="assign" data-id="andres">Asignar directamente</button>
-                  </div>
-                </td>
-              </tr>
-              <tr data-id="maria" data-status="review" data-rating="4.9">
-                <th scope="row">
-                  <div class="candidate-cell">
-                    <span class="candidate-avatar candidate-avatar--violet" aria-hidden="true">MT</span>
-                    <span class="candidate-cell__text">
-                      <strong>María Torres</strong>
-                      <span>Auxiliar Logística · Bogotá, Colombia</span>
-                    </span>
-                  </div>
-                </th>
-                <td>
-                  <span class="rating" aria-label="Calificación 4.9 de 5"><span class="rating__stars" aria-hidden="true">★★★★★</span> <strong>4.9</strong></span>
-                </td>
-                <td class="candidate-exp">6 años · 103 trabajos</td>
-                <td><span class="candidate-punctuality">99%</span></td>
-                <td><span class="status-pill status-pill--review" data-status-label><span aria-hidden="true">●</span> En revisión</span></td>
-                <td>
-                  <div class="candidate-actions" data-actions>
-                    <a class="candidate-action candidate-action--link" href="#candidato-maria">Ver perfil</a>
-                    <button class="candidate-action candidate-action--primary" type="button" data-action="select" data-id="maria">Seleccionar</button>
-                    <button class="candidate-action candidate-action--muted" type="button" data-action="discard" data-id="maria">Descartar</button>
-                    <button class="candidate-action candidate-action--outline" type="button" data-action="assign" data-id="maria">Asignar directamente</button>
-                  </div>
-                </td>
-              </tr>
-              <tr data-id="diego" data-status="discarded" data-rating="4.1">
-                <th scope="row">
-                  <div class="candidate-cell">
-                    <span class="candidate-avatar candidate-avatar--green" aria-hidden="true">DV</span>
-                    <span class="candidate-cell__text">
-                      <strong>Diego Vargas</strong>
-                      <span>Auxiliar Logístico · Bogotá, Colombia</span>
-                    </span>
-                  </div>
-                </th>
-                <td>
-                  <span class="rating" aria-label="Calificación 4.1 de 5"><span class="rating__stars" aria-hidden="true">★★★★★</span> <strong>4.1</strong></span>
-                </td>
-                <td class="candidate-exp">1 año · 14 trabajos</td>
-                <td><span class="candidate-punctuality">88%</span></td>
-                <td><span class="status-pill status-pill--discarded" data-status-label><span aria-hidden="true">●</span> Descartado</span></td>
-                <td>
-                  <div class="candidate-actions" data-actions>
-                    <a class="candidate-action candidate-action--link" href="#candidato-diego">Ver perfil</a>
-                  </div>
-                </td>
-              </tr>
-              <tr data-id="sandra" data-status="review" data-rating="4.5">
-                <th scope="row">
-                  <div class="candidate-cell">
-                    <span class="candidate-avatar candidate-avatar--blue" aria-hidden="true">SP</span>
-                    <span class="candidate-cell__text">
-                      <strong>Sandra Pérez</strong>
-                      <span>Operaria de Almacén · Bogotá, Colombia</span>
-                    </span>
-                  </div>
-                </th>
-                <td>
-                  <span class="rating" aria-label="Calificación 4.5 de 5"><span class="rating__stars" aria-hidden="true">★★★★★</span> <strong>4.5</strong></span>
-                </td>
-                <td class="candidate-exp">4 años · 61 trabajos</td>
-                <td><span class="candidate-punctuality">94%</span></td>
-                <td><span class="status-pill status-pill--review" data-status-label><span aria-hidden="true">●</span> En revisión</span></td>
-                <td>
-                  <div class="candidate-actions" data-actions>
-                    <a class="candidate-action candidate-action--link" href="#candidato-sandra">Ver perfil</a>
-                    <button class="candidate-action candidate-action--primary" type="button" data-action="select" data-id="sandra">Seleccionar</button>
-                    <button class="candidate-action candidate-action--muted" type="button" data-action="discard" data-id="sandra">Descartar</button>
-                    <button class="candidate-action candidate-action--outline" type="button" data-action="assign" data-id="sandra">Asignar directamente</button>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
+              <tbody id="candidates-body"></tbody>
             </table>
           </div>
           <p class="candidates-empty" id="candidates-empty" hidden>No hay candidatos que coincidan con la búsqueda o los filtros.</p>
@@ -272,7 +134,7 @@
           <div class="profile-card__body">
             <h1 id="profile-name" tabindex="-1"></h1>
             <p class="profile-card__role" id="profile-role"></p>
-            <p class="profile-card__location"><span aria-hidden="true">📍</span> Bogotá, Colombia</p>
+            <p class="profile-card__location"><span aria-hidden="true">📍</span> <span id="profile-location"></span></p>
             <dl class="profile-ratings" id="profile-ratings"></dl>
             <dl class="profile-stats" id="profile-stats"></dl>
           </div>
@@ -312,13 +174,8 @@
             <span class="rating"><span class="rating__stars" aria-hidden="true">★★★★★</span> <strong id="dialog-rating"></strong></span>
           </div>
         </div>
-        <div class="dialog-job" id="dialog-job" hidden>
-          <strong>Auxiliares de Montaje – Feria Tecnológica</strong>
-          <span>📅 15 Sep 2026</span>
-          <span>⏱️ 08:00 – 18:00</span>
-          <span>📍 Bogotá, Corferias</span>
-          <span>💰 $80.000 COP</span>
-        </div>
+        <div class="dialog-job" id="dialog-job" hidden></div>
+        <p class="dialog-warning" id="dialog-warning" role="alert" hidden></p>
         <p class="sl-dialog__text" id="dialog-text"></p>
         <div class="sl-dialog__actions">
           <button class="sl-btn sl-btn--secondary" type="submit" value="cancel">Cancelar</button>
@@ -328,6 +185,32 @@
     </form>
   </dialog>
 
+  <dialog class="sl-dialog" id="assign-dialog" aria-labelledby="assign-dialog-title">
+    <form class="sl-dialog__form" id="assign-form" novalidate>
+      <header class="sl-dialog__header">
+        <h2 id="assign-dialog-title">Asignar trabajador directamente</h2>
+        <button class="sl-dialog__close" type="button" data-close-assign aria-label="Cerrar">✕</button>
+      </header>
+      <div class="sl-dialog__body">
+        <p class="sl-dialog__text">Elige un trabajador que no se haya postulado. La asignación quedará pendiente hasta que la acepte o la rechace.</p>
+        <div class="posting-field">
+          <label for="assign-worker">Trabajador</label>
+          <select class="assign-select" id="assign-worker" required></select>
+        </div>
+        <p class="dialog-warning" id="assign-warning" role="alert" hidden></p>
+        <p class="sl-inline-error" id="assign-error" role="alert" hidden></p>
+        <div class="sl-dialog__actions">
+          <button class="sl-btn sl-btn--secondary" type="button" data-close-assign>Cancelar</button>
+          <button class="sl-btn sl-btn--primary" type="submit">Confirmar asignación</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/empresa-comun.js"></script>
   <script src="../js/empresa-candidatos.js"></script>
 </body>
 </html>

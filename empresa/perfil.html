@@ -36,7 +36,7 @@
         <a href="perfil.html" class="sidebar__profile">
           <span class="sidebar__avatar" aria-hidden="true">🏢</span>
           <span class="sidebar__identity">
-            <strong>Eventos Nova</strong>
+            <strong>…</strong>
             <span>Coordinador de empresa</span>
           </span>
         </a>
@@ -65,32 +65,32 @@
       <section class="company-hero" id="empresa" aria-labelledby="company-name">
         <div class="company-logo" aria-hidden="true">🏢</div>
         <div class="company-hero__body">
-          <h2 id="company-name">Eventos Nova S.A.S.</h2>
-          <p class="company-hero__type">Empresa de eventos</p>
-          <p class="company-hero__location"><span class="company-verified">✓ Empresa verificada</span><span><span aria-hidden="true">📍</span> Bogotá, Colombia</span></p>
-          <p class="company-hero__description">Empresa líder en organización de eventos corporativos y ferias empresariales con más de 10 años de experiencia en el mercado colombiano.</p>
+          <h2 id="company-name" data-campo="razon_social">…</h2>
+          <p class="company-hero__type" data-campo="sector"></p>
+          <p class="company-hero__location"><span class="company-verified" id="company-verified" hidden>✓ Empresa verificada</span><span><span aria-hidden="true">📍</span> <b class="sl-valor" data-campo="ubicacion"></b></span></p>
+          <p class="company-hero__description" data-campo="descripcion"></p>
         </div>
-        <div class="company-rating" aria-label="Calificación: 4.7 de 5">
-          <strong><span aria-hidden="true">★</span> 4.7</strong>
+        <div class="company-rating" id="company-rating">
+          <strong><span aria-hidden="true">★</span> <b class="sl-valor" data-campo="valoracion">—</b></strong>
           <span>Valoración</span>
         </div>
       </section>
 
       <section class="company-metrics" aria-label="Estadísticas de la empresa">
         <article class="company-metric company-metric--blue">
-          <div><p>Convocatorias publicadas</p><strong>18</strong></div>
+          <div><p>Convocatorias publicadas</p><strong data-campo="publicadas">0</strong></div>
           <span aria-hidden="true">📣</span>
         </article>
         <article class="company-metric company-metric--green">
-          <div><p>Trabajadores contratados</p><strong>234</strong></div>
+          <div><p>Trabajadores contratados</p><strong data-campo="contratados">0</strong></div>
           <span aria-hidden="true">👥</span>
         </article>
         <article class="company-metric company-metric--orange">
-          <div><p>Valoración</p><strong>4.7★</strong></div>
+          <div><p>Valoración</p><strong data-campo="valoracion" data-sufijo="★">—</strong></div>
           <span aria-hidden="true">⭐</span>
         </article>
         <article class="company-metric company-metric--purple">
-          <div><p>Activas ahora</p><strong>4</strong></div>
+          <div><p>Activas ahora</p><strong data-campo="activas">0</strong></div>
           <span aria-hidden="true">🟢</span>
         </article>
       </section>
@@ -100,19 +100,19 @@
         <dl class="company-contact__list">
           <div>
             <dt><span aria-hidden="true">✉️</span>Correo</dt>
-            <dd>coordinacion@eventosnova.com</dd>
+            <dd data-campo="correo"></dd>
           </div>
           <div>
             <dt><span aria-hidden="true">📱</span>Teléfono</dt>
-            <dd>+57 300 456 7890</dd>
+            <dd data-campo="telefono"></dd>
           </div>
           <div>
             <dt><span aria-hidden="true">📍</span>Ubicación</dt>
-            <dd>Bogotá, Colombia</dd>
+            <dd data-campo="ubicacion"></dd>
           </div>
           <div>
             <dt><span aria-hidden="true">💼</span>Sector</dt>
-            <dd>Empresa de eventos</dd>
+            <dd data-campo="sector"></dd>
           </div>
         </dl>
       </section>
@@ -122,27 +122,21 @@
           <h2 id="opportunities-heading">Convocatorias publicadas</h2>
           <a href="convocatorias.html">Ver todas <span aria-hidden="true">→</span></a>
         </div>
-        <ul class="company-opportunity-list">
-          <li>
-            <div><strong>Auxiliares de Montaje – Feria Tecnológica</strong><span>15 Sep 2026 · Bogotá, Corferias</span></div>
-            <span class="company-status"><span aria-hidden="true">•</span> Activa</span>
-          </li>
-          <li>
-            <div><strong>Operarios de Almacén – Temporada Alta</strong><span>20 Sep 2026 · Bogotá, Zona Franca</span></div>
-            <span class="company-status"><span aria-hidden="true">•</span> Activa</span>
-          </li>
-          <li>
-            <div><strong>Auxiliares Logísticos – Concierto Internacional</strong><span>30 Sep 2026 · Bogotá, El Campín</span></div>
-            <span class="company-status"><span aria-hidden="true">•</span> Activa</span>
-          </li>
+        <ul class="company-opportunity-list" id="company-postings">
+          <li class="sl-empty">Cargando convocatorias…</li>
         </ul>
       </section>
 
-      <aside class="company-verification" aria-label="Estado de verificación">
+      <aside class="company-verification" id="company-verification" aria-label="Estado de verificación" hidden>
         <strong><span aria-hidden="true">✓</span> Empresa verificada</strong>
         <p>Tu empresa ha superado el proceso de verificación de Smart Logistics. Este distintivo indica a los trabajadores que eres una empresa confiable y con operaciones reales.</p>
       </aside>
     </main>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/empresa-comun.js"></script>
+  <script src="../js/empresa-perfil.js"></script>
 </body>
 </html>

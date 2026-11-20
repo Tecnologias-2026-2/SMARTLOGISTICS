@@ -37,7 +37,7 @@
         <a href="perfil.html" class="sidebar__profile">
           <span class="sidebar__avatar" aria-hidden="true">🏢</span>
           <span class="sidebar__identity">
-            <strong>Eventos Nova</strong>
+            <strong>…</strong>
             <span>Coordinador de empresa</span>
           </span>
         </a>
@@ -61,7 +61,7 @@
       <header class="company-table-header">
         <div>
           <h1>Convocatorias</h1>
-          <p id="postings-count">3 convocatorias publicadas</p>
+          <p id="postings-count">Cargando convocatorias…</p>
         </div>
         <a href="crear-convocatoria.html" class="btn btn--primary company-new-button"><span aria-hidden="true">＋</span> Nueva convocatoria</a>
       </header>
@@ -88,73 +88,10 @@
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
-            <tbody id="postings-body">
-              <tr data-id="montaje">
-                <td class="company-event-name">
-                  <span class="company-icon company-icon--tool" aria-hidden="true">🔧</span>
-                  <div>
-                    <strong>Auxiliares de Montaje – Feria Tecnológica</strong>
-                    <small>Bogotá, Corferias</small>
-                  </div>
-                </td>
-                <td><span class="company-tag company-tag--soft-blue">Montaje</span></td>
-                <td class="company-date">15 Sep 2026</td>
-                <td>
-                  <div class="company-vacancies"><strong>4</strong><span>/12</span></div>
-                  <div class="scale" aria-label="4 de 12 plazas cubiertas"><span style="width: 33.33%;"></span></div>
-                </td>
-                <td><a class="company-count" href="candidatos.html"><span aria-hidden="true">👥</span>23</a></td>
-                <td><span class="status-pill status-pill--active"><span aria-hidden="true">•</span> Activa</span></td>
-                <td class="company-actions">
-                  <a href="candidatos.html" class="action-btn action-btn--primary">Candidatos</a>
-                  <a href="editar-convocatoria.html?id=montaje" class="action-btn action-btn--edit">Editar</a>
-                </td>
-              </tr>
-              <tr data-id="concierto">
-                <td class="company-event-name">
-                  <span class="company-icon company-icon--event" aria-hidden="true">🎪</span>
-                  <div>
-                    <strong>Auxiliares Logísticos – Concierto Internacional</strong>
-                    <small>Bogotá, El Campín</small>
-                  </div>
-                </td>
-                <td><span class="company-tag company-tag--soft-purple">Evento</span></td>
-                <td class="company-date">30 Sep 2026</td>
-                <td>
-                  <div class="company-vacancies"><strong>10</strong><span>/25</span></div>
-                  <div class="scale" aria-label="10 de 25 plazas cubiertas"><span style="width: 40%;"></span></div>
-                </td>
-                <td><a class="company-count" href="candidatos.html"><span aria-hidden="true">👥</span>67</a></td>
-                <td><span class="status-pill status-pill--active"><span aria-hidden="true">•</span> Activa</span></td>
-                <td class="company-actions">
-                  <a href="candidatos.html" class="action-btn action-btn--primary">Candidatos</a>
-                  <a href="editar-convocatoria.html?id=concierto" class="action-btn action-btn--edit">Editar</a>
-                </td>
-              </tr>
-              <tr data-id="evento-corporativo">
-                <td class="company-event-name">
-                  <span class="company-icon company-icon--event" aria-hidden="true">🎪</span>
-                  <div>
-                    <strong>Personal para Evento Corporativo</strong>
-                    <small>Bogotá, Hotel Tequendama</small>
-                  </div>
-                </td>
-                <td><span class="company-tag company-tag--soft-purple">Evento</span></td>
-                <td class="company-date">22 Sep 2026</td>
-                <td>
-                  <div class="company-vacancies"><strong>0</strong><span>/6</span></div>
-                  <div class="scale"><span style="width: 0%;"></span></div>
-                </td>
-                <td><a class="company-count" href="candidatos.html"><span aria-hidden="true">👥</span>6</a></td>
-                <td><span class="status-pill status-pill--finished"><span aria-hidden="true">•</span> Finalizada</span></td>
-                <td class="company-actions">
-                  <a href="candidatos.html" class="action-btn action-btn--primary">Candidatos</a>
-                  <button type="button" class="action-btn action-btn--rate" id="open-rating">Calificar</button>
-                </td>
-              </tr>
-            </tbody>
+            <tbody id="postings-body"></tbody>
           </table>
         </div>
+        <p class="sl-empty" id="postings-empty" hidden>Aún no publicas convocatorias. <a href="crear-convocatoria.html">Crea la primera</a>.</p>
       </section>
     </main>
   </div>
@@ -166,15 +103,12 @@
         <button class="sl-dialog__close" type="button" data-close-rating aria-label="Cerrar">✕</button>
       </header>
       <div class="sl-dialog__body">
-        <p class="sl-dialog__text">Personal para Evento Corporativo · 22 Sep 2026</p>
+        <p class="sl-dialog__text" id="rating-subtitle"></p>
 
         <div class="posting-field">
           <label for="rating-worker">Trabajador <span class="req" aria-hidden="true">*</span></label>
           <select id="rating-worker" required>
             <option value="" selected disabled>Selecciona un trabajador</option>
-            <option value="carlos">Carlos Rodríguez</option>
-            <option value="maria">María Torres</option>
-            <option value="sandra">Sandra Pérez</option>
           </select>
         </div>
 
@@ -212,6 +146,10 @@
     </form>
   </dialog>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/empresa-comun.js"></script>
   <script src="../js/empresa-convocatorias.js"></script>
 </body>
 </html>

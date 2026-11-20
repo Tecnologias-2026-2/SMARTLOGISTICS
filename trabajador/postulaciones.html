@@ -36,8 +36,8 @@
         <a href="perfil.html" class="sidebar__profile">
           <span class="sidebar__avatar" aria-hidden="true">👤</span>
           <span class="sidebar__identity">
-            <strong>Carlos Rodríguez</strong>
-            <span>Auxiliar Logístico</span>
+            <strong>…</strong>
+            <span></span>
           </span>
         </a>
 
@@ -59,20 +59,16 @@
     <main class="dashboard__main applications-main" id="contenido" tabindex="-1">
       <header class="applications-header">
         <h1>Mis postulaciones</h1>
-        <p id="application-count" aria-live="polite">2 postulaciones en total</p>
+        <p id="application-count" aria-live="polite">Cargando postulaciones…</p>
       </header>
 
-      <section class="assignment-card" id="assignment-card" aria-labelledby="assignment-title">
+      <section class="assignment-card" id="assignment-card" aria-labelledby="assignment-title" hidden>
         <span class="assignment-card__icon" aria-hidden="true">📌</span>
         <div class="assignment-card__body">
           <h2 id="assignment-title">Asignación directa pendiente</h2>
-          <p class="assignment-card__message" id="assignment-message" aria-live="polite">Eventos Nova te ha asignado directamente.</p>
-          <h3>Auxiliares Logísticos – Concierto Internacional</h3>
-          <div class="assignment-card__meta">
-            <span>🗓️ 30 Sep 2026</span>
-            <span>◷ 10:00 – 22:00</span>
-            <span>💰 $95.000 COP</span>
-          </div>
+          <p class="assignment-card__message" id="assignment-message" aria-live="polite"></p>
+          <h3 id="assignment-job"></h3>
+          <div class="assignment-card__meta" id="assignment-meta"></div>
           <div class="assignment-card__actions" id="assignment-actions">
             <button type="button" class="assignment-button assignment-button--reject" id="reject-assignment">Rechazar</button>
             <button type="button" class="assignment-button assignment-button--accept" id="accept-assignment">Aceptar asignación</button>
@@ -84,40 +80,12 @@
       <div class="application-filters" role="group" aria-label="Filtrar postulaciones">
         <button class="application-filter is-selected" type="button" data-status="all" aria-pressed="true">Todas</button>
         <button class="application-filter" type="button" data-status="review" aria-pressed="false">En revisión (0)</button>
-        <button class="application-filter" type="button" data-status="selected" aria-pressed="false">Seleccionado (1)</button>
-        <button class="application-filter" type="button" data-status="rejected" aria-pressed="false">No seleccionado (1)</button>
+        <button class="application-filter" type="button" data-status="selected" aria-pressed="false">Seleccionado (0)</button>
+        <button class="application-filter" type="button" data-status="rejected" aria-pressed="false">No seleccionado (0)</button>
       </div>
 
-      <section class="application-list" aria-label="Historial de postulaciones">
-        <article class="application-card" data-status="selected">
-          <span class="application-card__icon application-card__icon--selected" aria-hidden="true">🎉</span>
-          <div class="application-card__body">
-            <h2>Personal para Evento Corporativo</h2>
-            <p class="application-card__company">Corporate Events &amp; Co.</p>
-            <div class="application-card__meta">
-              <span>🗓️ 22 Sep 2026</span><span>📍 Bogotá, Hotel Tequendama</span><span>◷ 14:00 – 23:00</span>
-            </div>
-            <strong class="application-card__pay">$90.000 COP</strong>
-          </div>
-          <span class="application-status application-status--selected">● Seleccionado</span>
-          <p class="application-card__note">¡Felicitaciones! Has sido seleccionado para este trabajo.</p>
-        </article>
-
-        <article class="application-card" data-status="rejected">
-          <span class="application-card__icon application-card__icon--rejected" aria-hidden="true">✖</span>
-          <div class="application-card__body">
-            <h2>Auxiliares de Montaje – Feria Tecnológica</h2>
-            <p class="application-card__company">Eventos Nova</p>
-            <div class="application-card__meta">
-              <span>🗓️ 15 Sep 2026</span><span>📍 Bogotá, Corferias</span><span>◷ 08:00 – 18:00</span>
-            </div>
-            <strong class="application-card__pay">$80.000 COP</strong>
-          </div>
-          <span class="application-status application-status--rejected">● No seleccionado</span>
-          <p class="application-card__note">No fuiste seleccionado en esta oportunidad. ¡Sigue intentando!</p>
-        </article>
-
-      </section>
+      <section class="application-list" aria-label="Historial de postulaciones"></section>
+      <p class="sl-empty" id="applications-empty" hidden>Aún no tienes postulaciones. <a href="ofertas.html">Explora las ofertas</a> y postúlate.</p>
     </main>
   </div>
 
@@ -136,33 +104,37 @@
   <dialog class="assignment-details-dialog" id="assignment-details-dialog" aria-labelledby="assignment-details-title">
     <div class="assignment-details-dialog__content">
       <div class="dialog-head">
-        <span class="assignment-details-dialog__icon" aria-hidden="true">🎪</span>
+        <span class="assignment-details-dialog__icon" id="assignment-details-icon" aria-hidden="true">🎪</span>
         <button class="assignment-details-dialog__close" type="button" id="close-assignment-details" aria-label="Cerrar detalles">×</button>
       </div>
-      <p class="assignment-details-dialog__eyebrow">Eventos Nova · Evento</p>
-      <h2 id="assignment-details-title">Auxiliares Logísticos – Concierto Internacional</h2>
-      <div class="assignment-details-dialog__facts">
-        <p><strong>Fecha</strong><span>30 Sep 2026</span></p>
-        <p><strong>Horario</strong><span>10:00 – 22:00</span></p>
-        <p><strong>Ubicación</strong><span>Bogotá, El Campín</span></p>
-        <p><strong>Remuneración</strong><span>$95.000 COP</span></p>
-        <p><strong>Plazas disponibles</strong><span>10 de 25</span></p>
-      </div>
+      <p class="assignment-details-dialog__eyebrow" id="assignment-details-eyebrow"></p>
+      <h2 id="assignment-details-title"></h2>
+      <div class="assignment-details-dialog__facts" id="assignment-details-facts"></div>
       <section>
         <h3>Descripción del cargo</h3>
-        <p>Apoyo en la logística general del concierto, control de accesos, manejo de materiales escénicos y soporte a producción.</p>
+        <p id="assignment-details-description"></p>
       </section>
       <section>
         <h3>Requisitos</h3>
-        <ul>
-          <li>Experiencia en eventos masivos.</li>
-          <li>Capacidad para trabajar bajo presión.</li>
-          <li>Disponibilidad de 10:00 a 22:00.</li>
-          <li>Curso de primeros auxilios deseable.</li>
-        </ul>
+        <ul id="assignment-details-requirements"></ul>
       </section>
       <button class="assignment-details-dialog__done" type="button" id="dismiss-assignment-details">Cerrar</button>
     </div>
+  </dialog>
+
+  <dialog class="cancel-application-dialog" id="reject-assignment-dialog" aria-labelledby="reject-assignment-title">
+    <form class="cancel-application-dialog__content" id="reject-assignment-form" novalidate>
+      <span class="cancel-application-dialog__icon" aria-hidden="true">!</span>
+      <h2 id="reject-assignment-title">¿Por qué rechazas la asignación?</h2>
+      <p>La empresa recibirá tu respuesta junto con el motivo.</p>
+      <label class="visually-hidden" for="reject-reason">Motivo del rechazo</label>
+      <textarea class="reject-reason" id="reject-reason" maxlength="300" required placeholder="Ej.: Ya tengo otro compromiso ese día"></textarea>
+      <p class="sl-inline-error" id="reject-error" role="alert" hidden></p>
+      <div class="cancel-application-dialog__actions">
+        <button class="cancel-application-dialog__button cancel-application-dialog__button--secondary" type="button" id="keep-assignment">Volver</button>
+        <button class="cancel-application-dialog__button cancel-application-dialog__button--danger" type="submit">Rechazar asignación</button>
+      </div>
+    </form>
   </dialog>
 
   <dialog class="application-summary-dialog" id="application-summary-dialog" aria-labelledby="application-summary-title">
@@ -181,6 +153,9 @@
     </div>
   </dialog>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/app.js"></script>
   <script src="../js/trabajador-postulaciones.js"></script>
 </body>
 </html>
